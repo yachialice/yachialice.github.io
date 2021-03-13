@@ -214,7 +214,7 @@
   <entry>
     <title>Leetcode-88. Merge Sorted Array</title>
     <url>/2021/03/13/Leetcode-88-Merge-Sorted-Array/</url>
-    <content><![CDATA[<h1 id="Leetcode-88-Merge-Sorted-Array"><a href="#Leetcode-88-Merge-Sorted-Array" class="headerlink" title="Leetcode-88. Merge Sorted Array"></a>Leetcode-88. Merge Sorted Array</h1><h2 id="Dscription"><a href="#Dscription" class="headerlink" title="Dscription"></a>Dscription</h2><p>Given two sorted integer arrays <em>nums1</em> and <em>nums2</em>, merge <em>nums2</em> into <em>nums1</em> as one sorted array.</p>
+    <content><![CDATA[<h1 id="Leetcode-88-Merge-Sorted-Array"><a href="#Leetcode-88-Merge-Sorted-Array" class="headerlink" title="Leetcode-88. Merge Sorted Array"></a>Leetcode-88. Merge Sorted Array</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given two sorted integer arrays <em>nums1</em> and <em>nums2</em>, merge <em>nums2</em> into <em>nums1</em> as one sorted array.</p>
 <p>Note:</p>
 <ul>
 <li>The number of elements initialized in <em>nums1</em>and <em>nums2</em> are <em>m</em> and <em>n</em> respectively.</li>
