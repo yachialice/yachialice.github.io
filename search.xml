@@ -3,7 +3,7 @@
   <entry>
     <title>Leetcode-71. Combination</title>
     <url>/2021/03/06/Leetcode-71-Combination/</url>
-    <content><![CDATA[<h1 id="Leetcode-77-Combination"><a href="#Leetcode-77-Combination" class="headerlink" title="Leetcode-77. Combination"></a>Leetcode-77. Combination</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given two integers <em>n</em> and <em>k</em>, return all possible combinations of <em>k</em> numbers out of 1 … <em>n</em>.</p>
+    <content><![CDATA[<h1 id="Leetcode-77-Combination"><a href="#Leetcode-77-Combination" class="headerlink" title="Leetcode-77. Combination"></a>Leetcode-77. Combination</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given two integers <em>n</em> and <em>k</em>, return all possible combinations of <em>k</em> numbers out of 1 … <em>n</em>.</p>
 <p>For example,<br>If <em>n</em> = 4 and <em>k</em> = 2, a solution is:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
@@ -30,7 +30,7 @@
   <entry>
     <title>Leetcode-78 Subsets</title>
     <url>/2021/03/08/Leetcode-78-Subsets/</url>
-    <content><![CDATA[<h1 id="Leetcode-78-Subsets"><a href="#Leetcode-78-Subsets" class="headerlink" title="Leetcode-78. Subsets"></a>Leetcode-78. Subsets</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given a set of distinct integers, <em>S</em>, return all possible subsets.</p>
+    <content><![CDATA[<h1 id="Leetcode-78-Subsets"><a href="#Leetcode-78-Subsets" class="headerlink" title="Leetcode-78. Subsets"></a>Leetcode-78. Subsets</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a set of distinct integers, <em>S</em>, return all possible subsets.</p>
 <p>Note:</p>
 <ul>
 <li>Elements in a subset must be in non-descending order.</li>
@@ -66,7 +66,7 @@
   <entry>
     <title>Leetcode-79. Word Search</title>
     <url>/2021/03/08/Leetcode-79-Word-Search/</url>
-    <content><![CDATA[<h1 id="Leetode-79-Word-Search"><a href="#Leetode-79-Word-Search" class="headerlink" title="Leetode-79. Word Search"></a>Leetode-79. Word Search</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given a 2D board and a word, find if the word exists in the grid.</p>
+    <content><![CDATA[<h1 id="Leetode-79-Word-Search"><a href="#Leetode-79-Word-Search" class="headerlink" title="Leetode-79. Word Search"></a>Leetode-79. Word Search</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a 2D board and a word, find if the word exists in the grid.</p>
 <p>The word can be constructed from letters of sequentially adjacent cell, where “adjacent” cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.</p>
 <p>For example,<br>Given board =</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [&quot;ABCE&quot;],</span><br><span class="line">  [&quot;SFCS&quot;],</span><br><span class="line">  [&quot;ADEE&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
@@ -87,7 +87,7 @@
   <entry>
     <title>Leetcode-80. Remove Dupilicateds from Sorted Array</title>
     <url>/2021/03/08/Leetcode-80-Remove-Dupilicateds-from-Sorted-Array/</url>
-    <content><![CDATA[<h1 id="Leetcode-80-Remove-Dupilicateds-from-Sorted-Array"><a href="#Leetcode-80-Remove-Dupilicateds-from-Sorted-Array" class="headerlink" title="Leetcode-80. Remove Dupilicateds from Sorted Array ||"></a>Leetcode-80. Remove Dupilicateds from Sorted Array ||</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a> such that duplicates appeared at most <em>twice</em> and return the new length.</p>
+    <content><![CDATA[<h1 id="Leetcode-80-Remove-Dupilicateds-from-Sorted-Array"><a href="#Leetcode-80-Remove-Dupilicateds-from-Sorted-Array" class="headerlink" title="Leetcode-80. Remove Dupilicateds from Sorted Array ||"></a>Leetcode-80. Remove Dupilicateds from Sorted Array ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a> such that duplicates appeared at most <em>twice</em> and return the new length.</p>
 <p>Do not allocate extra space for another array, you must do this by modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a> with O(1) extra memory.</p>
 <p>Example 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Given nums &#x3D; [1,1,1,2,2,3],</span><br><span class="line"></span><br><span class="line">Your function should return length &#x3D; 5, with the first five elements of nums being 1, 1, 2, 2 and 3 respectively.</span><br><span class="line"></span><br><span class="line">It doesn&#39;t matter what you leave beyond the returned length.</span><br></pre></td></tr></table></figure>
@@ -113,7 +113,7 @@
   <entry>
     <title>Leetcode-81. Search in Rotated Sorted Array ||</title>
     <url>/2021/03/09/Leetcode-81-Search-in-Rotated-Sorted-Array/</url>
-    <content><![CDATA[<h1 id="Leetcode-81-Search-in-Rotated-Sorted-Array"><a href="#Leetcode-81-Search-in-Rotated-Sorted-Array" class="headerlink" title="Leetcode-81. Search in Rotated Sorted Array ||"></a>Leetcode-81. Search in Rotated Sorted Array ||</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
+    <content><![CDATA[<h1 id="Leetcode-81-Search-in-Rotated-Sorted-Array"><a href="#Leetcode-81-Search-in-Rotated-Sorted-Array" class="headerlink" title="Leetcode-81. Search in Rotated Sorted Array ||"></a>Leetcode-81. Search in Rotated Sorted Array ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
 <p>(i.e., <code>[0,0,1,2,2,5,6]</code> might become <code>[2,5,6,0,0,1,2]</code>).</p>
 <p>You are given a target value to search. If found in the array return <code>true</code>, otherwise return <code>false</code>.</p>
 <p>Example 1:</p>
@@ -142,7 +142,7 @@
   <entry>
     <title>Leetcode 82. Remove Duplicates from Sorted List ||</title>
     <url>/2021/03/09/Leetcode-82-Remove-Duplicates-from-Sorted-List/</url>
-    <content><![CDATA[<h1 id="Leetcode-82-Remove-Duplicates-from-Sorted-List"><a href="#Leetcode-82-Remove-Duplicates-from-Sorted-List" class="headerlink" title="Leetcode 82. Remove Duplicates from Sorted List ||"></a>Leetcode 82. Remove Duplicates from Sorted List ||</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only <em>distinct</em> numbers from the original list.</p>
+    <content><![CDATA[<h1 id="Leetcode-82-Remove-Duplicates-from-Sorted-List"><a href="#Leetcode-82-Remove-Duplicates-from-Sorted-List" class="headerlink" title="Leetcode 82. Remove Duplicates from Sorted List ||"></a>Leetcode 82. Remove Duplicates from Sorted List ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only <em>distinct</em> numbers from the original list.</p>
 <p>Example 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5</span><br><span class="line">Output: 1-&gt;2-&gt;5</span><br></pre></td></tr></table></figure>
 
@@ -165,7 +165,7 @@
   <entry>
     <title>Leetcode-83. Remove Duplicates from Sorted List</title>
     <url>/2021/03/11/Leetcode-83-Remove-Duplicates-from-Sorted-List/</url>
-    <content><![CDATA[<h1 id="Leetcode-83-Remove-Duplicates-from-Sorted-List"><a href="#Leetcode-83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="Leetcode-83. Remove Duplicates from Sorted List"></a>Leetcode-83. Remove Duplicates from Sorted List</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given a sorted linked list, delete all duplicates such that each element appear only <em>once</em>.</p>
+    <content><![CDATA[<h1 id="Leetcode-83-Remove-Duplicates-from-Sorted-List"><a href="#Leetcode-83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="Leetcode-83. Remove Duplicates from Sorted List"></a>Leetcode-83. Remove Duplicates from Sorted List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a sorted linked list, delete all duplicates such that each element appear only <em>once</em>.</p>
 <p>Example 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1-&gt;1-&gt;2</span><br><span class="line">Output: 1-&gt;2</span><br></pre></td></tr></table></figure>
 
@@ -194,7 +194,7 @@
   <entry>
     <title>Leetcode-86. Partition List</title>
     <url>/2021/03/11/Leetcode-86-Partition-List/</url>
-    <content><![CDATA[<h1 id="Leetcode-86-Partition-List"><a href="#Leetcode-86-Partition-List" class="headerlink" title="Leetcode-86. Partition List"></a>Leetcode-86. Partition List</h1><h2 id="Discription"><a href="#Discription" class="headerlink" title="Discription"></a>Discription</h2><p>Given a linked list and a value <em>x</em>, partition it such that all nodes less than <em>x</em> come before nodes greater than or equal to <em>x</em>.</p>
+    <content><![CDATA[<h1 id="Leetcode-86-Partition-List"><a href="#Leetcode-86-Partition-List" class="headerlink" title="Leetcode-86. Partition List"></a>Leetcode-86. Partition List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a linked list and a value <em>x</em>, partition it such that all nodes less than <em>x</em> come before nodes greater than or equal to <em>x</em>.</p>
 <p>You should preserve the original relative order of the nodes in each of the two partitions.</p>
 <p>For example,<br>Given <code>1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2</code> and <em>x</em> = 3,<br>return <code>1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</code>.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Create a new list with the Nodes less than x in the original list. At the same time delete the Nodes less than x in the original list. Finally, combine the two list to form the result.</p>
@@ -206,6 +206,31 @@
       <categories>
         <category>Leetcode</category>
         <category>Linked List</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-88. Merge Sorted Array</title>
+    <url>/2021/03/13/Leetcode-88-Merge-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="Leetcode-88-Merge-Sorted-Array"><a href="#Leetcode-88-Merge-Sorted-Array" class="headerlink" title="Leetcode-88. Merge Sorted Array"></a>Leetcode-88. Merge Sorted Array</h1><h2 id="Dscription"><a href="#Dscription" class="headerlink" title="Dscription"></a>Dscription</h2><p>Given two sorted integer arrays <em>nums1</em> and <em>nums2</em>, merge <em>nums2</em> into <em>nums1</em> as one sorted array.</p>
+<p>Note:</p>
+<ul>
+<li>The number of elements initialized in <em>nums1</em>and <em>nums2</em> are <em>m</em> and <em>n</em> respectively.</li>
+<li>You may assume that <em>nums1</em> has enough space (size that is greater or equal to <em>m</em> + <em>n</em>) to hold additional elements from <em>nums2</em>.</li>
+</ul>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">nums1 &#x3D; [1,2,3,0,0,0], m &#x3D; 3</span><br><span class="line">nums2 &#x3D; [2,5,6],       n &#x3D; 3</span><br><span class="line"></span><br><span class="line">Output: [1,2,2,3,5,6]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> i = m<span class="number">-1</span>, j = n<span class="number">-1</span>, k = m+n<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(j&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                nums1[k--] = (i&gt;=<span class="number">0</span>&amp;&amp;nums1[i]&gt;=nums2[j]) ? nums1[i--] : nums2[j--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Two Pointers</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
