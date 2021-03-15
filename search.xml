@@ -236,4 +236,34 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode-90. Subsets||</title>
+    <url>/2021/03/15/Leetcode-90-Subsets/</url>
+    <content><![CDATA[<h1 id="Leetcode-90-Subsets"><a href="#Leetcode-90-Subsets" class="headerlink" title="Leetcode-90. Subsets ||"></a>Leetcode-90. Subsets ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a collection of integers that might contain duplicates, <em>S</em>, return all possible subsets.</p>
+<p>Note:</p>
+<ul>
+<li>Elements in a subset must be in non-descending order.</li>
+<li>The solution set must not contain duplicate subsets.</li>
+</ul>
+<p>For example,<br>If <em>S</em> = <code>[1,2,2]</code>, a solution is:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [2],</span><br><span class="line">  [1],</span><br><span class="line">  [1,2,2],</span><br><span class="line">  [2,2],</span><br><span class="line">  [1,2],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h2><p>Similiar to 78.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; subsetsWithDup(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; out;</span><br><span class="line">        </span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> prev_size = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> prev_num = *nums.begin()<span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> start;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] != prev_num)&#123;</span><br><span class="line">                start = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                start = prev_size;  </span><br><span class="line">            &#125;</span><br><span class="line">            prev_size = res.size();</span><br><span class="line">            prev_num = nums[i];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> Size = res.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = start; j&lt;Size; j++)&#123;</span><br><span class="line">                res.push_back(res[j]);</span><br><span class="line">                res.back().push_back(nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h2><p>Similiar to 78.</p>
+<p>dfs method.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; subsetsWithDup(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; out;</span><br><span class="line">        </span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        dfs(nums, out, res, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; out, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="keyword">int</span> level)</span></span>&#123;</span><br><span class="line">        res.push_back(out);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = level; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            out.push_back(nums[i]);</span><br><span class="line">            dfs(nums, out, res, i+<span class="number">1</span>);</span><br><span class="line">            out.pop_back();</span><br><span class="line">            <span class="keyword">while</span>(i+<span class="number">1</span>&lt;nums.size() &amp;&amp; nums[i] == nums[i+<span class="number">1</span>]) i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Backtracking</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
