@@ -266,4 +266,35 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode-91. Decode Ways</title>
+    <url>/2021/03/20/Leetcode-91-Decode-Ways/</url>
+    <content><![CDATA[<h1 id="Leetcode-91-Decode-Ways"><a href="#Leetcode-91-Decode-Ways" class="headerlink" title="Leetcode-91. Decode Ways"></a>Leetcode-91. Decode Ways</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>A message containing letters from <code>A-Z</code> is being encoded to numbers using the following mapping:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39;A&#39; -&gt; 1</span><br><span class="line">&#39;B&#39; -&gt; 2</span><br><span class="line">...</span><br><span class="line">&#39;Z&#39; -&gt; 26</span><br></pre></td></tr></table></figure>
+
+<p>Given a non-empty string containing only digits, determine the total number of ways to decode it.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: &quot;12&quot;</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: It could be decoded as &quot;AB&quot; (1 2) or &quot;L&quot; (12).</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: &quot;226&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: It could be decoded as &quot;BZ&quot; (2 26), &quot;VF&quot; (22 6), or &quot;BBF&quot; (2 2 6)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>It’s a dynamic programming problem. </p>
+<p>if s[i] != ‘0’ and ‘10’&lt;=s[i-1]s[i]&lt;=’26’ : opt[i] = opt[i-1] + opt[i-2];</p>
+<p>if s[i] != ‘0’ and (s[i-1]s[i]&lt;’10’ || s[i-1]s[i]&gt;’26’) opt[i] = opt[i-1];</p>
+<p>if s[i] == ‘0’ and ‘10’&lt;=s[i-1]s[i]&lt;=’26’: opt[i] = opt[i-2]</p>
+<p>else opt[i] = 0;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numDecodings</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(s.empty() || s[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">opt</span><span class="params">(s.size() + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        opt[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        opt[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; opt.size(); i++)&#123;</span><br><span class="line">            <span class="comment">//注意此处，判定当前元素是否为0，若为0， 则不能加opt[i-1]，因为0不能映射</span></span><br><span class="line">            opt[i] = (s[i<span class="number">-1</span>] == <span class="string">&#x27;0&#x27;</span>) ? <span class="number">0</span> : opt[i<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">1</span> &amp;&amp; (s[i<span class="number">-2</span>] == <span class="string">&#x27;1&#x27;</span> || (s[i<span class="number">-2</span>] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; s[i<span class="number">-1</span>] &lt;= <span class="string">&#x27;6&#x27;</span>)))</span><br><span class="line">                opt[i] += opt[i<span class="number">-2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> opt.back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Dynamic Programming</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
