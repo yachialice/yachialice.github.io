@@ -297,4 +297,46 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode-92. Reverse Linked List</title>
+    <url>/2021/03/23/Leetcode-92-Reverse-Linked-List/</url>
+    <content><![CDATA[<h2 id="Leetcode-92-Reverse-Linked-List"><a href="#Leetcode-92-Reverse-Linked-List" class="headerlink" title="Leetcode-92. Reverse Linked List ||"></a>Leetcode-92. Reverse Linked List ||</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Reverse a linked list from position <em>m</em> to <em>n</em>. Do it in one-pass.</p>
+<p>Note: 1 ≤ <em>m</em> ≤ <em>n</em> ≤ length of list.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m &#x3D; 2, n &#x3D; 4</span><br><span class="line">Output: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseBetween</span><span class="params">(ListNode* head, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        ListNode* dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        dummy-&gt;next = head;</span><br><span class="line">        ListNode* prev = dummy;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= left<span class="number">-1</span>; i++) prev = prev-&gt;next;</span><br><span class="line">        ListNode* current = prev-&gt;next;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = left<span class="number">-1</span>; i &lt;= right<span class="number">-2</span>; i++)&#123;</span><br><span class="line">            ListNode* t = current-&gt;next;</span><br><span class="line">            current-&gt;next = t-&gt;next;</span><br><span class="line">            t-&gt;next = prev-&gt;next;</span><br><span class="line">            prev-&gt;next = t;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dummy-&gt;next;;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Linked List</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-93. Restore IP Addresses</title>
+    <url>/2021/03/23/Leetcode-93-Restore-IP-Addresses/</url>
+    <content><![CDATA[<h2 id="Leetcode-93-Restore-IP-Addresses"><a href="#Leetcode-93-Restore-IP-Addresses" class="headerlink" title="Leetcode-93. Restore IP Addresses"></a>Leetcode-93. Restore IP Addresses</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given a string containing only digits, restore it by returning all possible valid IP address combinations.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: &quot;25525511135&quot;</span><br><span class="line">Output: [&quot;255.255.11.135&quot;, &quot;255.255.111.35&quot;]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>It is a backtracting problem.</p>
+<p>When comparing a string number and 255, we can use atoi(s.c_str()). SInce atoi() is a C function, string s has to be turned into C format to use this function. </p>
+<p>s.substr(pos, n) is used to find substring of s, pos is the start index of the substring and n is the length of the substring.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">restoreIpAddresses</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">        helper(s, <span class="number">0</span>, <span class="string">&quot;&quot;</span>, res);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> n, <span class="built_in">string</span> out, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s.empty()) res.push_back(out);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt; <span class="number">4</span>; ++k) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s.size() &lt; k) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">int</span> val = atoi(s.substr(<span class="number">0</span>, k).c_str());</span><br><span class="line">                <span class="keyword">if</span> (val &gt; <span class="number">255</span> || k != <span class="built_in">std</span>::to_string(val).size()) <span class="keyword">continue</span>;</span><br><span class="line">                helper(s.substr(k), n + <span class="number">1</span>, out + s.substr(<span class="number">0</span>, k) + (n == <span class="number">3</span> ? <span class="string">&quot;&quot;</span> : <span class="string">&quot;.&quot;</span>), res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Backtracking</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
