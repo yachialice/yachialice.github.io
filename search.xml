@@ -461,7 +461,10 @@
 <p>file scope：对象若拥有file scope，则从声明点至文件末尾都可见。file scope内的对象也具备static extent（？？？static变量？？？？），从main()开始执行之前便分配好，一直存在至程序结束。</p>
 <p>内置类型对象：定义在file scope之内，必定被初始化为0；定义在local scope之内，除非指定初值，否则不会初始化。</p>
 <p>（三）动态内存管理<br>dynamic extent（动态范围）——由程序员自行管理，利用new和delete函数分配和释放，内存由空闲空间分配而来，成为heap memory（堆内存）。</p>
-<p>new和delete应成对使用，否则heap分配的对象永远不会释放，导致内存泄漏（memeory leak）。<br>(1) new函数的使用<br>‘’new Type;<br>‘’new Type(initial value);<br>可以声明initial value也可以不声明<br>例：</p>
+<p>new和delete应成对使用，否则heap分配的对象永远不会释放，导致内存泄漏（memeory leak）。<br>(1) new函数的使用</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Type;</span><br><span class="line"><span class="keyword">new</span> Type(initial value);</span><br></pre></td></tr></table></figure>
+
+<p>可以声明initial value也可以不声明<br>例：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1, p2;</span><br><span class="line">p1 = <span class="keyword">new</span> <span class="keyword">int</span>; <span class="comment">//由heap分配一个类型为int的对象，将地址赋给p1。不赋值直接输出*p1，会是随机数字（？）</span></span><br><span class="line">p2 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">2014</span>); <span class="comment">//由heap分配一个类型为int的对象，初值设为2014，将地址赋给p2</span></span><br></pre></td></tr></table></figure>
 
 <p>例：</p>
@@ -475,7 +478,7 @@
 
 
 <h3 id="2-3-提供默认参数值"><a href="#2-3-提供默认参数值" class="headerlink" title="2.3  提供默认参数值"></a>2.3  提供默认参数值</h3><p>​    传参的时候，可以给一些形参赋予默认值，调用函数的时候，如果不指明这些参数的值，则这些值用默认值初始化。<br>（1）默认值的解析从最右开始，若为某个参数提供了默认值，则参数右侧的所有参数都必须有默认值<br>（2）默认值只能指定一次。可以在函数声明时，也可以在函数定义处；不能够在两个地方都指定。</p>
-<p>###2.4使用局部静态对象<br>在局部作用域内部可见，外部不可见，且持续存在。<br>例:</p>
+<h3 id="2-4使用局部静态对象"><a href="#2-4使用局部静态对象" class="headerlink" title="2.4使用局部静态对象"></a>2.4使用局部静态对象</h3><p>在局部作用域内部可见，外部不可见，且持续存在。<br>例:</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">        a += <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a; <span class="comment">// 错误，函数外部a不可见</span></span><br><span class="line">        display();  <span class="comment">// 1</span></span><br><span class="line">        display();  <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -616,7 +619,7 @@
 
 
 <h2 id="第四章-基于对象的编程风格"><a href="#第四章-基于对象的编程风格" class="headerlink" title="第四章 基于对象的编程风格"></a>第四章 基于对象的编程风格</h2><h3 id="4-1-如何实现一个class"><a href="#4-1-如何实现一个class" class="headerlink" title="4.1 如何实现一个class"></a>4.1 如何实现一个class</h3><p>1、class的声明</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Stack;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>;</span></span><br></pre></td></tr></table></figure>
 
 <p>class需要有前置声明，才能进行类指针的定义，或将class作为数据类型。故而定义class前，最好先进行声明。</p>
 <p>2、class的声明</p>
