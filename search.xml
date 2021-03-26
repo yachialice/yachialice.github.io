@@ -704,4 +704,56 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-101. Symmetric Tree</title>
+    <url>/2021/03/26/LeetCode-101-Symmetric-Tree/</url>
+    <content><![CDATA[<h1 id="LeetCode-101-Symmetric-Tree"><a href="#LeetCode-101-Symmetric-Tree" class="headerlink" title="LeetCode-101. Symmetric Tree"></a>LeetCode-101. Symmetric Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
+<p>For example, this binary tree is symmetric:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   2</span><br><span class="line"> &#x2F; \ &#x2F; \</span><br><span class="line">3  4 4  3</span><br></pre></td></tr></table></figure>
+
+<p>But the following is not:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  1</span><br><span class="line"> &#x2F; \</span><br><span class="line">2   2</span><br><span class="line"> \   \</span><br><span class="line"> 3    3</span><br></pre></td></tr></table></figure>
+
+<p>Note:<br>Bonus points if you could solve it both recursively and iteratively.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> recursion(root-&gt;left, root-&gt;right);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">recursion</span><span class="params">(TreeNode* leftNode, TreeNode* rightNode)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!leftNode &amp;&amp; !rightNode) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(!leftNode&amp;&amp;rightNode || leftNode&amp;&amp;!rightNode || leftNode-&gt;val!=rightNode-&gt;val)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> recursion(leftNode-&gt;left, rightNode-&gt;right) &amp;&amp; recursion(leftNode-&gt;right, rightNode-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-102. Binary Tree Level Order Traversal</title>
+    <url>/2021/03/26/LeetCode-102-Binary-Tree-Level-Order-Traversal/</url>
+    <content><![CDATA[<h1 id="LeetCode-102-Binary-Tree-Level-Order-Traversal"><a href="#LeetCode-102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="LeetCode-102. Binary Tree Level Order Traversal"></a>LeetCode-102. Binary Tree Level Order Traversal</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, return the <em>level order</em> traversal of its nodes’ values. (ie, from left to right, level by level).</p>
+<p>For example:<br>Given binary tree <code>&#123;3,9,20,#,#,15,7&#125;</code>,</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>return its level order traversal as:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>迭代方法。</p>
+<p>使用队列。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;res;</span><br><span class="line">        <span class="keyword">if</span>(!root)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; q;</span><br><span class="line">        q.push_back(root);</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; level;</span><br><span class="line">            <span class="keyword">int</span> _size = q.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; _size; i++)&#123;</span><br><span class="line">                TreeNode* root = q.front();</span><br><span class="line">                q.pop_front();</span><br><span class="line">                </span><br><span class="line">                level.push_back(root-&gt;val);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;left)</span><br><span class="line">                    q.push_back(root-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;right)</span><br><span class="line">                    q.push_back(root-&gt;right);</span><br><span class="line">                  </span><br><span class="line">            &#125;</span><br><span class="line">            res.push_back(level);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>递归方法。不需要队列存储，只要给一个层数的标识符level，用中序遍历方法遍历存储即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root)&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">if</span>(!root)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        recursion(root, res, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">recursion</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="keyword">int</span> level)</span></span>&#123;   </span><br><span class="line">        <span class="comment">//if(!root) return;</span></span><br><span class="line">        <span class="keyword">if</span>(res.size()&lt;level) res.push_back(&#123;&#125;);</span><br><span class="line">        res[level<span class="number">-1</span>].push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left) recursion(root-&gt;left, res, level+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right) recursion(root-&gt;right, res, level+<span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
