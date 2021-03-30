@@ -894,4 +894,58 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-109. Convert Sorted List to Binary Search Tree</title>
+    <url>/2021/03/30/LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree/</url>
+    <content><![CDATA[<h1 id="LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree"><a href="#LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree" class="headerlink" title="LeetCode-109. Convert Sorted List to Binary Search Tree"></a>LeetCode-109. Convert Sorted List to Binary Search Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.</p>
+<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of <em>every</em> node never differ by more than 1.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Given the sorted linked list: [-10,-3,0,5,9],</span><br><span class="line"></span><br><span class="line">One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:</span><br><span class="line"></span><br><span class="line">      0</span><br><span class="line">     &#x2F; \</span><br><span class="line">   -3   9</span><br><span class="line">   &#x2F;   &#x2F;</span><br><span class="line"> -10  5</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>不同于108，将数组转化为平衡搜索树，list没有用下标取值操作。所以要使用快慢指针。快慢指针可以用来找中点，即fast指针一次向前移动两次，slow指针一次向前移动一次。</p>
+<p>本题中，需要每次把当前list划分为中点、中点左侧的list和中点右侧的list。因此当前list需要传入首指针和末尾指针。末尾指针指的是list末尾元素的下一个地址，类似于iterator指针中的end()。但这里不能直接使用iterator，因为输入的是一个listNode类，而不是list<int>类。</p>
+<p>此处刚开始遍历时，注意令末尾指针为NULL，也可以代表末尾元素的下一个地址。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        TreeNode* root = recursion(head, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">TreeNode* <span class="title">recursion</span><span class="params">(ListNode* start, ListNode* end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start == end) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        ListNode* fast = start;</span><br><span class="line">        ListNode* slow = start;</span><br><span class="line">        <span class="keyword">while</span>(fast!=end &amp;&amp; fast-&gt;next!=end)&#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        fast = slow-&gt;next;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(slow-&gt;val);</span><br><span class="line">        root-&gt;left = recursion(start, slow);</span><br><span class="line">        root-&gt;right = recursion(slow-&gt;next, end);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-110. Balanced Binary Tree</title>
+    <url>/2021/03/30/Leetcode-110-Balanced-Binary-Tree/</url>
+    <content><![CDATA[<h1 id="LeetCode-110-Balanced-Binary-Tree"><a href="#LeetCode-110-Balanced-Binary-Tree" class="headerlink" title="LeetCode-110. Balanced Binary Tree"></a>LeetCode-110. Balanced Binary Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, determine if it is height-balanced.</p>
+<p>For this problem, a height-balanced binary tree is defined as:</p>
+<blockquote>
+<p>a binary tree in which the depth of the two subtrees of <em>every</em>node never differ by more than 1.</p>
+</blockquote>
+<p>Example 1:</p>
+<p>Given the following tree <code>[3,9,20,null,null,15,7]</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>Return true.</p>
+<p>Example 2:</p>
+<p>Given the following tree <code>[1,2,2,3,3,null,null,4,4]</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">      1</span><br><span class="line">     &#x2F; \</span><br><span class="line">    2   2</span><br><span class="line">   &#x2F; \</span><br><span class="line">  3   3</span><br><span class="line"> &#x2F; \</span><br><span class="line">4   4</span><br></pre></td></tr></table></figure>
+
+<p>Return false.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>还是要求树的深度。本质上是判断树的左右子树深度相差是否小于等于1。这里要注意的是，递归是从底至上return值，如果子树已经不平衡了，则已不满足条件，返回标识符-1，没有必要继续递归下去了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(level(root) == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">level</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = level(root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = level(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span>(right == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> diff = <span class="built_in">abs</span>(left-right);</span><br><span class="line">        <span class="keyword">if</span>(diff&gt;<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>+max(left, right);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
