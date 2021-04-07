@@ -1011,4 +1011,42 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-116. Populating Next Right Pointers in Each Node</title>
+    <url>/2021/04/07/LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node/</url>
+    <content><![CDATA[<h1 id="LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node"><a href="#LeetCode-116-Populating-Next-Right-Pointers-in-Each-Node" class="headerlink" title="LeetCode-116. Populating Next Right Pointers in Each Node"></a>LeetCode-116. Populating Next Right Pointers in Each Node</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Node &#123;</span><br><span class="line">  int val;</span><br><span class="line">  Node *left;</span><br><span class="line">  Node *right;</span><br><span class="line">  Node *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to <code>NULL</code>.</p>
+<p>Initially, all next pointers are set to <code>NULL</code>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left) root-&gt;left-&gt;next = root-&gt;right;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right) root-&gt;right-&gt;next = root-&gt;next ? root-&gt;next-&gt;left : <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        connect(root-&gt;left);</span><br><span class="line">        connect(root-&gt;right);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-117. Populating Next Right Pointers in Each Node ||</title>
+    <url>/2021/04/07/LeetCode-117-Populating-Next-Right-Pointers-in-Each-Node/</url>
+    <content><![CDATA[<h1 id="LeetCode-117-Populating-Next-Right-Pointers-in-Each-Node"><a href="#LeetCode-117-Populating-Next-Right-Pointers-in-Each-Node" class="headerlink" title="LeetCode-117. Populating Next Right Pointers in Each Node ||"></a>LeetCode-117. Populating Next Right Pointers in Each Node ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Node &#123;</span><br><span class="line">  int val;</span><br><span class="line">  Node *left;</span><br><span class="line">  Node *right;</span><br><span class="line">  Node *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to <code>NULL</code>.</p>
+<p>Initially, all next pointers are set to <code>NULL</code>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        Node* p = root-&gt;next;</span><br><span class="line">        <span class="keyword">while</span>(p)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;left)&#123;</span><br><span class="line">                p = p-&gt;left;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;right)&#123;</span><br><span class="line">                p = p-&gt;right;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left) root-&gt;left-&gt;next = root-&gt;right ? root-&gt;right : p;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right) root-&gt;right-&gt;next = p;</span><br><span class="line">        <span class="comment">//这里必须先遍历右子节点，再遍历左子节点。因为希望在连接当前层节点时，上一层root和root右侧的next指针都已经连接好。这样p才可以定位到正确的位置。如果上层root右侧节点的next指针还没有连好，则p = p-&gt;next会中断，引起错误。</span></span><br><span class="line">        connect(root-&gt;left);        </span><br><span class="line">        connect(root-&gt;right);</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>

@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Yachialice's Blog"><meta name="keywords" content=""><meta name="author" content="Yachialice"><meta name="copyright" content="Yachialice"><title>Hello, world | Yachialice</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '5.4.0'
+} </script><meta name="generator" content="Hexo 5.4.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2021/03/06/lfBCnzNsjHxPIXw.jpg"></div><div class="author-info__name text-center">Yachialice</div><div class="author-info__description text-center">Yachialice's Blog</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/yachialice">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">30</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">2</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">9</span></a></div></div></div><nav id="nav" style="background-image: url(https://tva1.sinaimg.cn/large/008eGmZEgy1goa52nmaxvj31400u07dr.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Yachialice</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/about">About</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a></span></div><div id="site-info"><div id="site-title">Yachialice</div><div id="site-sub-title">Hello, world</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><article id="page"><h1></h1><div class="article-container"><h1 id="论文阅读-——Motion-induced-error-reduction-methods-for-phase-shifting-profilometry-A-review"><a href="#论文阅读-——Motion-induced-error-reduction-methods-for-phase-shifting-profilometry-A-review" class="headerlink" title="论文阅读 ——Motion induced error reduction methods for phase shifting profilometry: A review"></a>论文阅读 ——Motion induced error reduction methods for phase shifting profilometry: A review</h1><p>四类方法：（1）object tracking  （2）Fourier assisted methods    (3) motion prediction</p>
+<p>motion prediction：通过预测物体的运动，来进行运动补偿。因为是像素级别的补偿，所以也适合非刚体。</p>
+<h2 id="Object-Tracking"><a href="#Object-Tracking" class="headerlink" title="Object Tracking"></a>Object Tracking</h2><p>跟踪物体的运动，从而解决运动问题。比较适用于匀速运动。对不均匀运动和旋转问题较难解决。</p>
+<p>1、Lu et at.</p>
+<p>在物体上粘贴colored circles作为标记 -&gt; 求出物体的旋转矩阵R和平移矩阵T -&gt;整个系统使用一个参考平面标定，新的height distribution map可以利用R、T求出。新的phi‘（按照公式看应该是相位偏移？）可以通过相位和height distribution的关系求出 -&gt; 将phi’代入条纹方程，即可以求出包裹相位。</p>
+<p>随后改进：因为圆点标记只能预测2D运动，所以另外使用了一个迭代的方程来预测depth direction的运动。</p>
+<p>2、Lu et at.</p>
+<p>用SIFT特征点检测方法代替了colored circles。条纹投影在一个彩色通道中，因而在使用SIFT特征点检测时，滤去条纹投影的彩色通道即可。</p>
+<p>其余同1。</p>
+<p><b>1、2缺陷：都要使用一个参考平板标定，而平板标定对大范围测量不具有高准确性。</b></p>
+<p>3、Lu et at.</p>
+<p>将物体的运动分为五类，使用一个虚拟的平面，从而构建一个条纹方程的general model，此方程包括所有种类运动的补偿参数。</p>
+<p>能够解决刚体平移、关于虚拟平面的法向量旋转的运动。</p>
+<p>平移利用1的方法估计。旋转利用AIA算法计算相位偏移。</p>
+<p>（AIA：Advanced iterative algorithm for phase extraction of randomly phase-shifted interferograms)</p>
+<p><b>优点：不需要参考平面</b></p>
+<p><b>缺陷：只能适用于有限的旋转运动</b></p>
+<p>4、Flores et al. [30]</p>
+<p>同样使用了AIA算法。</p>
+<p>红色通道投影条纹，蓝色通道投影255 -&gt; 通过蓝色通道和AIA算法计算相位偏移</p>
+<p>5、Lu et al.[31]</p>
+<p>对多个运动的独立物体进行三维重建。利用two-frequency phase unwrapping方法。需要另外投影n幅条纹图像。</p>
+<p><b>缺陷：只能重建同种运动的多个物体</b></p>
+<p>6、Lu et al.[34]</p>
+<p>多个进行不同种类运动的物体重建。利用SIFT确定物体运动。</p>
+<p>7、Guo et al.[32]   <b>和我们现阶段思路很像，可以看一下</b></p>
+<p>使用L-K optical flow（光流法，应该和现阶段我们使用的方法一样），计算出每一点的位移d。并且对于解决2pi跳变的部分，利用领域的像素（领域边长为d？？）做补偿。</p>
+<p><b>优点：不用迭代</b></p>
+<p><b>缺点：物体的运动信息要提前计算，且不适用于non-uniform运动</b></p>
+<p>8、Duan et al.[33]</p>
+<p>解决2D运动错误。使用到两个参考平面（一个在物体前，一个在物体后）。需要使用到markers。</p>
+<h2 id="Fourier-assisted-methods"><a href="#Fourier-assisted-methods" class="headerlink" title="Fourier assisted methods"></a>Fourier assisted methods</h2><p>傅立叶只需要一张条纹图像就能解出相位。</p>
+<h2 id="Motion-Prediction"><a href="#Motion-Prediction" class="headerlink" title="Motion Prediction"></a>Motion Prediction</h2><p>1、Weise et al. [41]</p>
+<p>根据帧间延迟，求出物体表面的运动速度（怎么将两帧之间的同一物理点对应？）。利用速度求出物体上每一点的位移，并用此来纠正phase map。</p>
+<p><b>优点：像素级别的补偿</b></p>
+<p><b>缺点：只能针对非匀速运动</b></p>
+<p>2、Liu et al. [43]</p>
+<p>在投影仪的图像平面估算相位偏移。建立了物体运动（delt x， delta y， delta z）和投影平面的坐标（u,v)之间的关系模型。</p>
+<p>（1）利用两组条纹重建的三维模型，利用同一物理点的三维坐标计算出物体运动。</p>
+<p>（2）利用投影仪的小孔成像模型，建立运动和相位之间的关系。</p>
+<p>利用（1）（2）即可求出相位偏移。</p>
+<p><b>缺点：不适合高速运动。需要相机拍摄速度够快，能够忽略连续帧之间物体上像素的差别（？？？）</b></p>
+</div></article><nav id="pagination"><div class="pagination"></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://tva1.sinaimg.cn/large/008eGmZEgy1goa52nmaxvj31400u07dr.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2021 By Yachialice</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
