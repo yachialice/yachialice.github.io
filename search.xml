@@ -1288,4 +1288,71 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-131. Palindrome Partitioning</title>
+    <url>/2021/04/13/LeetCode-131-Palindrome-Partitioning/</url>
+    <content><![CDATA[<h1 id="LeetCode-131-Palindrome-Partitioning"><a href="#LeetCode-131-Palindrome-Partitioning" class="headerlink" title="LeetCode-131. Palindrome Partitioning"></a>LeetCode-131. Palindrome Partitioning</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a string <em>s</em>, partition <em>s</em> such that every substring of the partition is a palindrome.</p>
+<p>Return all possible palindrome partitioning of <em>s</em>.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: &quot;aab&quot;</span><br><span class="line">Output:</span><br><span class="line">[</span><br><span class="line">  [&quot;aa&quot;,&quot;b&quot;],</span><br><span class="line">  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Soution"><a href="#Soution" class="headerlink" title="Soution"></a>Soution</h2><p>经典的回溯写法。记住这种out.push_back-&gt;dfs-&gt;out.pop_back()的写法。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; partition(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; out;</span><br><span class="line">        dfs(res, s, out, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp;res, <span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; out, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start == s.size())&#123;</span><br><span class="line">            res.push_back(out);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i&lt;s.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!isPalindrome(s, start, i)) <span class="keyword">continue</span>;</span><br><span class="line">            out.push_back(s.substr(start, i-start+<span class="number">1</span>));</span><br><span class="line">            dfs(res, s, out, i+<span class="number">1</span>);</span><br><span class="line">            out.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(start&lt;end)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[start]!=s[end]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            start++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Backtracking</category>
+      </categories>
+      <tags>
+        <tag>Leecode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-133. Clone Graph</title>
+    <url>/2021/04/13/LeetCode-133-Clone-Graph/</url>
+    <content><![CDATA[<h1 id="LeetCode-133-Clone-Graph"><a href="#LeetCode-133-Clone-Graph" class="headerlink" title="LeetCode-133. Clone Graph"></a>LeetCode-133. Clone Graph</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a reference of a node in a <a href="https://en.wikipedia.org/wiki/Connectivity_(graph_theory)#Connected_graph">connected</a> undirected graph, return a <a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy">deep copy</a> (clone) of the graph. Each node in the graph contains a val (<code>int</code>) and a list (<code>List[Node]</code>) of its neighbors.</p>
+<p>Example:</p>
+<p><img src="https://assets.leetcode.com/uploads/2019/02/19/113_sample.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">&#123;&quot;$id&quot;:&quot;1&quot;,&quot;neighbors&quot;:[&#123;&quot;$id&quot;:&quot;2&quot;,&quot;neighbors&quot;:[&#123;&quot;$ref&quot;:&quot;1&quot;&#125;,&#123;&quot;$id&quot;:&quot;3&quot;,&quot;neighbors&quot;:[&#123;&quot;$ref&quot;:&quot;2&quot;&#125;,&#123;&quot;$id&quot;:&quot;4&quot;,&quot;neighbors&quot;:[&#123;&quot;$ref&quot;:&quot;3&quot;&#125;,&#123;&quot;$ref&quot;:&quot;1&quot;&#125;],&quot;val&quot;:4&#125;],&quot;val&quot;:3&#125;],&quot;val&quot;:2&#125;,&#123;&quot;$ref&quot;:&quot;4&quot;&#125;],&quot;val&quot;:1&#125;</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">Node 1&#39;s value is 1, and it has two neighbors: Node 2 and 4.</span><br><span class="line">Node 2&#39;s value is 2, and it has two neighbors: Node 1 and 3.</span><br><span class="line">Node 3&#39;s value is 3, and it has two neighbors: Node 2 and 4.</span><br><span class="line">Node 4&#39;s value is 4, and it has two neighbors: Node 1 and 3.</span><br></pre></td></tr></table></figure>
+
+<p>Note:</p>
+<ol>
+<li>The number of nodes will be between 1 and 100.</li>
+<li>The undirected graph is a <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)#Simple_graph">simple graph</a>, which means no repeated edges and no self-loops in the graph.</li>
+<li>Since the graph is undirected, if node <em>p</em> has node <em>q</em> as neighbor, then node <em>q</em> must have node <em>p</em> as neighbor too.</li>
+<li>You must return the copy of the given node as a reference to the cloned graph.</li>
+</ol>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>deep copy &amp; shallow copy</p>
+<p>以python语法为例</p>
+<p>（1）a=b，则a，b都指向同一个对象</p>
+<p>（2）浅拷贝，b=a.copy()，则b新建了一个对象，但这个对象的子对象还是和a同一个对象。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a = &#123;<span class="number">1</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;</span><br><span class="line">b = a.copy()</span><br><span class="line">a[<span class="number">1</span>].append(<span class="number">4</span>)</span><br><span class="line">&gt;&gt;a</span><br><span class="line">&#123;<span class="number">1</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]&#125;</span><br><span class="line">&gt;&gt;b</span><br><span class="line">&#123;<span class="number">1</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（3）深拷贝，b = copy.deepcopy(a)，b完全拷贝了a的父对象及子对象，b和a完全独立。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a = &#123;<span class="number">1</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;</span><br><span class="line">b = a.copy()</span><br><span class="line">a[<span class="number">1</span>].append(<span class="number">4</span>)</span><br><span class="line">&gt;&gt;a</span><br><span class="line">&#123;<span class="number">1</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]&#125;</span><br><span class="line">&gt;&gt;b</span><br><span class="line">&#123;<span class="number">1</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Solution1"><a href="#Solution1" class="headerlink" title="Solution1"></a>Solution1</h4><p>DFS写法。clone-&gt;neighbors.push_back(helper(neighbor, m))时候，进入当前点的neigbor的dfs遍历。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">cloneGraph</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;Node*, Node*&gt; m;</span><br><span class="line">        <span class="keyword">return</span> helper(node, m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Node* <span class="title">helper</span><span class="params">(Node* node, <span class="built_in">unordered_map</span>&lt;Node*, Node*&gt;&amp; m)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!node) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (m.count(node)) <span class="keyword">return</span> m[node];</span><br><span class="line">        Node *clone = <span class="keyword">new</span> Node(node-&gt;val);</span><br><span class="line">        m[node] = clone;</span><br><span class="line">        <span class="keyword">for</span> (Node *neighbor : node-&gt;neighbors) &#123;</span><br><span class="line">            clone-&gt;neighbors.push_back(helper(neighbor, m));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> clone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h4><p>BFS写法，使用一个queue，遍历到当前点时，将该点未遍历过的neighbor加入queue</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">cloneGraph</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!node) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;Node*, Node*&gt; m;</span><br><span class="line">        <span class="built_in">queue</span>&lt;Node*&gt; q&#123;&#123;node&#125;&#125;;</span><br><span class="line">        Node *clone = <span class="keyword">new</span> Node(node-&gt;val);</span><br><span class="line">        m[node] = clone;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            Node *t = q.front(); q.pop();</span><br><span class="line">            <span class="keyword">for</span> (Node *neighbor : t-&gt;neighbors) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!m.count(neighbor)) &#123;</span><br><span class="line">                    m[neighbor] = <span class="keyword">new</span> Node(neighbor-&gt;val);</span><br><span class="line">                    q.push(neighbor);</span><br><span class="line">                &#125;</span><br><span class="line">                m[t]-&gt;neighbors.push_back(m[neighbor]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> clone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+        <category>BFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
