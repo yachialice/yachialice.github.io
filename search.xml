@@ -1355,4 +1355,95 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-134. Gas Station</title>
+    <url>/2021/04/16/LeetCode-134-Gas-Station/</url>
+    <content><![CDATA[<h1 id="LeetCode-134-Gas-Station"><a href="#LeetCode-134-Gas-Station" class="headerlink" title="LeetCode-134. Gas Station"></a>LeetCode-134. Gas Station</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>There are <em>N</em> gas stations along a circular route, where the amount of gas at station <em>i</em> is <code>gas[i]</code>.</p>
+<p>You have a car with an unlimited gas tank and it costs <code>cost[i]</code> of gas to travel from station <em>i</em> to its next station (<em>i</em>+1). You begin the journey with an empty tank at one of the gas stations.</p>
+<p>Return the starting gas station’s index if you can travel around the circuit once, otherwise return -1.</p>
+<p>Note:<br>The solution is guaranteed to be unique.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">canCompleteCircuit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; gas, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = gas.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;N; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> index = help(gas, cost, i);</span><br><span class="line">            <span class="keyword">if</span>(index &gt;= <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> index;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;  </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">help</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; gas, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">cos</span>, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = gas.size();</span><br><span class="line">        <span class="keyword">int</span> initial = i;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> gas_have = gas[i];</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> gas_cost = <span class="built_in">cos</span>[i];</span><br><span class="line">            <span class="keyword">if</span>(gas_have &gt;= gas_cost)&#123;</span><br><span class="line">                i = (i+<span class="number">1</span>)%N;</span><br><span class="line">                gas_have = gas_have - gas_cost + gas[i];</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(i == initial)</span><br><span class="line">                    <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Greedy</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-136. Single Number</title>
+    <url>/2021/04/16/LeetCode-136-Single-Number/</url>
+    <content><![CDATA[<h1 id="LeetCode-136-Single-Number"><a href="#LeetCode-136-Single-Number" class="headerlink" title="LeetCode-136. Single Number"></a>LeetCode-136. Single Number</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>方法一：哈希表法。第一次出现-&gt;加入哈希表；第二次出现-&gt;从哈希表中移除。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; iset;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(iset.count(nums[i])) iset.erase(nums[i]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                iset.insert(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *iset.begin();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：位运算法</p>
+<p>用异或位运算法。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)</span><br><span class="line">            res ^= num;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Table</category>
+        <category>Bit Manipulation</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-137. Single Number||</title>
+    <url>/2021/04/16/LeetCode-137-Single-Number/</url>
+    <content><![CDATA[<h1 id="LeetCode-137-Single-Number"><a href="#LeetCode-137-Single-Number" class="headerlink" title="LeetCode-137. Single Number||"></a>LeetCode-137. Single Number||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a non-empty array of integers, every element appears <em>three</em> times except for one, which appears exactly once. Find that single one.</p>
+<p>Note:</p>
+<p>Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: [2,2,3,2]</span><br><span class="line">Output: 3</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: [0,1,0,1,0,1,99]</span><br><span class="line">Output: 99</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">32</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> num :nums)&#123;</span><br><span class="line">                <span class="comment">//注意加括号，防止计算顺序出错</span></span><br><span class="line">                sum = sum + ((num&gt;&gt;i)&amp;<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            res = res | ( (sum%<span class="number">3</span>)&lt;&lt;i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Map</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-138. Copy List with Random Pointer</title>
+    <url>/2021/04/16/LeetCode-138-Copy-List-with-Random-Pointer/</url>
+    <content><![CDATA[<h1 id="LeetCode-138-Copy-List-with-Random-Pointer"><a href="#LeetCode-138-Copy-List-with-Random-Pointer" class="headerlink" title="LeetCode-138. Copy List with Random Pointer"></a>LeetCode-138. Copy List with Random Pointer</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.</p>
+<p>Return a <a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy">deep copy</a> of the list.</p>
+<p>Example 1:</p>
+<p><img src="https://discuss.leetcode.com/uploads/files/1470150906153-2yxeznm.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">&#123;&quot;$id&quot;:&quot;1&quot;,&quot;next&quot;:&#123;&quot;$id&quot;:&quot;2&quot;,&quot;next&quot;:null,&quot;random&quot;:&#123;&quot;$ref&quot;:&quot;2&quot;&#125;,&quot;val&quot;:2&#125;,&quot;random&quot;:&#123;&quot;$ref&quot;:&quot;2&quot;&#125;,&quot;val&quot;:1&#125;</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">Node 1&#39;s value is 1, both of its next and random pointer points to Node 2.</span><br><span class="line">Node 2&#39;s value is 2, its next pointer points to null and its random pointer points to itself.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>哈希+一遍遍历</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">copyRandomList</span><span class="params">(Node* head)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;Node*, Node*&gt; m;</span><br><span class="line">        Node* dumpy = <span class="keyword">new</span> Node(<span class="number">-1</span>);</span><br><span class="line">        Node* curr = head;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">            Node* new_curr = <span class="literal">NULL</span>;</span><br><span class="line">            <span class="keyword">if</span>(!m.count(curr))&#123;</span><br><span class="line">                new_curr = <span class="keyword">new</span> Node(curr-&gt;val, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">                m[curr] = new_curr;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">               new_curr = m[curr];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(!dumpy-&gt;next) dumpy-&gt;next = new_curr;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next)&#123;</span><br><span class="line">                <span class="keyword">if</span>(m.count(curr-&gt;next))</span><br><span class="line">                    new_curr-&gt;next = m[curr-&gt;next];</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    Node* new_next = <span class="keyword">new</span> Node(curr-&gt;next-&gt;val, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">                    new_curr-&gt;next = new_next;</span><br><span class="line">                    m[curr-&gt;next] = new_next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;random)&#123;</span><br><span class="line">                <span class="keyword">if</span>(m.count(curr-&gt;random))</span><br><span class="line">                    new_curr-&gt;random = m[curr-&gt;random];</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    Node* new_random = <span class="keyword">new</span> Node(curr-&gt;random-&gt;val, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">                    new_curr-&gt;random = new_random;</span><br><span class="line">                    m[curr-&gt;random] = new_random;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">            </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>递归写法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">copyRandomList</span><span class="params">(Node* head)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;Node*, Node*&gt; m;</span><br><span class="line">        <span class="keyword">return</span> help(head, m);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="function">Node* <span class="title">help</span><span class="params">(Node* node, <span class="built_in">map</span>&lt;Node*, Node*&gt;&amp; m)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!node) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span>(m.count(node)) <span class="keyword">return</span> m[node];</span><br><span class="line">        </span><br><span class="line">        Node* new_node = <span class="keyword">new</span> Node(node-&gt;val);</span><br><span class="line">        m[node] = new_node;</span><br><span class="line">        </span><br><span class="line">        new_node-&gt;next = help(node-&gt;next, m);</span><br><span class="line">        new_node-&gt;random = help(node-&gt;random, m);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> new_node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Map</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
