@@ -1446,4 +1446,59 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-139. Word Break</title>
+    <url>/2021/04/17/LeetCode-139-Word-Break/</url>
+    <content><![CDATA[<h1 id="LeetCode-139-Word-Break"><a href="#LeetCode-139-Word-Break" class="headerlink" title="LeetCode-139. Word Break"></a>LeetCode-139. Word Break</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a non-empty string <em>s</em> and a dictionary <em>wordDict</em> containing a list of non-empty words, determine if <em>s</em> can be segmented into a space-separated sequence of one or more dictionary words.</p>
+<p>Note:</p>
+<ul>
+<li>The same word in the dictionary may be reused multiple times in the segmentation.</li>
+<li>You may assume the dictionary does not contain duplicate words.</li>
+</ul>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;leetcode&quot;, wordDict &#x3D; [&quot;leet&quot;, &quot;code&quot;]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: Return true because &quot;leetcode&quot; can be segmented as &quot;leet code&quot;.</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;applepenapple&quot;, wordDict &#x3D; [&quot;apple&quot;, &quot;pen&quot;]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: Return true because &quot;applepenapple&quot; can be segmented as &quot;apple pen apple&quot;.</span><br><span class="line">             Note that you are allowed to reuse a dictionary word.</span><br></pre></td></tr></table></figure>
+
+<p>Example 3:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;catsandog&quot;, wordDict &#x3D; [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h4 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h4><p>首先想到回溯法，但是超过时间限制。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; <span class="title">wordSet</span><span class="params">(wordDict.begin(), wordDict.end())</span></span>;</span><br><span class="line">        <span class="keyword">return</span> help(<span class="number">0</span>, s, wordSet);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">help</span><span class="params">(<span class="keyword">int</span> start, <span class="built_in">string</span>&amp; s, <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt;&amp; wordSet)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(wordSet.count(s.substr(start, s.size()-start)))</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">           </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size()-start+<span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="built_in">string</span> out = s.substr(start, i);</span><br><span class="line">            <span class="keyword">if</span>(wordSet.count(out))&#123;</span><br><span class="line">                <span class="keyword">int</span> res = help(i+start, s, wordSet);</span><br><span class="line">                <span class="keyword">if</span>(res) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>回溯法中加一个memo数组，用来存储已经计算过的情况。例如，memo[i]表示i~s.size()-1是否可拆分的情况。memo[i]=0：不可拆；memo[i] = 1：可拆；memo[i] = -1：还未计算。</p>
+<h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h4><p>动态规划法。dp[i]表示字符0～i-1是否能分割（dp多建立了一位，为了让遍历方便开始，有点像dumpy节点）。</p>
+<p>求dp[i]的时候，dp[0]<del>dp[i-1]都已经求得了，所以求的时候用j在0～i-1之间的字符串进行切割，形成0～j-1和j～i-1。0～j对应dp[j]，j</del>i-1对应s.substr(j, i-1)。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; <span class="title">wordSet</span><span class="params">(wordDict.begin(), wordDict.end())</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(s.size()+<span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;s.size()+<span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[j] &amp;&amp; wordSet.count(s.substr(j, i-j)))&#123;</span><br><span class="line">                    dp[i] = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp.back();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Backtracking</category>
+        <category>Dynamic Programming</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-141. Linked List Cycle</title>
+    <url>/2021/04/17/LeetCode-141-Linked-List-Cycle/</url>
+    <content><![CDATA[<h1 id="LeetCode-141-Linked-List-Cycle"><a href="#LeetCode-141-Linked-List-Cycle" class="headerlink" title="LeetCode-141. Linked List Cycle"></a>LeetCode-141. Linked List Cycle</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a linked list, determine if it has a cycle in it.</p>
+<p>To represent a cycle in the given linked list, we use an integer <code>pos</code> which represents the position (0-indexed) in the linked list where tail connects to. If <code>pos</code> is <code>-1</code>, then there is no cycle in the linked list.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>快慢指针。如果有环，最有一个节点的next指针指向空。如果无环，fast节点总会与slow节点相遇。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast &amp;&amp; fast-&gt;next)&#123;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            <span class="keyword">if</span>(fast == slow) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
