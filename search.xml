@@ -1610,4 +1610,54 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-148. Sort List</title>
+    <url>/2021/04/21/LeetCode-148-Sort-List/</url>
+    <content><![CDATA[<h1 id="LeetCode-148-Sort-List"><a href="#LeetCode-148-Sort-List" class="headerlink" title="LeetCode-148. Sort List"></a>LeetCode-148. Sort List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Sort a linked list in <em>O</em>(<em>n</em> log <em>n</em>) time using constant space complexity.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 4-&gt;2-&gt;1-&gt;3</span><br><span class="line">Output: 1-&gt;2-&gt;3-&gt;4</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: -1-&gt;5-&gt;3-&gt;4-&gt;0</span><br><span class="line">Output: -1-&gt;0-&gt;3-&gt;4-&gt;5</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">sortList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        ListNode* prev = head;</span><br><span class="line">        <span class="keyword">while</span>(fast &amp;&amp; fast-&gt;next)&#123;</span><br><span class="line">            prev = slow;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        prev-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> merge(sortList(head), sortList(slow));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">merge</span><span class="params">(ListNode* l1, ListNode* l2)</span></span>&#123;</span><br><span class="line">        ListNode *dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        ListNode *curr = dumpy;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Linked List</category>
+        <category>Divide &amp; Conquer</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-151. Reverse Words in a String</title>
+    <url>/2021/04/21/LeetCode-151-Reverse-Words-in-a-String/</url>
+    <content><![CDATA[<h1 id="LeetCode-151-Reverse-Words-in-a-String"><a href="#LeetCode-151-Reverse-Words-in-a-String" class="headerlink" title="LeetCode-151. Reverse Words in a String"></a>LeetCode-151. Reverse Words in a String</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an input string, reverse the string word by word.</p>
+<p>For example,<br>Given s = “<code>the sky is blue</code>“,<br>return “<code>blue is sky the</code>“.</p>
+<p><strong>Update (2015-02-12):</strong><br>For C programmers: Try to solve it <em>in-place</em> in <em>O</em>(1) space.</p>
+<p><a href="https://leetcode.com/problems/reverse-words-in-a-string/">click to show clarification.</a></p>
+<p><strong>Clarification:</strong></p>
+<ul>
+<li>What constitutes a word?<br>A sequence of non-space characters constitutes a word.</li>
+<li>Could the input string contain leading or trailing spaces?<br>Yes. However, your reversed string should not contain leading or trailing spaces.</li>
+<li>How about multiple spaces between two words?<br>Reduce them to a single space in the reversed string.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>利用字符流</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">reverseWords</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">is</span><span class="params">(s)</span></span>;</span><br><span class="line">        <span class="built_in">string</span> tmp;</span><br><span class="line">        is&gt;&gt;s;</span><br><span class="line">        <span class="keyword">while</span>(is&gt;&gt;tmp) s = tmp + <span class="string">&quot; &quot;</span> + s;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!s.empty() &amp;&amp; s[<span class="number">0</span>] == <span class="string">&#x27; &#x27;</span>) s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>先翻转整个字符串，再翻转单个单词</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
