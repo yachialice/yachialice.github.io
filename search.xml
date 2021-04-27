@@ -393,7 +393,6 @@
     <title>Essential C+ + 笔记</title>
     <url>/2021/03/24/Essential-C-%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>Essential C+ + 笔记</p>
-<p>Essential C+ + 笔记</p>
 <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h4 id="1-include，-using-namespace"><a href="#1-include，-using-namespace" class="headerlink" title="1. include， using namespace"></a>1. include， using namespace</h4><p><code>#include &lt;iostream&gt;</code>——C+ +标准的输入输出库，包含了相关的整套class，用以对终端和文件的输入输出<br><code>#include &lt;string&gt; </code>——包含string类型<br><code>using namespace std;</code>——实用std命名空间。std是标准库所驻的命名空间。命名空间的作用是将库名称封装起来，避免和应用程序发生命名冲突。</p>
 <h4 id="2-cout，-cin"><a href="#2-cout，-cin" class="headerlink" title="2. cout， cin"></a>2. cout， cin</h4><p>cout将信息写到用户终端中，运算符&lt;&lt;将数据定向到cout<br><code>cout  &lt;&lt;  “please enter your name”</code><br>cin读取终端上的输入内容，通过&gt;&gt;将输入内容定向到具有适合类型的对象上。<br><code>cin &gt;&gt; user_name</code></p>
 <h4 id="3-const关键字"><a href="#3-const关键字" class="headerlink" title="3. const关键字"></a>3. const关键字</h4><p>用const定义的对象，在获得初值后，无法再进行修改，否则会报错。<br>以下几种写法错误：<br>（1）<br><code>const int a; //没有初始化</code><br>（2）</p>
@@ -748,6 +747,85 @@
 
 <p><b>当编译器遇到函数调用语句，例如it(val);，则it可能是函数名称，函数指针，也可能是一个对象，此对象重载了()运算符。如果it是个对象，则编译器会在内部将此语句转化成it.operator(val);</b></p>
 <h3 id="4-10-重载iostream运算符"><a href="#4-10-重载iostream运算符" class="headerlink" title="4.10 重载iostream运算符"></a>4.10 重载iostream运算符</h3><p>实质上是重载运算符&lt;&lt;和&gt;&gt;，本质没有变化。</p>
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h3 id="5-1-面向对象编程概念"><a href="#5-1-面向对象编程概念" class="headerlink" title="5.1 面向对象编程概念"></a>5.1 面向对象编程概念</h3><p>1、继承：可以从基类中衍生出许多派生类。派生类可以增加、覆盖父类（基类）中继承而来的成员变量和函数，以实现独特行为。</p>
+<p>2、多态：让基类类型的pointer或者reference可以十分透明地指向任何一个派生类</p>
+<p>​        例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loan_check_in</span><span class="params">(LibMat &amp;mat)</span> <span class="comment">//LibMat &amp;mat参数可以传入非LibMat类型，而是传入任意LibMat的派生类</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  mat.check_in();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、动态绑定</p>
+<p>一般来说，在编译器编译的时候，就应该解析出程序应该调用哪个函数，但因为多态的存在，无法确定是哪个派生类调用函数。例如2中的mat.check_in()，只能在执行时根据mat所指的实际对象来决定调用的check_in()函数。这个过程会被延迟到运行时，成为动态绑定</p>
+<p>4、虚函数</p>
+<p>（1）默认情况下，成员函数的解析在编译时静态进行，若要进行动态绑定，需要增加virtual关键词。</p>
+<p>（2）一般来说，若某个成员函数在不同的派生类中，有不同的实现方式，则定义其为虚函数。</p>
+<p>（3）每个虚函数，要么有定义，要么可设为纯虚函数，赋值为0。含有虚函数的类无法产生对象，只能作为派生类的子对象使用。</p>
+<p>（4）static member function无法被设定为虚函数。</p>
+<p>（5）一般来说，若基类有一个或多个虚函数，应该将destructor声明为virtual。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">inline</span> num_sequence::~num_sequence()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-2-漫游：面向对象编程思维"><a href="#5-2-漫游：面向对象编程思维" class="headerlink" title="5.2 漫游：面向对象编程思维"></a>5.2 漫游：面向对象编程思维</h3><p>1、基类和派生类constructor和destructor调用顺序：</p>
+<p>基类constructor-&gt;派生类constructor-&gt;派生类的派生类的constructor-&gt;…-&gt;派生类的派生类的destructor-&gt;派生类的destructor-&gt;基类的destructor</p>
+<p>类似于盖房子，从底部开始建，从顶部开始拆</p>
+<p>2、派生类定义格式</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AudioBook</span> :</span> <span class="keyword">public</span> Book&#123; <span class="comment">//加public和基类</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    AudioBook(<span class="keyword">const</span> <span class="built_in">string</span> &amp; title, <span class="keyword">const</span> <span class="built_in">string</span>&amp; author, <span class="keyword">const</span> <span class="built_in">string</span> &amp;narrator) : Book(title, author), _narrator(narrator)&#123;&#125;<span class="comment">//这里调用了基类Book的构造函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、protected</p>
+<p>private：可以被子类继承，但不能被子类直接访问，需要调用父类的非public函数访问</p>
+<p>protected：可以被继承类直接访问，其他对象不可访问</p>
+<p>public：都可以直接访问</p>
+<h3 id="5-4-定义一个抽象基类"><a href="#5-4-定义一个抽象基类" class="headerlink" title="5.4 定义一个抽象基类"></a>5.4 定义一个抽象基类</h3><p>定义抽象基类设计思路：</p>
+<p>1、找出所有子类的共同操作行为，从而确定基类需要包含的函数</p>
+<p>2、找出哪些操作行为与类型相关，从而确定虚函数</p>
+<p>3、确定private、protected、public层级</p>
+<h3 id="5-5-定义一个派生类"><a href="#5-5-定义一个派生类" class="headerlink" title="5.5 定义一个派生类"></a>5.5 定义一个派生类</h3><p>1、对于派生类中的non-virtual函数，因为基类中没有相应的接口，所以无法通过基类的pointer或者reference调用。</p>
+<p>2、继承来的public和protected成员，无论在继承体系中深度如何，都可被视为派生类自身拥有的成员。即，基类中的public和protected在派生类的派生类中也是public和protected属性。</p>
+<p>3、派生类中有member和基类同名，则派生类中对该名称的调用，自动解析为派生类中的定义。如果要使用基类的定义，需要加上class scope， 如class_name::function()。</p>
+<p>但是若是用基类类型的reference或者pointer调用这个member，且此memeber没有被声明为virtual，则只能调用到基类的定义。</p>
+<h3 id="5-6-运用继承体系"><a href="#5-6-运用继承体系" class="headerlink" title="5.6 运用继承体系"></a>5.6 运用继承体系</h3><h3 id="5-7-基类该多么抽象"><a href="#5-7-基类该多么抽象" class="headerlink" title="5.7 基类该多么抽象"></a>5.7 基类该多么抽象</h3><p>Data member使用reference VS pointer：</p>
+<p>（1）如果使用reference，因为reference无法代表空对象，所以必须在constructor的member initialization list中初始化，并且初始化后不能指代另一个对象。</p>
+<p>（2）如果使用pointer，则可以在constructor中先初始化为NULL，之后再赋予有效内存地址。但是每次使用前，都要判断pointer是否为空。</p>
+<h3 id="5-8-初始化、析构、复制"><a href="#5-8-初始化、析构、复制" class="headerlink" title="5.8 初始化、析构、复制"></a>5.8 初始化、析构、复制</h3><p>1、基类如果有实际的data member，则需要初始化。较好的方法是为基类提供constructor，利用constructor初始化data member。<b>因为抽象基类不能建立对象，所以constructor可以设置为protected，是开放给派生类使用。</b></p>
+<p>（1）一般利用派生类的构造函数，调用基类的构造函数，例如</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">Fibonacci::Fibonacci</span><span class="params">(<span class="keyword">int</span> len, <span class="keyword">int</span> beg_pos)</span> : <span class="title">num_sequence</span><span class="params">(len, beg_pos, elems)</span> <span class="comment">//这里_elems是Fibonacci类的static data member</span></span></span><br></pre></td></tr></table></figure>
+
+<p>（2）也可以为num_sequence提供default constructor。当派生类的constructor没有明确指明调用哪个基类constructor时，使用基类的默认constructor。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">num_sequence::num_sequence(<span class="keyword">int</span> len=<span class="number">1</span>, <span class="keyword">int</span> bp = <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;* pe=<span class="number">0</span>) : _length(len), _beg_pos(bp), _pelems(pe)&#123;&#125; <span class="comment">//这里reference要改成pointer，将pointer默认初始化为0</span></span><br></pre></td></tr></table></figure>
+
+<p>2、复制</p>
+<p>无论是用类初始化类，还是用=在类间赋值，都有默认的copy constructor和copy assignment operator，会将需要初始化的data member意义赋值过去，一般可以不用另外定义。但是如果出现例如4.2那种，data member中存在指针，destructor中有释放指针指向的内存的操作时，为了防止二次释放已释放内存，需要自行重载定义一下。</p>
+<h3 id="5-9-在派生类中定义一个虚函数"><a href="#5-9-在派生类中定义一个虚函数" class="headerlink" title="5.9 在派生类中定义一个虚函数"></a>5.9 在派生类中定义一个虚函数</h3><p>1、如果要覆盖基类所提供的虚函数定义，那么派生类中的新定义的函数原型必须和基类中的一模一样，包括：函数列表、返回类型、常量性（const）</p>
+<p>如果不完全一致，可能导致虚函数定义没有被覆盖，用基类pointer或reference调用虚函数时，调用的仍然是基类的定义（即没有完成多态）。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//基类虚函数定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">num_sequence</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">what_am_i</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;num_sequence\n&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//派生类虚函数定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span> :</span> <span class="keyword">public</span> num_sequence&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">what_am_i</span><span class="params">()</span></span>&#123;<span class="comment">//少了一个const</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Fibonacci\n&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  Fibonacci b;</span><br><span class="line">  </span><br><span class="line">  num_sequence* pp = &amp;b;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; pp-&gt;what_am_i(); <span class="comment">//输出num_sequence</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;b.what_what_am_i(); <span class="comment">//输出Fibonacci</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><b>注意：如果虚函数返回的类型为某个基类形式（比如基类的pointer或者reference时），派生类定义的虚函数返回类型可以为派生类的相应类型，不必完全一样。</b></p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> num_sequence * <span class="title">clone</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">virtual</span> Fibonacci * <span class="title">clone</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Fibonacci(*<span class="keyword">this</span>);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、虚函数的静态解析</p>
+<p>如下两种情况下，虚函数不是动态解析，而是静态解析</p>
+<p>（1）基类的constructor和destructor调用虚函数。因为此时派生类还没有construct，或者已经被destruct了，所以默认调用的事基类的虚函数</p>
+<p>（2）使用的是基类对象，而非基类的pointer或者reference。<b>即想要使用多态的性质，必须使用pointer或者reference</b></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(LibMat object, <span class="keyword">const</span> LibMat&amp; pointer, <span class="keyword">const</span> LibMat &amp;reference)</span></span>&#123;</span><br><span class="line">    <span class="comment">//调用LibMat::print()</span></span><br><span class="line">    object.print();</span><br><span class="line">    <span class="comment">//动态绑定，根据派生类类型调用派生类中的virtual函数</span></span><br><span class="line">    pointer-&gt;print();</span><br><span class="line">    reference-&gt;print();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>上述例子中第一个参数object，传入的必须是基类LibMat的对象，因为分配的空间只有基类大小，如果传入的是派生类的对象，那么会只保留基类成分，其他的派生类成分被砍掉。而pointer和reference被初始化为指向对象的内存地址，所以可以接纳派生类。</b></p>
+<h3 id="5-10-运行时的类型鉴定机制"><a href="#5-10-运行时的类型鉴定机制" class="headerlink" title="5.10 运行时的类型鉴定机制"></a>5.10 运行时的类型鉴定机制</h3><p>RTT（Run-Time Type Identification，RTTI）运行时类型鉴定机制</p>
+<p>1、例1</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">char</span>* num_sequence::</span><br><span class="line">what_am_i() <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeid</span>(*<span class="keyword">this</span>).name();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>头文件<typeinfo>下的typeid运算符，会返回一个type_info对象，里面存储着与类型相关的信息。</p>
+<p>2、例2</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">num_sequence * ps = &amp;fib;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeid</span>(*ps) == <span class="keyword">typeid</span>(Fibonacci)) <span class="comment">//可用来判断ps指向对象的类型</span></span><br></pre></td></tr></table></figure>
+
+<p>3、例3</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">num_sequence * ps = &amp;fib;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeid</span>(*ps) == <span class="keyword">typeid</span>(Fibonacci))&#123;</span><br><span class="line">    Fibonacci *pf = <span class="keyword">static_cast</span>&lt;Fibonacci*&gt;(ps); <span class="comment">//无条件转换，不管是否正确</span></span><br><span class="line">    pf-&gt;gen_elems(<span class="number">64</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用dynamic_cast，这也是个RTTI运算法，会在运行时检验操作。可以转换，则进行转换，否则，则返回0</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">num_sequence *ps = &amp;fib;</span><br><span class="line"><span class="keyword">if</span>(Fibonacci * pf = <span class="keyword">dynamic_cast</span>&lt;Fibonacci*&gt;(ps))&#123;</span><br><span class="line">    pf-&gt;gen_elems(<span class="number">64</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>C++</category>
