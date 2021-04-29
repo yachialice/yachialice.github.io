@@ -1490,7 +1490,7 @@
 ]]></content>
       <categories>
         <category>Leetcode</category>
-        <category>Hash Map</category>
+        <category>Hash Table</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
@@ -1518,7 +1518,7 @@
 ]]></content>
       <categories>
         <category>Leetcode</category>
-        <category>Hash Map</category>
+        <category>Hash Table</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
@@ -1842,6 +1842,61 @@
       <categories>
         <category>Leetcode</category>
         <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-165. Compare Version Numbers</title>
+    <url>/2021/04/29/LeetCode-165-Compare-Version-Numbers/</url>
+    <content><![CDATA[<h1 id="LeetCode-165-Compare-Version-Numbers"><a href="#LeetCode-165-Compare-Version-Numbers" class="headerlink" title="LeetCode-165. Compare Version Numbers"></a>LeetCode-165. Compare Version Numbers</h1><h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>Compare two version numbers <em>version1</em> and <em>version2</em>.<br>If <code>*version1* &gt; *version2*</code> return <code>1;</code> if <code>*version1* &lt;*version2*</code> return <code>-1;</code>otherwise return <code>0</code>.</p>
+<p>You may assume that the version strings are non-empty and contain only digits and the <code>.</code> character.<br>The <code>.</code> character does not represent a decimal point and is used to separate number sequences.<br>For instance, <code>2.5</code> is not “two and a half” or “half way to version three”, it is the fifth second-level revision of the second first-level revision.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: version1 &#x3D; &quot;0.1&quot;, version2 &#x3D; &quot;1.1&quot;</span><br><span class="line">Output: -1</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: version1 &#x3D; &quot;1.0.1&quot;, version2 &#x3D; &quot;1&quot;</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p>Example 3:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: version1 &#x3D; &quot;7.5.2.4&quot;, version2 &#x3D; &quot;7.5.3&quot;</span><br><span class="line">Output: -1</span><br></pre></td></tr></table></figure>
+
+<p>Credits:<br>Special thanks to <a href="https://oj.leetcode.com/discuss/user/ts">@ts</a> for adding this problem and creating all test cases.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><p>一起遍历两个version，遇到’.’前把数字加入string，遇到了’.’就比较一次aoti(string)的大小。</p>
+<p>如果v1或者v2为空，那么atoi(v1.c_str()), atoi(v2.c_str())得到的是什么？？</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareVersion</span><span class="params">(<span class="built_in">string</span> version1, <span class="built_in">string</span> version2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = version1.size();</span><br><span class="line">        <span class="keyword">int</span> n = version2.size();</span><br><span class="line">        <span class="built_in">string</span> v1, v2;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;m || j&lt;n)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt; m &amp;&amp; version1[i] != <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">                v1.push_back(version1[i]);</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(j &lt; n &amp;&amp; version2[j] != <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">                v2.push_back(version2[j]);</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> num1 = atoi(v1.c_str());</span><br><span class="line">            <span class="keyword">int</span> num2 = atoi(v2.c_str());</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(num1 &gt; num2)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(num1 &lt; num2)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            </span><br><span class="line">            v1.clear();</span><br><span class="line">            v2.clear();</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-166. Fraction to Recurring Decimal</title>
+    <url>/2021/04/29/LeetCode-166-Fraction-to-Recurring-Decimal/</url>
+    <content><![CDATA[<h1 id="LeetCode-166-Fraction-to-Recurring-Decimal"><a href="#LeetCode-166-Fraction-to-Recurring-Decimal" class="headerlink" title="LeetCode-166. Fraction to Recurring Decimal"></a>LeetCode-166. Fraction to Recurring Decimal</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</p>
+<p>If the fractional part is repeating, enclose the repeating part in parentheses.</p>
+<p>For example,</p>
+<ul>
+<li>Given numerator = 1, denominator = 2, return “0.5”.</li>
+<li>Given numerator = 2, denominator = 1, return “2”.</li>
+<li>Given numerator = 2, denominator = 3, return “0.(6)”.</li>
+</ul>
+<p><strong>Credits:</strong><br>Special thanks to <a href="https://oj.leetcode.com/discuss/user/Shangrila">@Shangrila</a> for adding this problem and creating all test cases.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>这道题比较麻烦。</p>
+<p>（1）按照一般的思路，需要先把正负号提出来，单独判断。但是整数INT类型为-2^31~2^31-1，所以-2^31取abs，会超出INT_MAX = 2^31-1，所以要用long类型存储。</p>
+<p>（2）求商：numerator/denominator；求余：numerator%demoniator</p>
+<p>（3）map&lt;int, int&gt; reminder_hash中的key为reminder，value为s中出现此reminder的位置，方便加”(“和”)”</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">fractionToDecimal</span><span class="params">(<span class="keyword">int</span> numerator, <span class="keyword">int</span> denominator)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; reminder_hash;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> s1 = numerator &gt; <span class="number">0</span> ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> s2 = denominator &gt; <span class="number">0</span> ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">string</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> num = <span class="built_in">abs</span>(numerator);</span><br><span class="line">        <span class="keyword">long</span> de = <span class="built_in">abs</span>(denominator);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> out = num / de;</span><br><span class="line">        <span class="keyword">long</span> reminder = num % de;</span><br><span class="line">        </span><br><span class="line">        res += to_string(out);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//除了结果为0，都要判断是否要加正负号</span></span><br><span class="line">        <span class="keyword">if</span>(out != <span class="number">0</span> || reminder != <span class="number">0</span>)</span><br><span class="line">            res = s1*s2 == <span class="number">1</span> ? res : <span class="string">&quot;-&quot;</span>+res;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(reminder != <span class="number">0</span>)</span><br><span class="line">            res += <span class="string">&quot;.&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//s存储小数部分</span></span><br><span class="line">        <span class="built_in">string</span> s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(reminder != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(reminder_hash.count(reminder))&#123;</span><br><span class="line">                s.insert(reminder_hash[reminder],<span class="string">&quot;(&quot;</span>);</span><br><span class="line">                s += <span class="string">&quot;)&quot;</span>;</span><br><span class="line">                <span class="keyword">return</span> res + s;</span><br><span class="line">            &#125;</span><br><span class="line">            reminder_hash[reminder] = pos;</span><br><span class="line">            s += to_string(reminder * <span class="number">10</span> / de);</span><br><span class="line">            reminder = (reminder * <span class="number">10</span>) % de;</span><br><span class="line">            </span><br><span class="line">            pos++;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res + s;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Table</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
