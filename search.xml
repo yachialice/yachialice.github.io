@@ -1951,4 +1951,57 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-171. Excel Sheet Column Number</title>
+    <url>/2021/05/06/LeetCode-171-Excel-Sheet-Column-Number/</url>
+    <content><![CDATA[<h1 id="LeetCode-171-Excel-Sheet-Column-Number"><a href="#LeetCode-171-Excel-Sheet-Column-Number" class="headerlink" title="LeetCode-171. Excel Sheet Column Number"></a>LeetCode-171. Excel Sheet Column Number</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Related to question <a href="https://oj.leetcode.com/problems/excel-sheet-column-title/">Excel Sheet Column Title</a></p>
+<p>Given a column title as appear in an Excel sheet, return its corresponding column number.</p>
+<p>For example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">A -&gt; 1</span><br><span class="line">B -&gt; 2</span><br><span class="line">C -&gt; 3</span><br><span class="line">...</span><br><span class="line">Z -&gt; 26</span><br><span class="line">AA -&gt; 27</span><br><span class="line">AB -&gt; 28 </span><br></pre></td></tr></table></figure>
+
+<p><strong>Credits:</strong><br>Special thanks to <a href="https://oj.leetcode.com/discuss/user/ts">@ts</a> for adding this problem and creating all test cases.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>可以联系168一起看，比168简单。实质上是把26进制的数转换为十进制的数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">titleToNumber</span><span class="params">(<span class="built_in">string</span> columnTitle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;columnTitle.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> curr = (columnTitle[i]-<span class="string">&#x27;A&#x27;</span>+<span class="number">1</span>);</span><br><span class="line">            res = res*<span class="number">26</span> + curr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-169. Majority Element</title>
+    <url>/2021/05/06/LeetCode-169-Majority-Element/</url>
+    <content><![CDATA[<h1 id="LeetCode-169-Majority-Element"><a href="#LeetCode-169-Majority-Element" class="headerlink" title="LeetCode-169. Majority Element"></a>LeetCode-169. Majority Element</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given an array <code>nums</code> of size <code>n</code>, return <em>the majority element</em>.</p>
+<p>The majority element is the element that appears more than <code>⌊n / 2⌋</code> times. You may assume that the majority element always exists in the array.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [3,2,3]</span><br><span class="line">Output: 3</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,2,1,1,1,2,2]</span><br><span class="line">Output: 2</span><br></pre></td></tr></table></figure>
+
+<p>Constraints:</p>
+<ul>
+<li><code>n == nums.length</code></li>
+<li><code>1 &lt;= n &lt;= 5 * 104</code></li>
+<li><code>-231 &lt;= nums[i] &lt;= 231 - 1</code></li>
+</ul>
+<p>Follow-up: Could you solve the problem in linear time and in <code>O(1)</code> space?</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>哈希+存储最多元素</p>
+<p>还有分治等其他方法，可以看一下别的方法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用for (int num : nums)更好</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; dict_;</span><br><span class="line">        <span class="keyword">int</span> max_key = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> max_value = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(dict_.count(nums[i]))&#123;</span><br><span class="line">                dict_[nums[i]]++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dict_[nums[i]] = <span class="number">1</span>;   </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(dict_[nums[i]] &gt; max_value)&#123;</span><br><span class="line">                max_key = nums[i];</span><br><span class="line">                max_value = dict_[nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max_key;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Table</category>
+        <category>Divide &amp; Conquer</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
