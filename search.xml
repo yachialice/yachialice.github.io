@@ -1902,4 +1902,53 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-167. Two Sum||-Input array is sorted</title>
+    <url>/2021/05/06/LeetCode-167-Two-Sum-Input-array-is-sorted/</url>
+    <content><![CDATA[<h1 id="LeetCode-167-Two-Sum-Input-array-is-sorted"><a href="#LeetCode-167-Two-Sum-Input-array-is-sorted" class="headerlink" title="LeetCode-167. Two Sum||-Input array is sorted"></a>LeetCode-167. Two Sum||-Input array is sorted</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.<br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.<br>You may assume that each input would have exactly one solution.<br>Input: numbers={2, 7, 11, 15}, target=9<br>Output: index1=1, index2=2</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h4><p>二分查找，时间复杂度o(nlogn)，空间复杂度o(n)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(<span class="number">2</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;numbers.size()<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> curr = numbers[i];</span><br><span class="line">            <span class="keyword">int</span> search = target - curr;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> left = i+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> right = numbers.size()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">                <span class="keyword">int</span> mid = numbers[(left+right)/<span class="number">2</span>];</span><br><span class="line">                <span class="keyword">if</span>(mid == search)&#123;</span><br><span class="line">                    res[<span class="number">0</span>] = i+<span class="number">1</span>;</span><br><span class="line">                    res[<span class="number">1</span>] = (left+right)/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(mid&lt;search)</span><br><span class="line">                    left = (left+right)/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    right = (left+right)/<span class="number">2</span><span class="number">-1</span>;   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Solution-2-双指针"><a href="#Solution-2-双指针" class="headerlink" title="Solution 2 双指针"></a>Solution 2 双指针</h4><p>时间复杂度O(n)，空间复杂度O(1)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(<span class="number">2</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = numbers.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = numbers[left] + numbers[right];</span><br><span class="line">            <span class="keyword">if</span>(sum == target)</span><br><span class="line">                <span class="keyword">return</span> &#123;left+<span class="number">1</span>, right+<span class="number">1</span>&#125;;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target)&#123;</span><br><span class="line">                left ++;   </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-168. Excel Sheet Column Title</title>
+    <url>/2021/05/06/LeetCode-168-Excel-Sheet-Column-Title/</url>
+    <content><![CDATA[<h1 id="LeetCode-168-Excel-Sheet-Column-Title"><a href="#LeetCode-168-Excel-Sheet-Column-Title" class="headerlink" title="LeetCode-168. Excel Sheet Column Title"></a>LeetCode-168. Excel Sheet Column Title</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
+<p>For example:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 -&gt; A</span><br><span class="line">2 -&gt; B</span><br><span class="line">3 -&gt; C</span><br><span class="line">...</span><br><span class="line">26 -&gt; Z</span><br><span class="line">27 -&gt; AA</span><br><span class="line">28 -&gt; AB </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1</span><br><span class="line">Output: &quot;A&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 28</span><br><span class="line">Output: &quot;AB&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Example 3:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 701</span><br><span class="line">Output: &quot;ZY&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Credits:</strong><br>Special thanks to <a href="https://oj.leetcode.com/discuss/user/ifanchu">@ifanchu</a> for adding this problem and creating all test cases.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>从低到高求，最后再反转string</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convertToTitle</span><span class="params">(<span class="keyword">int</span> columnNumber)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">int</span> n = columnNumber;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(n)&#123;</span><br><span class="line">            res += (--n%<span class="number">26</span>) + <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">            n = (n++)/<span class="number">26</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        reverse(res.begin(), res.end());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
