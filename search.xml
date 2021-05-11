@@ -2004,4 +2004,238 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-33. Search in Rotated Sorted Array</title>
+    <url>/2021/05/11/LeetCode-33-Search-in-Rotated-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="LeetCode-33-Search-in-Rotated-Sorted-Array"><a href="#LeetCode-33-Search-in-Rotated-Sorted-Array" class="headerlink" title="LeetCode-33. Search in Rotated Sorted Array"></a>LeetCode-33. Search in Rotated Sorted Array</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">https://leetcode.com/problems/search-in-rotated-sorted-array/</a></p>
+<p>There is an integer array <code>nums</code> sorted in ascending order (with <strong>distinct</strong> values).</p>
+<p>Prior to being passed to your function, <code>nums</code> is <strong>rotated</strong> at an unknown pivot index <code>k</code> (<code>0 &lt;= k &lt; nums.length</code>) such that the resulting array is <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code> (<strong>0-indexed</strong>). For example, <code>[0,1,2,4,5,6,7]</code>might be rotated at pivot index <code>3</code> and become <code>[4,5,6,7,0,1,2]</code>.</p>
+<p>Given the array <code>nums</code> <strong>after</strong> the rotation and an integer <code>target</code>, return <em>the index of</em> <code>target</code><em>if it is in</em> <code>nums</code><em>, or</em> <code>-1</code> <em>if it is not in</em> <code>nums</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [4,5,6,7,0,1,2], target &#x3D; 0</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [4,5,6,7,0,1,2], target &#x3D; 3</span><br><span class="line">Output: -1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1], target &#x3D; 0</span><br><span class="line">Output: -1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）比较target和nums[right]，找到递增的是left～mid，还是mid～right</p>
+<p>（2）可以想象这样一幅图</p>
+<p>![image-20210511202359261](/Users/alice/Library/Application Support/typora-user-images/image-20210511202359261.png)</p>
+<p>nums[mid]和right比较，如果nums[mid]在点1位置，则left～mid有序；若在点2的位置，则mid～right有序</p>
+<p>（3）if target应该在有序的区间内（target和区间左右端点值比较），缩小范围到有序区间</p>
+<p>else 缩小范围到有序区间之外</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size() <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">//注意这里是&lt;=</span></span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="comment">//mid～right ascends</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; nums[right])&#123;</span><br><span class="line">                <span class="keyword">if</span>(target &gt; nums[mid] &amp;&amp; target &lt;= nums[right])</span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//nums[mid] == nums[right]?</span></span><br><span class="line">            <span class="comment">//left～mid ascends</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(target &lt; nums[mid] &amp;&amp; target &gt;= nums[left])</span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-34. Find First and Last Position of Element in Sorted Array</title>
+    <url>/2021/05/11/LeetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="LeetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array"><a href="#LeetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array" class="headerlink" title="LeetCode-34. Find First and Last Position of Element in Sorted Array"></a>LeetCode-34. Find First and Last Position of Element in Sorted Array</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></p>
+<p>Given an array of integers <code>nums</code> sorted in ascending order, find the starting and ending position of a given <code>target</code> value.</p>
+<p>If <code>target</code> is not found in the array, return <code>[-1, -1]</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [5,7,7,8,8,10], target &#x3D; 8</span><br><span class="line">Output: [3,4]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [5,7,7,8,8,10], target &#x3D; 6</span><br><span class="line">Output: [-1,-1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [], target &#x3D; 0</span><br><span class="line">Output: [-1,-1]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>1、用二分法找到一个target</p>
+<p>2、从target开始左右遍历，直到找到starting and ending position</p>
+<p>此种方法的问题是，时间复杂度不能保证是O(logn)，比如当数组中所有元素相同时，会变成O(n).</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">searchRange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)&#123;</span><br><span class="line">                <span class="keyword">int</span> l = mid;</span><br><span class="line">                <span class="keyword">int</span> r = mid;</span><br><span class="line">                <span class="keyword">while</span>(l&gt;=<span class="number">0</span> &amp;&amp; nums[l] == nums[mid])</span><br><span class="line">                    l--;</span><br><span class="line">                <span class="keyword">while</span>(r&lt; nums.size() &amp;&amp; nums[r] == nums[mid])</span><br><span class="line">                    r++;</span><br><span class="line">                <span class="keyword">return</span> &#123;++l, --r&#125;;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &lt; target)&#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; target)&#123;</span><br><span class="line">                right = mid <span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>（1）用二分法找两次，一次找左边界，一次找右边界</p>
+<p>（2）整体思路较为费劲，需要找两次。</p>
+<p>（3）左边界和右边界的写法不同，一个为nums[mid]&lt;target，一个为nums[mid]&lt;=target</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">searchRange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(<span class="number">2</span>,<span class="number">-1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!nums.size()) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="comment">//找左边界</span></span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> right = mid<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//例如[2,2]的案例，left可以会超出数组下界，所以要先判断是否溢出</span></span><br><span class="line">        <span class="keyword">if</span>(left &lt; nums.size() &amp;&amp; nums[left] == target) res[<span class="number">0</span>] = left;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> res;</span><br><span class="line">       <span class="comment">//重新初始化right</span></span><br><span class="line">        right = nums.size()<span class="number">-1</span>;</span><br><span class="line">      <span class="comment">//找右边界</span></span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt;= target) left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> right = mid<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        res[<span class="number">1</span>] = right;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution 3"></a>Solution 3</h3><p>（1）查找第一个大于等于target的位置，即左边界</p>
+<p>（2）查找第一个大于等于target+1的位置，即右边界</p>
+<p>（3）此种思路其实和Solution2相似，不过统一了写法，更加简单</p>
+<p>（4）二分搜索法小结：<a href="https://www.cnblogs.com/grandyang/p/6854825.html%E3%80%82%E6%AD%A4%E9%A2%98%E7%94%A8%E5%88%B0%E4%BA%86%EF%BC%8C%E6%9F%A5%E6%89%BE%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%B0%8F%E4%BA%8Etarget%E7%9A%84%E6%95%B0%E7%9A%84%E5%86%99%E6%B3%95%E3%80%82">https://www.cnblogs.com/grandyang/p/6854825.html。此题用到了，查找第一个不小于target的数的写法。</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">searchRange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = find(nums, target);</span><br><span class="line">        <span class="keyword">if</span>(start == nums.size() || nums[start] != target) <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">        <span class="keyword">return</span> &#123;start, find(nums, target+<span class="number">1</span>)<span class="number">-1</span>&#125;;</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size() - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-4. Median of Two Sorted Arrays</title>
+    <url>/2021/05/11/LeetCode-4-Median-of-Two-Sorted-Arrays/</url>
+    <content><![CDATA[<h1 id="LeetCode-4-Median-of-Two-Sorted-Arrays"><a href="#LeetCode-4-Median-of-Two-Sorted-Arrays" class="headerlink" title="LeetCode-4. Median of Two Sorted Arrays"></a>LeetCode-4. Median of Two Sorted Arrays</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/submissions/">https://leetcode.com/problems/median-of-two-sorted-arrays/submissions/</a></p>
+<p>There are two sorted arrays nums1 and nums2 of size m and n respectively.</p>
+<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<p>You may assume nums1 and nums2 cannot be both empty.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nums1 &#x3D; [1, 3]</span><br><span class="line">nums2 &#x3D; [2]</span><br><span class="line"></span><br><span class="line">The median is 2.0</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nums1 &#x3D; [1, 2]</span><br><span class="line">nums2 &#x3D; [3, 4]</span><br><span class="line"></span><br><span class="line">The median is (2 + 3)&#x2F;2 &#x3D; 2.5</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1） 找出第(m+n+1)/2大的数和第(m+n+2)/2的数，两者的平均即为中位数，无论nums为奇数长还是偶数长</p>
+<p>（2）i，j分别为nums1和nums2的指针。0～i-1和0～j-1表示已经验证过的小于中位数的数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = nums1.size();</span><br><span class="line">        <span class="keyword">int</span> n = nums2.size();</span><br><span class="line">        <span class="keyword">int</span> left = (m + n + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> right = (m + n + <span class="number">2</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> (findKth(nums1, <span class="number">0</span>, nums2, <span class="number">0</span>, left) + findKth(nums1, <span class="number">0</span>, nums2, <span class="number">0</span>, right)) / <span class="number">2.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKth</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> i, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= nums1.size()) <span class="keyword">return</span> nums2[j + k - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (j &gt;= nums2.size()) <span class="keyword">return</span> nums1[i + k - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">1</span>) <span class="keyword">return</span> min(nums1[i], nums2[j]);</span><br><span class="line">        <span class="comment">//-1是因为i，j现在还没有纳入已排除的小于中位数的数中去</span></span><br><span class="line">        <span class="keyword">int</span> midVal1 = (i + k / <span class="number">2</span> - <span class="number">1</span> &lt; nums1.size()) ? nums1[i + k / <span class="number">2</span> - <span class="number">1</span>] : INT_MAX;</span><br><span class="line">        <span class="keyword">int</span> midVal2 = (j + k / <span class="number">2</span> - <span class="number">1</span> &lt; nums2.size()) ? nums2[j + k / <span class="number">2</span> - <span class="number">1</span>] : INT_MAX;</span><br><span class="line">        <span class="keyword">if</span> (midVal1 &lt; midVal2) &#123;</span><br><span class="line">            <span class="keyword">return</span> findKth(nums1, i + k / <span class="number">2</span>, nums2, j, k - k / <span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> findKth(nums1, i, nums2, j + k / <span class="number">2</span>, k - k / <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-704. Binary Search</title>
+    <url>/2021/05/11/LeetCode-704-Binary-Search/</url>
+    <content><![CDATA[<h1 id="LeetCode-704-Binary-Search"><a href="#LeetCode-704-Binary-Search" class="headerlink" title="LeetCode-704. Binary Search"></a>LeetCode-704. Binary Search</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/binary-search/">https://leetcode.com/problems/binary-search/</a></p>
+<p>Given a sorted (in ascending order) integer array <code>nums</code> of <code>n</code> elements and a <code>target</code> value, write a function to search <code>target</code> in <code>nums</code>. If <code>target</code> exists, then return its index, otherwise return <code>-1</code>.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: 9 exists in nums and its index is 4</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 2</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: 2 does not exist in nums so return -1</span><br></pre></td></tr></table></figure>
+
+<p>Note:</p>
+<ol>
+<li>You may assume that all elements in <code>nums</code> are unique.</li>
+<li><code>n</code> will be in the range <code>[1, 10000]</code>.</li>
+<li>The value of each element in <code>nums</code> will be in the range <code>[-9999, 9999]</code>.</li>
+</ol>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>(1）right = num.size()-1</p>
+<p>(2) left = mid + 1; right = mid - 1;</p>
+<p>(3) while(left &lt;= right)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right )/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &lt; target)&#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-74. Search a 2D Matrix</title>
+    <url>/2021/05/11/LeetCode-74-Search-a-2D-Matrix/</url>
+    <content><![CDATA[<h1 id="LeetCode-74-Search-a-2D-Matrix"><a href="#LeetCode-74-Search-a-2D-Matrix" class="headerlink" title="LeetCode-74. Search a 2D Matrix"></a>LeetCode-74. Search a 2D Matrix</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/search-a-2d-matrix/">https://leetcode.com/problems/search-a-2d-matrix/</a></p>
+<p>Write an efficient algorithm that searches for a value in an <code>m x n</code> matrix. This matrix has the following properties:</p>
+<ul>
+<li>Integers in each row are sorted from left to right.</li>
+<li>The first integer of each row is greater than the last integer of the previous row.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/05/mat.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: matrix &#x3D; [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target &#x3D; 3</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/05/mat2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: matrix &#x3D; [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target &#x3D; 13</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>把二维数组看作一维，直接转换坐标</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">searchMatrix</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.size();</span><br><span class="line">        <span class="keyword">int</span> n = matrix[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">int</span> right = m*n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> i = mid / n;</span><br><span class="line">            <span class="keyword">int</span> j = mid % n;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][j] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[i][j] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>做两次二分查找，一次找到相应的行，一次找到相应的列</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-81 Search in Rotated Sorted Array ||</title>
+    <url>/2021/05/11/LeetCode-81-Search-in-Rotated-Sorted-Array-0/</url>
+    <content><![CDATA[<h1 id="LeetCode-81-Search-in-Rotated-Sorted-Array"><a href="#LeetCode-81-Search-in-Rotated-Sorted-Array" class="headerlink" title="LeetCode-81 Search in Rotated Sorted Array ||"></a>LeetCode-81 Search in Rotated Sorted Array ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/">https://leetcode.com/problems/search-in-rotated-sorted-array-ii/</a></p>
+<p>相关题目：33</p>
+<p>There is an integer array <code>nums</code> sorted in non-decreasing order (not necessarily with <strong>distinct</strong>values).</p>
+<p>Before being passed to your function, <code>nums</code> is <strong>rotated</strong> at an unknown pivot index <code>k</code> (<code>0 &lt;= k &lt; nums.length</code>) such that the resulting array is <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code> (<strong>0-indexed</strong>). For example, <code>[0,1,2,4,4,4,5,6,6,7]</code> might be rotated at pivot index <code>5</code> and become <code>[4,5,6,6,7,0,1,2,4,4]</code>.</p>
+<p>Given the array <code>nums</code> <strong>after</strong> the rotation and an integer <code>target</code>, return <code>true</code> <em>if</em> <code>target</code> <em>is in</em> <code>nums</code><em>, or</em> <code>false</code> <em>if it is not in</em> <code>nums</code><em>.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,5,6,0,0,1,2], target &#x3D; 0</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,5,6,0,0,1,2], target &#x3D; 3</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）此题不同于33题的地方在于nums中有元素相等，故而nums[mid]与nums[right]相比较，无法得出有序的区间在哪里。</p>
+<p>如下图，nums[mid]=nums[right]时，</p>
+<p>若mid为点1，有序区间为left～mid。</p>
+<p>若mid为点2， 有序区间为mid～right</p>
+<p>（2）为了判断有序区间，需要进行right–，直到nums[mid]!=nums[right]。</p>
+<p>![image-20210511203748232](/Users/alice/Library/Application Support/typora-user-images/image-20210511203748232.png)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size() - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//nums[mid]==nums[right]的时候，无法确定哪边有序，如target=3时，[1,1,3,1]，[3,1,1]。则将right--，直到nums[mid]!=nums[right]</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == nums[right])&#123;</span><br><span class="line">                <span class="keyword">while</span>(right &gt;= left &amp;&amp; nums[mid] == nums[right])</span><br><span class="line">                      right--;</span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &lt; nums[right])&#123;</span><br><span class="line">                <span class="keyword">if</span>(target &gt; nums[mid] &amp;&amp; target &lt;= nums[right])</span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(target &lt; nums[mid] &amp;&amp; target &gt;= nums[left])</span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode - Binary Search总汇</title>
+    <url>/2021/05/11/LeetCode-Binary-Search%E6%80%BB%E6%B1%87/</url>
+    <content><![CDATA[<h1 id="LeetCode-Binary-Search总汇"><a href="#LeetCode-Binary-Search总汇" class="headerlink" title="LeetCode - Binary Search总汇"></a>LeetCode - Binary Search总汇</h1><h2 id="Solved-List"><a href="#Solved-List" class="headerlink" title="Solved List"></a>Solved List</h2><p>参考索引</p>
+<p>胖头龙：<a href="https://www.1point3acres.com/bbs/forum.php?mod=viewthread&amp;tid=678970&amp;extra=&amp;authorid=682747&amp;page=1">https://www.1point3acres.com/bbs/forum.php?mod=viewthread&amp;tid=678970&amp;extra=&amp;authorid=682747&amp;page=1</a></p>
+<h3 id="1、-朴素二分法"><a href="#1、-朴素二分法" class="headerlink" title="1、 朴素二分法"></a>1、 朴素二分法</h3><p><font color=#9932CC>704. Binary Search</font></p>
+<p><a href="https://leetcode.com/problems/binary-search/">https://leetcode.com/problems/binary-search/</a></p>
+<p><font color=#0000FF>34. Find First and Last Postition of Element in Sorted Array</font></p>
+<p><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></p>
+<h3 id="2、条件二分法"><a href="#2、条件二分法" class="headerlink" title="2、条件二分法"></a>2、条件二分法</h3><p><font color=#9932CC>33. Search in Rotated Sorted Array</font></p>
+<p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">https://leetcode.com/problems/search-in-rotated-sorted-array/</a></p>
+<p><font color=#9932CC>81. Search in Rotated Sorted Array ||</font></p>
+<p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/">https://leetcode.com/problems/search-in-rotated-sorted-array-ii/</a></p>
+<p><font color=#0000FF>74. Search a 2D Matrix</font></p>
+<p><a href="https://leetcode.com/problems/search-a-2d-matrix/">https://leetcode.com/problems/search-a-2d-matrix/</a></p>
+<p><font color=#0000FF>4. Median of Two Sorted Arrays</font></p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>总汇</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
