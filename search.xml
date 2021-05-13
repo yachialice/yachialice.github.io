@@ -1834,9 +1834,13 @@
 
 
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>因为-1位当作负无限大，所以从curr=0开始。如果next&lt;curr，则curr为峰值，直接return。若curr与next相等，则next一定也不是峰值，next与curr指针都向后移两位。若curr&lt;next，则next可能为峰值，next与curr指针都向后移一位。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h4><p>因为-1位当作负无限大，所以从curr=0开始。如果next&lt;curr，则curr为峰值，直接return。若curr与next相等，则next一定也不是峰值，next与curr指针都向后移两位。若curr&lt;next，则next可能为峰值，next与curr指针都向后移一位。</p>
 <p>即遍历的时候，保证当前curr&gt;prev，则curr只需要与next比较即可。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.size()==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> curr = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> next = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(next &lt; nums.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[curr] &gt; nums[next])</span><br><span class="line">                <span class="keyword">return</span> curr;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[curr] == nums[next])&#123;</span><br><span class="line">                curr += <span class="number">2</span>;</span><br><span class="line">                next += <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                curr += <span class="number">1</span>;</span><br><span class="line">                next += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(next == nums.size())</span><br><span class="line">            <span class="keyword">return</span> next<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">             <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h4><p>（1）使用二分法查找。因为最后一个元素为负无穷，并且找到一个峰值就可。所以如果当前元素&lt;后一个元素，即代表峰值在当前元素后面。</p>
+<p>（2）一些笔记见代码注释</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="comment">//注意，如果这里写成</span></span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="comment">//这样不加if(nums[mid] == target)语句，实际上break时，left指向的实际是最小的不满足于下面if语句的元素。如果下面语句是if(nums[mid]&lt;target),找到的是第一个大于等于target的元素；如果下面语句是if(nums[mid]&lt;=target)，找到的是第一个大于target的元素。</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; nums[mid+<span class="number">1</span>])&#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -2229,10 +2233,90 @@
 <p><font color=#0000FF>74. Search a 2D Matrix</font></p>
 <p><a href="https://leetcode.com/problems/search-a-2d-matrix/">https://leetcode.com/problems/search-a-2d-matrix/</a></p>
 <p><font color=#0000FF>4. Median of Two Sorted Arrays</font></p>
-]]></content>
+<p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/">https://leetcode.com/problems/median-of-two-sorted-arrays/</a></p>
+<p><font color=#0000FF>162. Find Peak Element</font></p>
+<p><a href="https://leetcode.com/problems/find-peak-element/">https://leetcode.com/problems/find-peak-element/</a></p>
+<h3 id="3、答案二分法"><a href="#3、答案二分法" class="headerlink" title="3、答案二分法"></a>3、答案二分法</h3><p><font color=#9932CC>875. Koko Eating Bananas</font></p>
+<p><a href="https://leetcode.com/problems/koko-eating-bananas/">https://leetcode.com/problems/koko-eating-bananas/</a></p>
+<p><font color=#9932CC>1283. Find the Smallest Divisor Given a Threshold</font></p>
+<p><a href="https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/">https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/</a></p>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2>]]></content>
       <categories>
         <category>Leetcode</category>
         <category>总汇</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-1283. Find the Smallest Divisor Given a Threshold</title>
+    <url>/2021/05/13/LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold/</url>
+    <content><![CDATA[<h1 id="LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold"><a href="#LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold" class="headerlink" title="LeetCode-1283. Find the Smallest Divisor Given a Threshold"></a>LeetCode-1283. Find the Smallest Divisor Given a Threshold</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/">https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/</a></p>
+<p>Given an array of integers <code>nums</code> and an integer <code>threshold</code>, we will choose a positive integer <code>divisor</code>, divide all the array by it, and sum the division’s result. Find the <strong>smallest</strong> <code>divisor</code> such that the result mentioned above is less than or equal to <code>threshold</code>.</p>
+<p>Each result of the division is rounded to the nearest integer greater than or equal to that element. (For example: <code>7/3 = 3</code> and <code>10/2 = 5</code>).</p>
+<p>It is guaranteed that there will be an answer.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,2,5,9], threshold &#x3D; 6</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: We can get a sum to 17 (1+2+5+9) if the divisor is 1. </span><br><span class="line">If the divisor is 4 we can get a sum of 7 (1+1+2+3) and if the divisor is 5 the sum will be 5 (1+1+1+2). </span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [44,22,33,11,1], threshold &#x3D; 5</span><br><span class="line">Output: 44</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [21212,10101,12121], threshold &#x3D; 1000000</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,3,5,7,11], threshold &#x3D; 11</span><br><span class="line">Output: 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 106</code></li>
+<li><code>nums.length &lt;= threshold &lt;= 106</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">smallestDivisor</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> threshold)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">1e6</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> r = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) r += (num % mid==<span class="number">0</span>) ? num/mid : num/mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(r &gt;threshold)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-875. Koko Eating Bananas</title>
+    <url>/2021/05/13/LeetCode-875-Koko-Eating-Bananas/</url>
+    <content><![CDATA[<h1 id="LeetCode-875-Koko-Eating-Bananas"><a href="#LeetCode-875-Koko-Eating-Bananas" class="headerlink" title="LeetCode-875. Koko Eating Bananas"></a>LeetCode-875. Koko Eating Bananas</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/koko-eating-bananas/">https://leetcode.com/problems/koko-eating-bananas/</a></p>
+<p>相似题目：1283. <a href="https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/">https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/</a></p>
+<p>Koko loves to eat bananas. There are <code>n</code> piles of bananas, the <code>ith</code> pile has <code>piles[i]</code> bananas. The guards have gone and will come back in <code>h</code> hours.</p>
+<p>Koko can decide her bananas-per-hour eating speed of <code>k</code>. Each hour, she chooses some pile of bananas and eats <code>k</code> bananas from that pile. If the pile has less than <code>k</code> bananas, she eats all of them instead and will not eat any more bananas during this hour.</p>
+<p>Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.</p>
+<p>Return <em>the minimum integer</em> <code>k</code> <em>such that she can eat all the bananas within</em> <code>h</code><em>hours</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: piles &#x3D; [3,6,7,11], h &#x3D; 8</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: piles &#x3D; [30,11,23,4,20], h &#x3D; 5</span><br><span class="line">Output: 30</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: piles &#x3D; [30,11,23,4,20], h &#x3D; 6</span><br><span class="line">Output: 23</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= piles.length &lt;= 104</code></li>
+<li><code>piles.length &lt;= h &lt;= 109</code></li>
+<li><code>1 &lt;= piles[i] &lt;= 109</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）其实是一个遍历的思路，答案的范围为[1, 10^9]，故而从这个范围内搜索满足条件的k</p>
+<p>cn（2）注意for(auto pile : piles)的写法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minEatingSpeed</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; piles, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">1e9</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> time = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> pile : piles) time += (mid + pile - <span class="number">1</span>) / mid;</span><br><span class="line">            <span class="keyword">if</span>(time &gt; h)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
