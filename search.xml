@@ -2322,4 +2322,169 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-26. Remove Duplicates from Sorted Array</title>
+    <url>/2021/05/14/LeetCode-26-Remove-Duplicates-from-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="LeetCode-26-Remove-Duplicates-from-Sorted-Array"><a href="#LeetCode-26-Remove-Duplicates-from-Sorted-Array" class="headerlink" title="LeetCode-26. Remove Duplicates from Sorted Array"></a>LeetCode-26. Remove Duplicates from Sorted Array</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">https://leetcode.com/problems/remove-duplicates-from-sorted-array/</a></p>
+<p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that each element appears only <em>once</em> and returns the new length.</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a></strong> with O(1) extra memory.</p>
+<p><strong>Clarification:</strong></p>
+<p>Confused why the returned value is an integer but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means a modification to the input array will be known to the caller as well.</p>
+<p>Internally you can think of this:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; nums is passed in by reference. (i.e., without making a copy)</span><br><span class="line">int len &#x3D; removeDuplicates(nums);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; any modification to nums in your function would be known by the caller.</span><br><span class="line">&#x2F;&#x2F; using the length returned by your function, it prints the first len elements.</span><br><span class="line">for (int i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,1,2]</span><br><span class="line">Output: 2, nums &#x3D; [1,2]</span><br><span class="line">Explanation: Your function should return length &#x3D; 2, with the first two elements of nums being 1 and 2 respectively. It doesn&#39;t matter what you leave beyond the returned length.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0,0,1,1,1,2,2,3,3,4]</span><br><span class="line">Output: 5, nums &#x3D; [0,1,2,3,4]</span><br><span class="line">Explanation: Your function should return length &#x3D; 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively. It doesn&#39;t matter what values are set beyond the returned length.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>(1)显然使用双指针</p>
+<p>(2)重点在于corner case的写法</p>
+<p>(3) nums[++prev] = nums[curr++]这一句巧妙地将prev先+1，再赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> prev = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> curr = <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(curr &lt; nums.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[curr] == nums[prev]) curr++;</span><br><span class="line">            <span class="keyword">else</span> nums[++prev] = nums[curr++];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums.empty() ? <span class="number">0</span> : prev+<span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-283. Move Zeros</title>
+    <url>/2021/05/14/LeetCode-283-Move-Zeros/</url>
+    <content><![CDATA[<h1 id="LeetCode-283-Move-Zeros"><a href="#LeetCode-283-Move-Zeros" class="headerlink" title="LeetCode-283. Move Zeros"></a>LeetCode-283. Move Zeros</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an integer array <code>nums</code>, move all <code>0</code>‘s to the end of it while maintaining the relative order of the non-zero elements.</p>
+<p><strong>Note</strong> that you must do this in-place without making a copy of the array.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0,1,0,3,12]</span><br><span class="line">Output: [1,3,12,0,0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0]</span><br><span class="line">Output: [0]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）curr指针用来搜索非零的位置，将其与prev指针指的位置互换。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> prev = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> curr = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(curr &lt; nums.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[curr]) swap(nums[curr], nums[prev++]);</span><br><span class="line">            curr++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-75. Sort Colors</title>
+    <url>/2021/05/13/LeetCode-75-Sort-Colors/</url>
+    <content><![CDATA[<h1 id="LeetCode-75-Sort-Colors"><a href="#LeetCode-75-Sort-Colors" class="headerlink" title="LeetCode-75. Sort Colors"></a>LeetCode-75. Sort Colors</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/sort-colors/">https://leetcode.com/problems/sort-colors/</a></p>
+<p>Given an array <code>nums</code> with <code>n</code> objects colored red, white, or blue, sort them <strong><a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a></strong> so that objects of the same color are adjacent, with the colors in the order red, white, and blue.</p>
+<p>We will use the integers <code>0</code>, <code>1</code>, and <code>2</code> to represent the color red, white, and blue, respectively.</p>
+<p>You must solve this problem without using the library’s sort function.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,0,2,1,1,0]</span><br><span class="line">Output: [0,0,1,1,2,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,0,1]</span><br><span class="line">Output: [0,1,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0]</span><br><span class="line">Output: [0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1]</span><br><span class="line">Output: [1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == nums.length</code></li>
+<li><code>1 &lt;= n &lt;= 300</code></li>
+<li><code>nums[i]</code> is <code>0</code>, <code>1</code>, or <code>2</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>利用counting sort</p>
+<p>（1）时间复杂度：O(n+k)；（k是否为3？？）；空间复杂度：O(3)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">count</span><span class="params">(<span class="number">3</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) count[num]++;</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;count.size(); i++)</span><br><span class="line">            <span class="keyword">while</span>(count[i]--&gt;<span class="number">0</span>)</span><br><span class="line">                nums[k++] = i;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>（2）双指针</p>
+<p>（不是很懂）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.size()<span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= right; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>) swap(nums[left++],nums[i]);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] == <span class="number">2</span>) swap(nums[right--], nums[i--]);</span><br><span class="line">        &#125;</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Two Pointers</category>
+        <category>Sort</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-80. Remove Duplicates from Sorted Array ||</title>
+    <url>/2021/05/14/LeetCode-80-Remove-Duplicates-from-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="LeetCode-80-Remove-Duplicates-from-Sorted-Array"><a href="#LeetCode-80-Remove-Duplicates-from-Sorted-Array" class="headerlink" title="LeetCode-80. Remove Duplicates from Sorted Array ||"></a>LeetCode-80. Remove Duplicates from Sorted Array ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/">https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/</a></p>
+<p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that duplicates appeared at most <em>twice</em> and return the new length.</p>
+<p>Do not allocate extra space for another array; you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a></strong> with O(1) extra memory.</p>
+<p><strong>Clarification:</strong></p>
+<p>Confused why the returned value is an integer, but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means a modification to the input array will be known to the caller.</p>
+<p>Internally you can think of this:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; nums is passed in by reference. (i.e., without making a copy)</span><br><span class="line">int len &#x3D; removeDuplicates(nums);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; any modification to nums in your function would be known by the caller.</span><br><span class="line">&#x2F;&#x2F; using the length returned by your function, it prints the first len elements.</span><br><span class="line">for (int i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,1,1,2,2,3]</span><br><span class="line">Output: 5, nums &#x3D; [1,1,2,2,3]</span><br><span class="line">Explanation: Your function should return length &#x3D; 5, with the first five elements of nums being 1, 1, 2, 2 and 3 respectively. It doesn&#39;t matter what you leave beyond the returned length.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0,0,1,1,1,1,2,3,3]</span><br><span class="line">Output: 7, nums &#x3D; [0,0,1,1,2,3,3]</span><br><span class="line">Explanation: Your function should return length &#x3D; 7, with the first seven elements of nums being modified to 0, 0, 1, 1, 2, 3 and 3 respectively. It doesn&#39;t matter what values are set beyond the returned length.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）和26题相比，增加一个count变量，记录当前元素出现的次数</p>
+<p>（2）重难点在于如何分类讨论</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> prev = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> curr = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//count为prev所指元素已出现个数</span></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(curr &lt; nums.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[prev] == nums[curr] &amp;&amp; count==<span class="number">2</span>) curr++;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[prev] == nums[curr])</span><br><span class="line">                    count++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    count = <span class="number">1</span>;</span><br><span class="line">                </span><br><span class="line">                nums[++prev] = nums[curr++];</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.empty() ? <span class="number">0</span> : prev + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-912. Sort an Array</title>
+    <url>/2021/05/13/LeetCode-912-Sort-an-Array/</url>
+    <content><![CDATA[<h1 id="LeetCode-912-Sort-an-Array"><a href="#LeetCode-912-Sort-an-Array" class="headerlink" title="LeetCode-912. Sort an Array"></a>LeetCode-912. Sort an Array</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/sort-an-array/">https://leetcode.com/problems/sort-an-array/</a></p>
+<p>Given an array of integers <code>nums</code>, sort the array in ascending order.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [5,2,3,1]</span><br><span class="line">Output: [1,2,3,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [5,1,1,2,0,0]</span><br><span class="line">Output: [0,0,1,1,2,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）counting sort</p>
+<p>（2）count的大小为nums的范围大小</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">count</span><span class="params">(<span class="number">5e4</span>+<span class="number">5e4</span>+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) count[num+<span class="number">5e4</span>]++;  </span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;count.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(count[i]--&gt;<span class="number">0</span>) nums[k++] = i<span class="number">-5e4</span>;   </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Sort</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
