@@ -3326,4 +3326,132 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-1. Two Sum</title>
+    <url>/2021/06/11/LeetCode-1-Two-Sum/</url>
+    <content><![CDATA[<h1 id="LeetCode-1-Two-Sum"><a href="#LeetCode-1-Two-Sum" class="headerlink" title="LeetCode-1. Two Sum"></a>LeetCode-1. Two Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+<p>You may assume that each input would have *<strong>exactly* one solution</strong>, and you may not use the <em>same</em> element twice.</p>
+<p>You can return the answer in any order.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,7,11,15], target &#x3D; 9</span><br><span class="line">Output: [0,1]</span><br><span class="line">Output: Because nums[0] + nums[1] &#x3D;&#x3D; 9, we return [0, 1].</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [3,2,4], target &#x3D; 6</span><br><span class="line">Output: [1,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [3,3], target &#x3D; 6</span><br><span class="line">Output: [0,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>-109 &lt;= target &lt;= 109</code></li>
+<li><strong>Only one valid answer exists.</strong></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）遍历一遍，求哈希表</p>
+<p>（2）遍历一遍，查找</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            m[nums[i]] = i;   </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> t = target - nums[i];</span><br><span class="line">            <span class="keyword">if</span>(m.count(t) &amp;&amp; m[t]!=i)</span><br><span class="line">                <span class="keyword">return</span> &#123;m[t], i&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Hash Table</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-15. 3Sum</title>
+    <url>/2021/06/11/LeetCode-15-3Sum/</url>
+    <content><![CDATA[<h1 id="LeetCode-15-3Sum"><a href="#LeetCode-15-3Sum" class="headerlink" title="LeetCode-15. 3Sum"></a>LeetCode-15. 3Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an integer array nums, return all the triplets <code>[nums[i], nums[j], nums[k]]</code>such that <code>i != j</code>, <code>i != k</code>, and <code>j != k</code>, and <code>nums[i] + nums[j] + nums[k] == 0</code>.</p>
+<p>Notice that the solution set must not contain duplicate triplets.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [-1,0,1,2,-1,-4]</span><br><span class="line">Output: [[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; []</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0]</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）先排序</p>
+<p>（2）利用Two Pointers查找剩下两个num</p>
+<p>（3）注意下面代码注释中的细节</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; threeSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="comment">//注意写下面这句话</span></span><br><span class="line">        <span class="keyword">if</span>(nums.empty() || nums.front() &gt; <span class="number">0</span> || nums.back() &lt; <span class="number">0</span> ||nums.size()&lt;<span class="number">3</span>) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size()<span class="number">-2</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; <span class="number">0</span> ) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(i&gt;<span class="number">0</span> &amp;&amp; nums[i]==nums[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">int</span> target = <span class="number">0</span> - nums[i];</span><br><span class="line">            <span class="keyword">int</span> left = i+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> right = nums.size()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[left]+nums[right] &lt; target)&#123;</span><br><span class="line">                    left++;</span><br><span class="line">                    <span class="comment">//while(nums[left]==nums[left+1]) left++;</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(nums[left]+nums[right] &gt; target)&#123;</span><br><span class="line">                    right--;</span><br><span class="line">                    <span class="comment">//while(nums[right]==nums[right-1]) right--;</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    res.push_back(&#123;nums[i],nums[left],nums[right]&#125;);</span><br><span class="line">                    <span class="comment">//注意这里要先while，再left++,right--</span></span><br><span class="line">                    <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left]==nums[left+<span class="number">1</span>]) left++;</span><br><span class="line">                    <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right]==nums[right<span class="number">-1</span>]) right--;</span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-528. Random Pick with Weight</title>
+    <url>/2021/06/11/LeetCode-528-Random-Pick-with-Weight/</url>
+    <content><![CDATA[<h1 id="LeetCode-528-Random-Pick-with-Weight"><a href="#LeetCode-528-Random-Pick-with-Weight" class="headerlink" title="LeetCode-528. Random Pick with Weight"></a>LeetCode-528. Random Pick with Weight</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given an array of positive integers <code>w</code> where <code>w[i]</code> describes the weight of <code>i``th</code> index (0-indexed).</p>
+<p>We need to call the function <code>pickIndex()</code> which <strong>randomly</strong> returns an integer in the range <code>[0, w.length - 1]</code>. <code>pickIndex()</code> should return the integer proportional to its weight in the <code>w</code> array. For example, for <code>w = [1, 3]</code>, the probability of picking the index <code>0</code> is <code>1 / (1 + 3) = 0.25</code> (i.e 25%) while the probability of picking the index <code>1</code> is <code>3 / (1 + 3) = 0.75</code> (i.e 75%).</p>
+<p>More formally, the probability of picking index <code>i</code> is <code>w[i] / sum(w)</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input</span><br><span class="line">[&quot;Solution&quot;,&quot;pickIndex&quot;]</span><br><span class="line">[[[1]],[]]</span><br><span class="line">Output</span><br><span class="line">[null,0]</span><br><span class="line"></span><br><span class="line">Explanation</span><br><span class="line">Solution solution &#x3D; new Solution([1]);</span><br><span class="line">solution.pickIndex(); &#x2F;&#x2F; return 0. Since there is only one single element on the array the only option is to return the first element.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input</span><br><span class="line">[&quot;Solution&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;]</span><br><span class="line">[[[1,3]],[],[],[],[],[]]</span><br><span class="line">Output</span><br><span class="line">[null,1,1,1,1,0]</span><br><span class="line"></span><br><span class="line">Explanation</span><br><span class="line">Solution solution &#x3D; new Solution([1, 3]);</span><br><span class="line">solution.pickIndex(); &#x2F;&#x2F; return 1. It&#39;s returning the second element (index &#x3D; 1) that has probability of 3&#x2F;4.</span><br><span class="line">solution.pickIndex(); &#x2F;&#x2F; return 1</span><br><span class="line">solution.pickIndex(); &#x2F;&#x2F; return 1</span><br><span class="line">solution.pickIndex(); &#x2F;&#x2F; return 1</span><br><span class="line">solution.pickIndex(); &#x2F;&#x2F; return 0. It&#39;s returning the first element (index &#x3D; 0) that has probability of 1&#x2F;4.</span><br><span class="line"></span><br><span class="line">Since this is a randomization problem, multiple answers are allowed so the following outputs can be considered correct :</span><br><span class="line">[null,1,1,1,1,0]</span><br><span class="line">[null,1,1,1,1,1]</span><br><span class="line">[null,1,1,1,0,0]</span><br><span class="line">[null,1,1,1,0,1]</span><br><span class="line">[null,1,0,1,0,0]</span><br><span class="line">......</span><br><span class="line">and so on.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）w的累加和为sum，则创建sum个元素，w[i]为多少，创建多少个i，则抽到i的几率为w[i]</p>
+<p>（2）生成1～w.size()范围的随机数rand，来决定抽到的元素是从最小到大的第几个</p>
+<p>（3）利用二分法查找rand对应的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Solution(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; w) &#123;</span><br><span class="line">        sum = w;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sum.size(); i++)&#123;</span><br><span class="line">            sum[i] = sum[i<span class="number">-1</span>] + w[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pickIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//注意这里要+1，将x的范围变为1～sum.back()</span></span><br><span class="line">        <span class="keyword">int</span> x = rand()%sum.back()+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = sum.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(sum[mid] == x)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">if</span>(sum[mid] &lt; x)</span><br><span class="line">                left = mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right = mid<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary Search</category>
+        <category>Random</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-560. Subarray Sum Equals K</title>
+    <url>/2021/06/11/LeetCode-560-Subarray-Sum-Equals-K/</url>
+    <content><![CDATA[<h1 id="LeetCode-560-Subarray-Sum-Equals-K"><a href="#LeetCode-560-Subarray-Sum-Equals-K" class="headerlink" title="LeetCode-560. Subarray Sum Equals K"></a>LeetCode-560. Subarray Sum Equals K</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/subarray-sum-equals-k/">https://leetcode.com/problems/subarray-sum-equals-k/</a></p>
+<p>Given an array of integers <code>nums</code> and an integer <code>k</code>, return <em>the total number of continuous subarrays whose sum equals to <code>k</code></em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,1,1], k &#x3D; 2</span><br><span class="line">Output: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,2,3], k &#x3D; 3</span><br><span class="line">Output: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 2 * 104</code></li>
+<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
+<li><code>-107 &lt;= k &lt;= 107</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）利用m存储累加和为key的子序列个数</p>
+<p>（2）用sum记录到当前位置的累加和，利用HashMap寻找sum-k是否存在。如果有连续子数组的和为sum-k，那么和为k的子数组一定也存在。</p>
+<p>问题：（1）为什么一定要加m[sum-k]，而不是m[k]？<br>（2）如果有两个序列累加和相等，例如sum[i]==sum[j]，那么不会重复加m[sum-k]吗？</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m&#123;&#123;<span class="number">0</span>,<span class="number">1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>, sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">            res += m[sum-k];</span><br><span class="line">            m[sum]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Hash Table</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
