@@ -3454,4 +3454,76 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-18. 4Sum</title>
+    <url>/2021/06/11/LeetCode-18-4Sum/</url>
+    <content><![CDATA[<h1 id="LeetCode-18-4Sum"><a href="#LeetCode-18-4Sum" class="headerlink" title="LeetCode-18. 4Sum"></a>LeetCode-18. 4Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an array <code>nums</code> of <code>n</code> integers, return <em>an array of all the <strong>unique</strong> quadruplets</em><code>[nums[a], nums[b], nums[c], nums[d]]</code> such that:</p>
+<ul>
+<li><code>0 &lt;= a, b, c, d &lt; n</code></li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are <strong>distinct</strong>.</li>
+<li><code>nums[a] + nums[b] + nums[c] + nums[d] == target</code></li>
+</ul>
+<p>You may return the answer in <strong>any order</strong>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,0,-1,0,-2,2], target &#x3D; 0</span><br><span class="line">Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [2,2,2,2,2], target &#x3D; 8</span><br><span class="line">Output: [[2,2,2,2]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 200</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>-109 &lt;= target &lt;= 109</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>和3Sum思想类似，不过多嵌套了一层循环。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; fourSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="keyword">if</span>(nums.empty() || nums.size() &lt; <span class="number">4</span>) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= nums.size()<span class="number">-4</span>; i++)&#123;</span><br><span class="line">            <span class="comment">//if(nums[i] &gt; target) break;</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i<span class="number">-1</span>])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt;= nums.size()<span class="number">-3</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> k = target - nums[i];</span><br><span class="line">                <span class="comment">//if(nums[j] &gt; k) break;</span></span><br><span class="line">                <span class="keyword">if</span>(j &gt; i+<span class="number">1</span> &amp;&amp; nums[j] == nums[j<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">int</span> left = j+<span class="number">1</span>, right = nums.size()<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">int</span> t = k - nums[j];</span><br><span class="line">                <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(nums[left] + nums[right] == t)&#123;</span><br><span class="line">                        res.push_back(&#123;nums[i], nums[j], nums[left], nums[right]&#125;);</span><br><span class="line">                        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] == nums[left+<span class="number">1</span>]) left++;</span><br><span class="line">                        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right] == nums[right<span class="number">-1</span>]) right--;</span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(nums[left] + nums[right] &lt; t)&#123;</span><br><span class="line">                        left++;  </span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LintCode-382. TriangleCount</title>
+    <url>/2021/06/11/LintCode-382-TriangleCount/</url>
+    <content><![CDATA[<h1 id="LintCode-382-TriangleCount"><a href="#LintCode-382-TriangleCount" class="headerlink" title="LintCode-382. TriangleCount"></a>LintCode-382. TriangleCount</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://www.lintcode.com/problem/382/description">https://www.lintcode.com/problem/382/description</a></p>
+<p>描述</p>
+<p>给定一个整数数组，在该数组中，寻找三个数，分别代表三角形三条边的长度，问，可以寻找到多少组这样的三个数来组成三角形？</p>
+<p>样例</p>
+<p><strong>样例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3, 4, 6, 7]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">可以组成的是 (3, 4, 6), </span><br><span class="line">           (3, 6, 7),</span><br><span class="line">           (4, 6, 7)</span><br></pre></td></tr></table></figure>
+
+<p><strong>样例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4, 4, 4, 4]</span><br><span class="line">输出: 4</span><br><span class="line">解释:</span><br><span class="line">任何三个数都可以构成三角形</span><br><span class="line">所以答案为 C(3, 4) &#x3D; 4</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>我的思路</p>
+<p>（1）先固定第一个数S[i]，然后第二层for循环固定第二个数，也是最大的数S[right]。</p>
+<p>（2）从而只需判断另外两个较小的数之和大于最大的数即可：S[i] + S[left] &gt; S[right]</p>
+<p>（3）若S[i] + S[left]小了，则left++。找到一个满足S[i] + S[left] &gt; S[right]的，则left～right-1区间中的数作为left都满足条件，从而res+=right-left，之后right–。</p>
+<p>单词方法超出了时间限制。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">triangleCount</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;S)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// write your code here</span></span><br><span class="line">    sort(S.begin(), S.end());</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; S.size()<span class="number">-2</span>; i++)&#123;</span><br><span class="line">        <span class="comment">//int left = i+1;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> right = S.size()<span class="number">-1</span>; right &gt; i+<span class="number">1</span>; right--)&#123;</span><br><span class="line">            <span class="keyword">int</span> left = i+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left &lt; right &amp;&amp; S[left] + S[i] &lt;= S[right])</span><br><span class="line">                left++;</span><br><span class="line">            res += right-left;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>其实和我的思路类似，不过先固定的是最大的数S[i]，然后i逆序遍历。剩下的部分类似于3Sum，4Sum的Two Pointers思想。之所以不能正序遍历是因为若先固定最小的数，那么当S[i]+S[left]&lt;=S[right]时，left++或者right–均可能令更新后的元素满足S[i]+S[left]&gt;S[right]，不好分类讨论。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">triangleCount</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;S)</span></span>&#123;</span><br><span class="line">    sort(S.begin(), S.end());</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = S.size()<span class="number">-1</span>; i&gt;=<span class="number">2</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = i<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">            <span class="keyword">if</span>(S[l] + S[r] &gt; S[i])&#123;</span><br><span class="line">                res += r-l;</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                l++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Array</category>
+        <category>Two Pointers</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
