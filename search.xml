@@ -3767,4 +3767,91 @@
         <tag>LeetCode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-733. Flood Fill</title>
+    <url>/2021/06/23/LeetCode-733-Flood-Fill/</url>
+    <content><![CDATA[<h1 id="LeetCode-733-Flood-Fill"><a href="#LeetCode-733-Flood-Fill" class="headerlink" title="LeetCode-733. Flood Fill"></a>LeetCode-733. Flood Fill</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/flood-fill/">https://leetcode.com/problems/flood-fill/</a></p>
+<p>An image is represented by an <code>m x n</code> integer grid <code>image</code> where <code>image[i][j]</code>represents the pixel value of the image.</p>
+<p>You are also given three integers <code>sr</code>, <code>sc</code>, and <code>newColor</code>. You should perform a <strong>flood fill</strong> on the image starting from the pixel <code>image[sr][sc]</code>.</p>
+<p>To perform a <strong>flood fill</strong>, consider the starting pixel, plus any pixels connected <strong>4-directionally</strong> to the starting pixel of the same color as the starting pixel, plus any pixels connected <strong>4-directionally</strong> to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with <code>newColor</code>.</p>
+<p>Return <em>the modified image after performing the flood fill</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/06/01/flood1-grid.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: image &#x3D; [[1,1,1],[1,1,0],[1,0,1]], sr &#x3D; 1, sc &#x3D; 1, newColor &#x3D; 2</span><br><span class="line">Output: [[2,2,2],[2,2,0],[2,0,1]]</span><br><span class="line">Explanation: From the center of the image with position (sr, sc) &#x3D; (1, 1) (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.</span><br><span class="line">Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: image &#x3D; [[0,0,0],[0,0,0]], sr &#x3D; 0, sc &#x3D; 0, newColor &#x3D; 2</span><br><span class="line">Output: [[2,2,2],[2,2,2]]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>这道题主要注意的是当oldColor=newColor时，可能会导致遍历到curr的领域neigborNode时，neigborNode又遍历回curr，将curr加回队列，然后循环无法结束。</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>使用visited数组，来记录节点有没有被遍历过，防止无穷循环。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; floodFill(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc, <span class="keyword">int</span> newColor) &#123;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dirs = &#123;&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line">        <span class="comment">//二维数组初始化？</span></span><br><span class="line">        <span class="keyword">int</span> visited[<span class="number">51</span>][<span class="number">51</span>] = &#123;&#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> value = image[sr][sc];</span><br><span class="line">        q.push(&#123;sr, sc&#125;);</span><br><span class="line">        visited[sr][sc] = <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> r = q.front().first, c = q.front().second; q.pop();</span><br><span class="line">            image[r][c]  = newColor;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> d : dirs)&#123;</span><br><span class="line">                <span class="keyword">int</span> x = r+d[<span class="number">0</span>], y = c+d[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span>(x &lt; <span class="number">0</span> || x &gt;= image.size() || y &lt;<span class="number">0</span> || y &gt;= image[<span class="number">0</span>].size() || image[x][y]!=value || visited[x][y])</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                q.push(&#123;x, y&#125;);</span><br><span class="line">                visited[x][y] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>直接当newColor和初始点一样时，返回原始image</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; floodFill(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc, <span class="keyword">int</span> newColor) &#123;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dirs = &#123;&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line">        <span class="comment">//二维数组初始化？</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> value = image[sr][sc];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(value == newColor) <span class="keyword">return</span> image;</span><br><span class="line">        q.push(&#123;sr, sc&#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> r = q.front().first, c = q.front().second; q.pop();</span><br><span class="line">            image[r][c]  = newColor;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> d : dirs)&#123;</span><br><span class="line">                <span class="keyword">int</span> x = r+d[<span class="number">0</span>], y = c+d[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span>(x &lt; <span class="number">0</span> || x &gt;= image.size() || y &lt;<span class="number">0</span> || y &gt;= image[<span class="number">0</span>].size() || image[x][y]!=value)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                q.push(&#123;x, y&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution 3"></a>Solution 3</h3><p>DFS.</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+        <category>BFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-994. Rotting Oranges</title>
+    <url>/2021/06/23/LeetCode-994-Rotting-Oranges/</url>
+    <content><![CDATA[<h1 id="LeetCode-994-Rotting-Oranges"><a href="#LeetCode-994-Rotting-Oranges" class="headerlink" title="LeetCode-994. Rotting Oranges"></a>LeetCode-994. Rotting Oranges</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/rotting-oranges/">https://leetcode.com/problems/rotting-oranges/</a></p>
+<p>You are given an <code>m x n</code> <code>grid</code> where each cell can have one of three values:</p>
+<ul>
+<li><code>0</code> representing an empty cell,</li>
+<li><code>1</code> representing a fresh orange, or</li>
+<li><code>2</code> representing a rotten orange.</li>
+</ul>
+<p>Every minute, any fresh orange that is <strong>4-directionally adjacent</strong> to a rotten orange becomes rotten.</p>
+<p>Return <em>the minimum number of minutes that must elapse until no cell has a fresh orange</em>. If <em>this is impossible, return</em> <code>-1</code>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2019/02/16/oranges.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: grid &#x3D; [[2,1,1],[1,1,0],[0,1,1]]</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: grid &#x3D; [[2,1,1],[0,1,1],[1,0,1]]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: grid &#x3D; [[0,2]]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: Since there are already no fresh oranges at minute 0, the answer is just 0.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == grid.length</code></li>
+<li><code>n == grid[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 10</code></li>
+<li><code>grid[i][j]</code> is <code>0</code>, <code>1</code>, or <code>2</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>本题可以结合01 Matrix一起看，都是需要从多个初始点一起发散进行BFS搜索。</p>
+<p>此题显然要记录BFS遍历的层数。</p>
+<p>注意，</p>
+<p>（1）要将每个腐烂的橘子当作一个起始点同时发散。先将所有初始grid中腐烂的橘子都放入queue中，作为第一层</p>
+<p>（2）不要用两个for循环和visited试图遍历一个初始腐烂橘子的领域，再寻找一下个初始腐烂的橘子遍历领域</p>
+<p>（3）需要记录BFS遍历的层数时，要先记录当前层的大小，int s_ = q.size()。不能直接for(int i =0; i&lt;q.size(); i++)，因为queue的大小一直在波动。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">orangesRotting</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = grid.size(), n = grid[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">int</span> dir[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">int</span> fresh_fruit = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>) fresh_fruit++;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(grid[i][j] == <span class="number">2</span>) q.push(&#123;i,j&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (!q.empty() &amp;&amp; fresh_fruit &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> s_ = q.size();</span><br><span class="line">            res++;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s_; i++) &#123;</span><br><span class="line">                <span class="keyword">auto</span> cur = q.front(); q.pop();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> d : dir) &#123;</span><br><span class="line">                    <span class="keyword">int</span> x = cur[<span class="number">0</span>] + d[<span class="number">0</span>], y = cur[<span class="number">1</span>] + d[<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> (x &lt; <span class="number">0</span> || x &gt;= m || y &lt; <span class="number">0</span> || y &gt;= n || grid[x][y] != <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    grid[x][y] = <span class="number">2</span>;</span><br><span class="line">                    q.push(&#123;x, y&#125;);</span><br><span class="line">                    fresh_fruit--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> fresh_fruit &gt; <span class="number">0</span> ? <span class="number">-1</span> : res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>BFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
