@@ -1084,6 +1084,12 @@
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>还是要求树的深度。本质上是判断树的左右子树深度相差是否小于等于1。这里要注意的是，递归是从底至上return值，如果子树已经不平衡了，则已不满足条件，返回标识符-1，没有必要继续递归下去了。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(level(root) == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">level</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = level(root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = level(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span>(right == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> diff = <span class="built_in">abs</span>(left-right);</span><br><span class="line">        <span class="keyword">if</span>(diff&gt;<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>+max(left, right);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<h2 id="二刷补充"><a href="#二刷补充" class="headerlink" title="二刷补充"></a>二刷补充</h2><p>个人这样写更顺。还是无法避免地要求出各子树的深度。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool isBalanced(TreeNode* root) &#123;</span><br><span class="line">        if(helper(root) &#x3D;&#x3D; -1) return false;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int helper(TreeNode* root)&#123;</span><br><span class="line">        if(!root) return 0;</span><br><span class="line">        </span><br><span class="line">        int left &#x3D; helper(root-&gt;left);</span><br><span class="line">        int right &#x3D; helper(root-&gt;right);</span><br><span class="line">        if(left &#x3D;&#x3D; -1 || right &#x3D;&#x3D; -1) return -1;</span><br><span class="line">        </span><br><span class="line">        if(abs(left-right) &gt; 1) return -1;</span><br><span class="line">        else return 1+max(left, right);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
 ]]></content>
       <categories>
         <category>Leetcode</category>
@@ -4089,6 +4095,77 @@
 
 <h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>递归法。不是特别理解。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(TreeNode* root, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> helper(root, k);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="keyword">int</span>&amp; k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> val = helper(root-&gt;left, k);</span><br><span class="line">        <span class="keyword">if</span>(k == <span class="number">0</span>) <span class="keyword">return</span> val;</span><br><span class="line">        <span class="keyword">if</span>(--k == <span class="number">0</span>) <span class="keyword">return</span> root-&gt;val;</span><br><span class="line">        <span class="keyword">return</span> helper(root-&gt;right, k);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Heap &amp; Stack</title>
+    <url>/2021/07/01/Heap-Stack/</url>
+    <content><![CDATA[<h1 id="Heap-amp-Stack"><a href="#Heap-amp-Stack" class="headerlink" title="Heap &amp; Stack"></a>Heap &amp; Stack</h1><p>参考资料：<a href="https://www.cnblogs.com/ricklz/p/10090969.html">https://www.cnblogs.com/ricklz/p/10090969.html</a></p>
+<p><a href="https://blog.csdn.net/qq_34803821/article/details/87717205">https://blog.csdn.net/qq_34803821/article/details/87717205</a></p>
+<h2 id="数据结构中的堆-amp-栈"><a href="#数据结构中的堆-amp-栈" class="headerlink" title="数据结构中的堆&amp;栈"></a>数据结构中的堆&amp;栈</h2><p>（1）栈：先进后出</p>
+<p>（2）堆：二叉树，每个子节点都不大于（不小于）父节点，称为大顶堆（小顶堆）。编程时会使用priority_queue</p>
+<h2 id="内存中的堆-amp-栈"><a href="#内存中的堆-amp-栈" class="headerlink" title="内存中的堆&amp;栈"></a>内存中的堆&amp;栈</h2><p>一半程序放在Rom（只读内存，比如硬盘）或Flash中，运行时拷贝到RAM中执行。</p>
+<p>RAM存储信息结构如下图：</p>
+<p>![image-20210701164033872](/Users/alice/Library/Application Support/typora-user-images/image-20210701164033872.png)</p>
+<p>（1）栈从高地址-&gt;低地址分配，栈的最大容量事先由系统分配好</p>
+<p>（2）堆低地址-&gt;高地址分配，是不连续的内存区域。</p>
+<p>操作系统分配堆的操作：操作系统有一个记录空闲内存地址的链表，当系统收到程序的申请时，会遍历该链表，寻找第一个空间大于所申请空间的堆结点，然后将该结点从空闲结点链表中删除，并将该结点的空间分配给程序，另外，对于大多数系统，会在这块内存空间中的首地址处记录本次分配的大小，这样，代码中的 delete语句才能正确的释放本内存空间。另外，由于找到的堆结点的大小不一定正好等于申请的大小，系统会自动的将多余的那部分重新放入空闲链表中</p>
+<p>（3）栈存储局部变量，系统自动分配，速度快。堆由new/malloc申请分配，速度慢，容易产生内存碎片和内存泄漏，需要delete/free。</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>Heap</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-98. Validate Binary Search Tree</title>
+    <url>/2021/07/02/Leetcode-98-Validate-Binary-Search-Tree/</url>
+    <content><![CDATA[<h1 id="Leetcode-98-Validate-Binary-Search-Tree"><a href="#Leetcode-98-Validate-Binary-Search-Tree" class="headerlink" title="Leetcode-98. Validate Binary Search Tree"></a>Leetcode-98. Validate Binary Search Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given the <code>root</code> of a binary tree, <em>determine if it is a valid binary search tree (BST)</em>.</p>
+<p>A <strong>valid BST</strong> is defined as follows:</p>
+<ul>
+<li>The left subtree of a node contains only nodes with keys <strong>less than</strong> the node’s key.</li>
+<li>The right subtree of a node contains only nodes with keys <strong>greater than</strong> the node’s key.</li>
+<li>Both the left and right subtrees must also be binary search trees.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/01/tree1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [2,1,3]</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/01/tree2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [5,1,4,null,null,3,6]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: The root node&#39;s value is 5 but its right child&#39;s value is 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[1, 104]</code>.</li>
+<li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>（1）先中序遍历一遍，存到res中</p>
+<p>（2）再判断res是不是严格递增数组</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        inorder(root, res);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; res.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(res[i] &lt;= res[i<span class="number">-1</span>]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; res)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        inorder(root-&gt;left, res);</span><br><span class="line">        res.push_back(root-&gt;val);</span><br><span class="line">        inorder(root-&gt;right, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>递归法</p>
+<p>（1）注意，这道题并不能简单地将child和最近的parent节点比较，因为还需要满足和parent的parent之间的大小关系。所以递归的时候要保留一个max，一个min，来指代当前节点最大不能超过max，最小不能小于min。</p>
+<p>（2）对于leftchild来说，因为其值要小于root，且root-&gt;val小于当前的max，因此max应该更新为root-&gt;val，min应该不变。</p>
+<p>​        对于rightchild来说，因为其值要大于root，且root-&gt;val&gt;当前的min，因此min应该更新为root-&gt;val，max值应该不变。</p>
+<p>（3）因为node值的范围为-2^31~2^31-1，故而应该将max和min设置为long类型的，否则会报错。</p>
+<p>因为假如初始时max = INT_MAX, min = INT_MIN，而节点值为2^31-1或者-2^31，那么if(root-&gt;val &gt;= max || root-&gt;val &lt;= min) return false;会直接return false.，而实际上不一定会出错，如下示例：</p>
+<p>![image-20210702120153877](/Users/alice/Library/Application Support/typora-user-images/image-20210702120153877.png)</p>
+<p>所以为了更好地处理边界情况，将max和min改为long类型。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="keyword">return</span> helper(root, LONG_MAX, LONG_MIN);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//max表示当前节点最大不能大过max，min表示当前节点最小不能小过min</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="keyword">long</span> max, <span class="keyword">long</span> min)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val &gt;= max || root-&gt;val &lt;= min) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> helper(root-&gt;left, root-&gt;val, min) &amp;&amp; helper(root-&gt;right, max, root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
