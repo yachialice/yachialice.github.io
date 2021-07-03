@@ -1118,13 +1118,14 @@
 
 
 <p>本题需要分情况讨论，讨论当前节点有没有左右节点。</p>
-<p>我的做法：</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>我的做法：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(!root-&gt;left &amp;&amp; root-&gt;right)</span><br><span class="line">            <span class="keyword">return</span> minDepth(root-&gt;right) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(!root-&gt;right &amp;&amp; root-&gt;left)</span><br><span class="line">            <span class="keyword">return</span> minDepth(root-&gt;left) + <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> min(minDepth(root-&gt;left), minDepth(root-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>更简单的分类讨论：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!root-&gt;left) <span class="keyword">return</span> <span class="number">1</span> + minDepth(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span> (!root-&gt;right) <span class="keyword">return</span> <span class="number">1</span> + minDepth(root-&gt;left);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + min(minDepth(root-&gt;left), minDepth(root-&gt;right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>迭代法。<br>使用BFS，寻找最小扩散次数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution&#123;</span><br><span class="line">public:</span><br><span class="line">    int minDepth(TreeNode* root)&#123;</span><br><span class="line">        if(!root) return 0;</span><br><span class="line">        queue&lt;TreeNode*&gt; q(&#123;root&#125;);</span><br><span class="line">        int res &#x3D; 0;</span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            res++;</span><br><span class="line">            int size &#x3D; q.size();</span><br><span class="line">            for(int i &#x3D; 0; i &lt; size; i++)&#123;</span><br><span class="line">                TreeNode* curr &#x3D; q.front(); q.pop();</span><br><span class="line">                if(!curr-&gt;left &amp;&amp; !curr-&gt;right) return res;</span><br><span class="line">                if(curr-&gt;left) q.push(curr-&gt;left);</span><br><span class="line">                if(curr-&gt;right) q.push(curr-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return -1;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -4175,5 +4176,41 @@
       <tags>
         <tag>Leetcode</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/07/03/Leetcode-112-Path-Sum/</url>
+    <content><![CDATA[<p>—/Users/alice/Blog/blog/source/_posts/Leetcode-112-Path-Sum.md<br>title: Leetcode-112. Path Sum<br>date: 2021-07-03 11:16:22<br>tags: Leetcode<br>categories: [Leetcode, Tree]</p>
+<hr>
+<h1 id="Leetcode-112-Path-Sum"><a href="#Leetcode-112-Path-Sum" class="headerlink" title="Leetcode-112. Path Sum"></a>Leetcode-112. Path Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/path-sum/">https://leetcode.com/problems/path-sum/</a></p>
+<p>Given the <code>root</code> of a binary tree and an integer <code>targetSum</code>, return <code>true</code> if the tree has a <strong>root-to-leaf</strong> path such that adding up all the values along the path equals <code>targetSum</code>.</p>
+<p>A <strong>leaf</strong> is a node with no children.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/18/pathsum1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum &#x3D; 22</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/18/pathsum2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2,3], targetSum &#x3D; 5</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2], targetSum &#x3D; 0</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[0, 5000]</code>.</li>
+<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+<li><code>-1000 &lt;= targetSum &lt;= 1000</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>递归法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        targetSum = targetSum - root-&gt;val;</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right &amp;&amp; targetSum == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> hasPathSum(root-&gt;left, targetSum) || hasPathSum(root-&gt;right, targetSum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>迭代法。</p>
+<p>其实就是先序遍历，然后顺便计算现在累加数。比较讨巧的是，直接改变node的val来积累累加数，而不是另外设置变量。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="function"><span class="built_in">stack</span>&lt;TreeNode*&gt; <span class="title">s</span><span class="params">(&#123;root&#125;)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!s.empty())&#123;</span><br><span class="line">            TreeNode* curr = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;val == targetSum &amp;&amp; !curr-&gt;left &amp;&amp; !curr-&gt;right) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right)&#123;</span><br><span class="line">                curr-&gt;right-&gt;val += curr-&gt;val;</span><br><span class="line">                s.push(curr-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left)&#123;</span><br><span class="line">                curr-&gt;left-&gt;val += curr-&gt;val;</span><br><span class="line">                s.push(curr-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
   </entry>
 </search>
