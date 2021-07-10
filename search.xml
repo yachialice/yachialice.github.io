@@ -747,7 +747,7 @@
 
 <p><b>当编译器遇到函数调用语句，例如it(val);，则it可能是函数名称，函数指针，也可能是一个对象，此对象重载了()运算符。如果it是个对象，则编译器会在内部将此语句转化成it.operator(val);</b></p>
 <h3 id="4-10-重载iostream运算符"><a href="#4-10-重载iostream运算符" class="headerlink" title="4.10 重载iostream运算符"></a>4.10 重载iostream运算符</h3><p>实质上是重载运算符&lt;&lt;和&gt;&gt;，本质没有变化。</p>
-<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h3 id="5-1-面向对象编程概念"><a href="#5-1-面向对象编程概念" class="headerlink" title="5.1 面向对象编程概念"></a>5.1 面向对象编程概念</h3><p>1、继承：可以从基类中衍生出许多派生类。派生类可以增加、覆盖父类（基类）中继承而来的成员变量和函数，以实现独特行为。</p>
+<h2 id="第五章-面向对象编程风格"><a href="#第五章-面向对象编程风格" class="headerlink" title="第五章 面向对象编程风格"></a>第五章 面向对象编程风格</h2><h3 id="5-1-面向对象编程概念"><a href="#5-1-面向对象编程概念" class="headerlink" title="5.1 面向对象编程概念"></a>5.1 面向对象编程概念</h3><p>1、继承：可以从基类中衍生出许多派生类。派生类可以增加、覆盖父类（基类）中继承而来的成员变量和函数，以实现独特行为。</p>
 <p>2、多态：让基类类型的pointer或者reference可以十分透明地指向任何一个派生类</p>
 <p>​        例如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loan_check_in</span><span class="params">(LibMat &amp;mat)</span> <span class="comment">//LibMat &amp;mat参数可以传入非LibMat类型，而是传入任意LibMat的派生类</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  mat.check_in();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -826,6 +826,84 @@
 <p>也可以使用dynamic_cast，这也是个RTTI运算法，会在运行时检验操作。可以转换，则进行转换，否则，则返回0</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">num_sequence *ps = &amp;fib;</span><br><span class="line"><span class="keyword">if</span>(Fibonacci * pf = <span class="keyword">dynamic_cast</span>&lt;Fibonacci*&gt;(ps))&#123;</span><br><span class="line">    pf-&gt;gen_elems(<span class="number">64</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="第六章-以template进行编程"><a href="#第六章-以template进行编程" class="headerlink" title="第六章 以template进行编程"></a>第六章 以template进行编程</h2><h3 id="6-1-被参数化的类型-amp-6-2-Class-Template的定义"><a href="#6-1-被参数化的类型-amp-6-2-Class-Template的定义" class="headerlink" title="6.1 被参数化的类型 &amp; 6.2 Class Template的定义"></a>6.1 被参数化的类型 &amp; 6.2 Class Template的定义</h3><p>定义套路如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//.h文件</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BinaryTree();</span><br><span class="line">    ~BinaryTree();</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    BTnode&lt;elemType&gt;* _root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//.cpp文件</span></span><br><span class="line"><span class="comment">//注意函数定义时要加template &lt;typename elemType&gt;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt;</span><br><span class="line">BinaryTree&lt;elemType&gt;::</span><br><span class="line">BinaryTree() : _root(<span class="number">0</span>)&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt;</span><br><span class="line">BinaryTree&lt;elemType&gt;::~BinaryTree()&#123;</span><br><span class="line">  clear();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-3-Template类型参数的处理"><a href="#6-3-Template类型参数的处理" class="headerlink" title="6.3 Template类型参数的处理"></a>6.3 Template类型参数的处理</h3><p>因为不知道elemType究竟会是什么类型。在函数传参时，为了避免Matrix等比较大的数据复制，（1）使用reference传参（2）在类的constructor中，使用member initialization初始化成员，而不是在构造函数内部赋值。</p>
+<p>优秀写法示例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> valType&gt;</span><br><span class="line"><span class="keyword">inline</span> BTnode&lt;valType&gt;::</span><br><span class="line">BTnode(<span class="keyword">const</span> valType &amp;val)</span><br><span class="line">    :_val(val)</span><br><span class="line">&#123;</span><br><span class="line">        _lchile = _rchild = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-4-实现一个Class-Template"><a href="#6-4-实现一个Class-Template" class="headerlink" title="6.4 实现一个Class Template"></a>6.4 实现一个Class Template</h3><h2 id="第7章-异常处理"><a href="#第7章-异常处理" class="headerlink" title="第7章 异常处理"></a>第7章 异常处理</h2><h3 id="7-1-抛出异常"><a href="#7-1-抛出异常" class="headerlink" title="7.1 抛出异常"></a>7.1 抛出异常</h3><p>1、异常处理机制：</p>
+<p>（1）异常的鉴定与发出：throw</p>
+<p>（2）异常的处理方式：catch</p>
+<p>异常处理过程：</p>
+<p>异常出现，正常程序执行被暂停-&gt;异常处理机制搜索程序中有能力处理异常的地点-&gt;异常处理完成，程序从异常处理点接着执行下去。</p>
+<p>2、throw</p>
+<p>可以throw整数、字符串、异常类等</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="number">42</span>;</span><br><span class="line"><span class="keyword">throw</span> <span class="string">&quot;panic: no buffer!&quot;</span>;</span><br><span class="line"><span class="keyword">throw</span> iterator_overflow;</span><br></pre></td></tr></table></figure>
+
+<p>异常类可以自行定义，也可以继承于exception基类（详情见7.5）</p>
+<h3 id="7-2-捕获异常"><a href="#7-2-捕获异常" class="headerlink" title="7.2 捕获异常"></a>7.2 捕获异常</h3><ol>
+<li>利用catch子句来捕获被抛出的异常对象。</li>
+</ol>
+<p>示例:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">log_message</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>();</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">extern</span> <span class="built_in">string</span> err_messages[];</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">extern</span> ostream log_file;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">bool</span> some_function()&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">bool</span> status = <span class="literal">true</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="comment">//...</span></span></span></span><br><span class="line"><span class="function"><span class="params">    </span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="comment">//对应抓取throw的整型异常</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">catch</span>(<span class="keyword">int</span> errno)&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        log_message(err_messages[errno]);</span></span></span><br><span class="line"><span class="function"><span class="params">        status = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="comment">//对应抓取throw的字符串异常</span></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">catch</span>(<span class="keyword">const</span> <span class="keyword">char</span>* str)&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">       log_message(str);</span></span></span><br><span class="line"><span class="function"><span class="params">    status = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">  </span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="comment">//对应抓取throw抛出的类</span></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">catch</span>(iterator_overflow &amp;iof)&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">       iof.what_happened(log_file);</span></span></span><br><span class="line"><span class="function"><span class="params">    status = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">  </span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">return</span> status;</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//捕获任何类型异常</span></span><br><span class="line"><span class="keyword">catch</span>(...)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li><p>重新抛出异常</p>
+<p>有时候catch中无法完成异常处理，需要在catch中重新rethrow异常，寻求其他catch子句的帮助，例如:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">catch</span>(iterator_overflow &amp;iof)&#123;</span><br><span class="line">    log_message(iof.what_happened());</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">throw</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="7-3-提炼异常"><a href="#7-3-提炼异常" class="headerlink" title="7.3 提炼异常"></a>7.3 提炼异常</h3><p>catch子句和try子句一一对应，表示如果try内有任何异常发生，则接下来由catch子句加以处理。</p>
+<p>每一个被抛出的异常，都有一个throw表达式，可能隐藏的很深，在标准库中。</p>
+<p>1、由throw的位置，根据函数调用链寻找catch</p>
+<p>由throw语句位置，判断当前是否在try块内 ?（1）</p>
+<p>是-&gt;检验相应的catch子句，判断其是否有处理异常的能力。若有，则根据catch语句处理异常，程序从被执行的catch的下一句继续。若没有，则中断函数，沿着函数调用链回溯，寻找符合条件的catch。</p>
+<p>否-&gt;停止当前函数，寻找当前函数的调用端，判断调用端是否在try语句中，回到步骤（1）</p>
+<p>如果回溯到main()内还是找不到合适的catch子句，则调用标准库中的terminate()，中断整个程序运行。</p>
+<p>见P195示例</p>
+<h3 id="7-4-局部资源管理"><a href="#7-4-局部资源管理" class="headerlink" title="7.4 局部资源管理"></a>7.4 局部资源管理</h3><p>异常处理机制在终结某个函数之前，c++保证，函数中所有局部对象的destructor都会被调用，这样可以保证资源在有异常抛出的情况下，也可以被释放。</p>
+<p>例如下面三种写法：</p>
+<p>写法一： 错误写法</p>
+<p>如果process()中出现throw，则process()后的释放资源语句不会被执行</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> Mutex m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//请求资源</span></span><br><span class="line">     <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">  m.acquire();</span><br><span class="line">  process(p);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//释放资源</span></span><br><span class="line">  m.release();</span><br><span class="line">  <span class="keyword">delete</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>写法二: 利用try catch保证资源释放</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="comment">//同写法一 </span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">catch</span>(...)&#123;</span><br><span class="line">    m.release();</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>写法三：利用类的destructor保证资源释放</p>
+<p>即使没有异常抛出，对象消亡时，destructor也会被调用。</p>
+<p>本例中，函数终结前，局部变量的destructor都会被调用。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//auto_ptr是一个template class，可以自动删除new分配的对象。将*和-&gt;运算符重载，使用方式同一般指针。</span></span><br><span class="line">    <span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line">  <span class="comment">//MutexLock类的destructor中完成资源释放</span></span><br><span class="line">  <span class="function">MuteLock <span class="title">ml</span><span class="params">(m)</span></span>;</span><br><span class="line">  process(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-5-标准异常"><a href="#7-5-标准异常" class="headerlink" title="7.5 标准异常"></a>7.5 标准异常</h3><p>​    标准库定义了一套异常类体系，根部时exception抽象基类。exception有虚函数const char* what()，用以表示被抛出异常的文字描述。</p>
+<p>​    如果将自己编写的异常类继承于exception基类下，则可以被catch(const exception &amp;ex)捕获，一网打尽所有异常。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">catch</span>(<span class="keyword">const</span> exception&amp; ex)&#123;</span><br><span class="line">     <span class="built_in">cerr</span> &lt;&lt; ex.what() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>exception的派生类写法示例:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">iterator_overflow</span> :</span> <span class="keyword">public</span> exception&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    iterator_overflow(<span class="keyword">int</span> index, <span class="keyword">int</span> max) : _index(index), _max(max) &#123;&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">index</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> _index;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> _max;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">what</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _index;</span><br><span class="line">    <span class="keyword">int</span> _max;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* iterator_overflow::</span><br><span class="line">what() <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="built_in">ostringstream</span> ex_msg;</span><br><span class="line">    <span class="comment">//为什么要用static类型??</span></span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">string</span> msg;</span><br><span class="line"></span><br><span class="line">    ex_msg &lt;&lt; <span class="string">&quot;Internal error: current index&quot;</span></span><br><span class="line">            &lt;&lt; _index &lt;&lt; <span class="string">&quot;exceeds maximum bound: &quot;</span></span><br><span class="line">            &lt;&lt;_max;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ostringstream的str()可以提供转化操作，将不同类型的数据格式转化为字符串</span></span><br><span class="line">    msg = ex_msg.str();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//string的成员函数c_str()返回const char*类型字符串</span></span><br><span class="line">    <span class="keyword">return</span> msg.c_str();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><b>注：cout 输出到标准输出的ostream对象，cerr输出到标准错误的ostream对象</b></p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -4216,5 +4294,206 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="function"><span class="built_in">stack</span>&lt;TreeNode*&gt; <span class="title">s</span><span class="params">(&#123;root&#125;)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!s.empty())&#123;</span><br><span class="line">            TreeNode* curr = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;val == targetSum &amp;&amp; !curr-&gt;left &amp;&amp; !curr-&gt;right) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right)&#123;</span><br><span class="line">                curr-&gt;right-&gt;val += curr-&gt;val;</span><br><span class="line">                s.push(curr-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left)&#123;</span><br><span class="line">                curr-&gt;left-&gt;val += curr-&gt;val;</span><br><span class="line">                s.push(curr-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+  </entry>
+  <entry>
+    <title>LeetCode-113. Path Sum||</title>
+    <url>/2021/07/09/LeetCode-113-Path-Sum/</url>
+    <content><![CDATA[<h1 id="LeetCode-113-Path-Sum"><a href="#LeetCode-113-Path-Sum" class="headerlink" title="LeetCode-113. Path Sum||"></a>LeetCode-113. Path Sum||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given the <code>root</code> of a binary tree and an integer <code>targetSum</code>, return all <strong>root-to-leaf</strong>paths where each path’s sum equals <code>targetSum</code>.</p>
+<p>A <strong>leaf</strong> is a node with no children.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/18/pathsumii1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum &#x3D; 22</span><br><span class="line">Output: [[5,4,11,2],[5,8,4,5]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/18/pathsum2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2,3], targetSum &#x3D; 5</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2], targetSum &#x3D; 0</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[0, 5000]</code>.</li>
+<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+<li><code>-1000 &lt;= targetSum &lt;= 1000</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>递归法</p>
+<p>直接先序遍历，当当前节点是叶节点，且pathSum满足要求，将当前路径加入res。</p>
+<p><b>注意：这里的vector curr只能传值，不能传地址，否则记录的path会错乱</b></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; pathSum(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;    </span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr;</span><br><span class="line">        helper(root, res, curr, targetSum);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">        curr.push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right &amp;&amp; target == root-&gt;val)&#123;</span><br><span class="line">            res.push_back(curr);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        helper(root-&gt;left, res, curr, target-root-&gt;val);</span><br><span class="line">        helper(root-&gt;right, res, curr, target-root-&gt;val);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>迭代法</p>
+<p>说是中序遍历的思想，但我觉得有点像后续遍历。后续遍历能否这样写出递归的方式???</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; pathSum(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;    </span><br><span class="line">        <span class="comment">//stack只能pop一个，遍历一个。为了不pop地遍历，此处使用vector</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; st;</span><br><span class="line">        </span><br><span class="line">        TreeNode* curr = root, *pre = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(curr || !st.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">                st.push_back(curr);</span><br><span class="line">                val += curr-&gt;val;</span><br><span class="line">                curr = curr-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = st.back();</span><br><span class="line">            <span class="keyword">if</span>(!curr-&gt;left &amp;&amp; !curr-&gt;right &amp;&amp; val == targetSum)&#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;a : st) v.push_back(a-&gt;val);</span><br><span class="line">                res.push_back(v);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//此处如果不加curr!=pre,则会导致无限重复。</span></span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right &amp;&amp; curr-&gt;right != pre) curr = curr-&gt;right;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                val -= curr-&gt;val;</span><br><span class="line">                st.pop_back();</span><br><span class="line">                pre = curr;</span><br><span class="line">                <span class="comment">//这里是避免curr在进入左子树的遍历查询</span></span><br><span class="line">                curr = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-124. Binary Tree Maximum Path Sum</title>
+    <url>/2021/07/09/LeetCode-124-Binary-Tree-Maximum-Path-Sum/</url>
+    <content><![CDATA[<h1 id="LeetCode-124-Binary-Tree-Maximum-Path-Sum"><a href="#LeetCode-124-Binary-Tree-Maximum-Path-Sum" class="headerlink" title="LeetCode-124. Binary Tree Maximum Path Sum"></a>LeetCode-124. Binary Tree Maximum Path Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>A <strong>path</strong> in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence <strong>at most once</strong>. Note that the path does not need to pass through the root.</p>
+<p>The <strong>path sum</strong> of a path is the sum of the node’s values in the path.</p>
+<p>Given the <code>root</code> of a binary tree, return <em>the maximum <strong>path sum</strong> of any path</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/13/exx1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2,3]</span><br><span class="line">Output: 6</span><br><span class="line">Explanation: The optimal path is 2 -&gt; 1 -&gt; 3 with a path sum of 2 + 1 + 3 &#x3D; 6.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/13/exx2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [-10,9,20,null,null,15,7]</span><br><span class="line">Output: 42</span><br><span class="line">Explanation: The optimal path is 15 -&gt; 20 -&gt; 7 with a path sum of 15 + 20 + 7 &#x3D; 42.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[1, 3 * 104]</code>.</li>
+<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> res;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode *root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> a=depth(root-&gt;left), b=depth(root-&gt;right);</span><br><span class="line">        res=max(res,a+b+root-&gt;val);<span class="comment">//if *root is the top node in the path</span></span><br><span class="line">        <span class="keyword">return</span> max(<span class="number">0</span>,max(a, b)+root-&gt;val);<span class="comment">//if *root is in the path, if this branch a burden or a plus</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        res=root-&gt;val;</span><br><span class="line">        depth(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-199. Binary Tree Right Side View</title>
+    <url>/2021/07/09/LeetCode-199-Binary-Tree-Right-Side-View/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>LeetCode-236. Lowest Common Ancestor of a Binary Tree</title>
+    <url>/2021/07/09/LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree/</url>
+    <content><![CDATA[<h1 id="LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree"><a href="#LeetCode-236-Lowest-Common-Ancestor-of-a-Binary-Tree" class="headerlink" title="LeetCode-236. Lowest Common Ancestor of a Binary Tree"></a>LeetCode-236. Lowest Common Ancestor of a Binary Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/</a></p>
+<p>Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.</p>
+<p>According to the <a href="https://en.wikipedia.org/wiki/Lowest_common_ancestor">definition of LCA on Wikipedia</a>: “The lowest common ancestor is defined between two nodes <code>p</code> and <code>q</code> as the lowest node in <code>T</code> that has both <code>p</code> and <code>q</code> as descendants (where we allow <strong>a node to be a descendant of itself</strong>).”</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 1</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The LCA of nodes 5 and 1 is 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 4</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2], p &#x3D; 1, q &#x3D; 2</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[2, 105]</code>.</li>
+<li><code>-109 &lt;= Node.val &lt;= 109</code></li>
+<li>All <code>Node.val</code> are <strong>unique</strong>.</li>
+<li><code>p != q</code></li>
+<li><code>p</code> and <code>q</code> will exist in the tree.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>（1）p和q分别在right和left中，则返回root。</p>
+<p>（2）p和q同时在right和left中，则返回非空的那一个</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root || p == root || q == root) <span class="keyword">return</span> root;</span><br><span class="line">        </span><br><span class="line">        TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);</span><br><span class="line">        TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);</span><br><span class="line">        <span class="comment">//如果p和q分别在root的两个子树中，返回root</span></span><br><span class="line">        <span class="keyword">if</span>(left &amp;&amp; right) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="comment">//p和q同时在root的left子树或root的right子树中</span></span><br><span class="line">        <span class="keyword">return</span> left ? left : right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>优化后的方法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root || p == root || q == root) <span class="keyword">return</span> root;</span><br><span class="line">        </span><br><span class="line">        TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);</span><br><span class="line">        <span class="comment">//此种情况下表示，left返回的是q和p的最近祖先，表示p和q同时在左子树中，此时直接return，省去右子树的遍历。若left存在，且left==q||left==p，并不能确定q和p同时在左子树中，还是有分别在左右子树中，需要遍历右子树</span></span><br><span class="line">        <span class="keyword">if</span>(left &amp;&amp; left != q &amp;&amp; left != p) <span class="keyword">return</span> left;</span><br><span class="line">        </span><br><span class="line">        TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(right &amp;&amp; left) <span class="keyword">return</span> root;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left ? left : right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-331. Verify Preorder Serialization of a Binary Tree</title>
+    <url>/2021/07/10/LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree/</url>
+    <content><![CDATA[<h1 id="LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree"><a href="#LeetCode-331-Verify-Preorder-Serialization-of-a-Binary-Tree" class="headerlink" title="LeetCode-331. Verify Preorder Serialization of a Binary Tree"></a>LeetCode-331. Verify Preorder Serialization of a Binary Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/">https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/</a></p>
+<p>One way to serialize a binary tree is to use <strong>preorder traversal</strong>. When we encounter a non-null node, we record the node’s value. If it is a null node, we record using a sentinel value such as <code>&#39;#&#39;</code>.</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/12/pre-tree.jpg" alt="img"></p>
+<p>For example, the above binary tree can be serialized to the string <code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>, where <code>&#39;#&#39;</code> represents a null node.</p>
+<p>Given a string of comma-separated values <code>preorder</code>, return <code>true</code> if it is a correct preorder traversal serialization of a binary tree.</p>
+<p>It is <strong>guaranteed</strong> that each comma-separated value in the string must be either an integer or a character <code>&#39;#&#39;</code> representing null pointer.</p>
+<p>You may assume that the input format is always valid.</p>
+<ul>
+<li>For example, it could never contain two consecutive commas, such as <code>&quot;1,,3&quot;</code>.</li>
+</ul>
+<p><strong>Note:</strong> You are not allowed to reconstruct the tree.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: preorder &#x3D; &quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: preorder &#x3D; &quot;1,#&quot;</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: preorder &#x3D; &quot;9,#,#,1&quot;</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= preorder.length &lt;= 104</code></li>
+<li><code>preoder</code> consist of integers in the range <code>[0, 100]</code> and <code>&#39;#&#39;</code> separated by commas <code>&#39;,&#39;</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>判断是否是先序的方式：（1）#比数字多一个（2）最后一个一定是#号（怎么找到的规律？？？）</p>
+<p><b>注意：c++没有split，拆分字符串需要用到getline(in, t, ‘,’)，其中in为字符流，t为分割后得到的字符串，’,’为分割符</b></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidSerialization</span><span class="params">(<span class="built_in">string</span> preorder)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">in</span><span class="params">(preorder)</span></span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; v;</span><br><span class="line">        <span class="built_in">string</span> t = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(getline(in, t, <span class="string">&#x27;,&#x27;</span>)) v.push_back(t);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size()<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(v[i] == <span class="string">&quot;#&quot;</span>)&#123;</span><br><span class="line">                count--;</span><br><span class="line">                <span class="keyword">if</span>(count &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                count++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> count == <span class="number">0</span> &amp;&amp; v.back() == <span class="string">&quot;#&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-449. Serialize and Deserialize BST</title>
+    <url>/2021/07/10/LeetCode-449-Serialize-and-Deserialize-BST/</url>
+    <content><![CDATA[<h1 id="LeetCode-449-Serialize-and-Deserialize-BST"><a href="#LeetCode-449-Serialize-and-Deserialize-BST" class="headerlink" title="LeetCode-449. Serialize and Deserialize BST"></a>LeetCode-449. Serialize and Deserialize BST</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/serialize-and-deserialize-bst/">https://leetcode.com/problems/serialize-and-deserialize-bst/</a></p>
+<p>Serialization is converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.</p>
+<p>Design an algorithm to serialize and deserialize a <strong>binary search tree</strong>. There is no restriction on how your serialization/deserialization algorithm should work. You need to ensure that a binary search tree can be serialized to a string, and this string can be deserialized to the original tree structure.</p>
+<p><strong>The encoded string should be as compact as possible.</strong></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [2,1,3]</span><br><span class="line">Output: [2,1,3]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; []</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[0, 104]</code>.</li>
+<li><code>0 &lt;= Node.val &lt;= 104</code></li>
+<li>The input tree is <strong>guaranteed</strong> to be a binary search tree.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>基本上和LeetCode-297. Serialize and Deserialize Binary Tree <a href="https://yachialice.gitee.io/2021/06/18/LeetCode-297-Serialize-and-Deserialize-Binary-Tree/#LeetCode-297-Serialize-and-Deserialize-Binary-Tree%E4%B8%80%E6%A0%B7">https://yachialice.gitee.io/2021/06/18/LeetCode-297-Serialize-and-Deserialize-Binary-Tree/#LeetCode-297-Serialize-and-Deserialize-Binary-Tree一样</a></p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>层序遍历迭代法</p>
+<p>（1）注意，空指针也可以直接加入queue，所以遍历的时候不需要特别处理。出队的时候，遇到空指针，加”# “到string里即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialize</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="built_in">ostringstream</span> out;</span><br><span class="line">        <span class="function"><span class="built_in">queue</span>&lt;TreeNode*&gt; <span class="title">q</span><span class="params">(&#123;root&#125;)</span></span>;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">            TreeNode* curr = q.front(); q.pop();</span><br><span class="line">            <span class="keyword">if</span>(curr)&#123;</span><br><span class="line">                out &lt;&lt; curr-&gt;val &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">                q.push(curr-&gt;left);</span><br><span class="line">                q.push(curr-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                out &lt;&lt; <span class="string">&quot;# &quot;</span>;   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> out.str();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(data.empty()) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">in</span><span class="params">(data)</span></span>;</span><br><span class="line">        <span class="built_in">string</span> val;</span><br><span class="line">        in &gt;&gt; val;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(stoi(val));</span><br><span class="line">        <span class="function"><span class="built_in">queue</span>&lt;TreeNode*&gt; <span class="title">q</span><span class="params">(&#123;root&#125;)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">            TreeNode* curr = q.front(); q.pop();</span><br><span class="line">            <span class="keyword">if</span>(in &gt;&gt; val)&#123;</span><br><span class="line">               <span class="keyword">if</span>(val == <span class="string">&quot;#&quot;</span>) curr-&gt;left = <span class="literal">NULL</span>; </span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    TreeNode* left = <span class="keyword">new</span> TreeNode(stoi(val));</span><br><span class="line">                    q.push(left);</span><br><span class="line">                    curr-&gt;left = left;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;   </span><br><span class="line">            <span class="keyword">if</span>(in &gt;&gt; val)&#123;</span><br><span class="line">                <span class="keyword">if</span>(val == <span class="string">&quot;#&quot;</span>) curr-&gt;right = <span class="literal">NULL</span>;   </span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    TreeNode* right = <span class="keyword">new</span> TreeNode(stoi(val));</span><br><span class="line">                    q.push(right);</span><br><span class="line">                    curr-&gt;right = right;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>先序递归法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialize</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">ostringstream</span> out;</span><br><span class="line">        serialize(root, out);</span><br><span class="line">        <span class="keyword">return</span> out.str();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">in</span><span class="params">(data)</span></span>;</span><br><span class="line">        <span class="keyword">return</span> deserialize(in);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">serialize</span><span class="params">(TreeNode* root, <span class="built_in">ostringstream</span>&amp; out)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">            out &lt;&lt; <span class="string">&quot;# &quot;</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        out &lt;&lt; root-&gt;val &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        serialize(root-&gt;left, out);</span><br><span class="line">        serialize(root-&gt;right, out);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">istringstream</span>&amp; in)</span></span>&#123;</span><br><span class="line">        <span class="built_in">string</span> val;</span><br><span class="line">        in &gt;&gt; val;</span><br><span class="line">        <span class="keyword">if</span>(val == <span class="string">&quot;#&quot;</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        TreeNode* curr = <span class="keyword">new</span> TreeNode(stoi(val));</span><br><span class="line">        curr-&gt;left = deserialize(in);</span><br><span class="line">        curr-&gt;right = deserialize(in);</span><br><span class="line">        <span class="keyword">return</span> curr;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
   </entry>
 </search>
