@@ -4110,6 +4110,9 @@
 <h5 id="2、PostOrder"><a href="#2、PostOrder" class="headerlink" title="2、PostOrder"></a>2、PostOrder</h5><p>思路和Inorder的迭代法基本没有区别</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="built_in">pair</span>&lt;TreeNode*, <span class="keyword">int</span>&gt;&gt; s_(&#123;&#123;root,<span class="number">0</span>&#125;&#125;);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!s_.empty())&#123;</span><br><span class="line">            TreeNode* curr = s_.top().first;</span><br><span class="line">            <span class="keyword">int</span> flag = s_.top().second;</span><br><span class="line">            s_.pop();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(flag) res.push_back(curr-&gt;val);</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                s_.push(&#123;curr, <span class="number">1</span>&#125;);</span><br><span class="line">                <span class="keyword">if</span>(curr-&gt;right) s_.push(&#123;curr-&gt;right, <span class="number">0</span>&#125;);</span><br><span class="line">                <span class="keyword">if</span>(curr-&gt;left) s_.push(&#123;curr-&gt;left, <span class="number">0</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>法二</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        TreeNode* curr = root, *pre = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!st.empty() || curr)&#123;</span><br><span class="line">            <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">                st.push(curr);</span><br><span class="line">                curr = curr-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = st.top();</span><br><span class="line">          <span class="comment">//如果有curr-&gt;right，且curr-&gt;right没有被遍历过，则先去遍历curr-&gt;right</span></span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right &amp;&amp; curr-&gt;right!=pre) curr = curr-&gt;right;</span><br><span class="line">          <span class="comment">//如果没有curr-&gt;right，或者curr-&gt;right已经被遍历过了，curr也可以加入res中，并且再向上回溯</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                pre = curr;</span><br><span class="line">                res.push_back(curr-&gt;val);</span><br><span class="line">                st.pop();</span><br><span class="line">                curr = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>Leetcode</category>
@@ -4330,8 +4333,13 @@
 
 
 <h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>迭代法</p>
-<p>说是中序遍历的思想，但我觉得有点像后续遍历。后续遍历能否这样写出递归的方式???</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; pathSum(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;    </span><br><span class="line">        <span class="comment">//stack只能pop一个，遍历一个。为了不pop地遍历，此处使用vector</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; st;</span><br><span class="line">        </span><br><span class="line">        TreeNode* curr = root, *pre = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(curr || !st.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">                st.push_back(curr);</span><br><span class="line">                val += curr-&gt;val;</span><br><span class="line">                curr = curr-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = st.back();</span><br><span class="line">            <span class="keyword">if</span>(!curr-&gt;left &amp;&amp; !curr-&gt;right &amp;&amp; val == targetSum)&#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;a : st) v.push_back(a-&gt;val);</span><br><span class="line">                res.push_back(v);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//此处如果不加curr!=pre,则会导致无限重复。</span></span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right &amp;&amp; curr-&gt;right != pre) curr = curr-&gt;right;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                val -= curr-&gt;val;</span><br><span class="line">                st.pop_back();</span><br><span class="line">                pre = curr;</span><br><span class="line">                <span class="comment">//这里是避免curr在进入左子树的遍历查询</span></span><br><span class="line">                curr = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>说是中序遍历的思想，但我觉得有点像后续遍历。后续遍历能否这样写出递归的方式???<br>（1）注意：需要利用vector来模拟栈，因为需要统计路上遇到的node<br>（2）注意，遍历时，curr要面临遍历curr-&gt;right，以及curr-&gt;right已经遍历过，要将curr从路径中删除两种选择。需要记录curr的上一个node，来判断curr-&gt;right有没有遍历过。<br>（3）如果要将curr从路径中删除，要置curr=NULL。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; pathSum(TreeNode* root, <span class="keyword">int</span> targetSum)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>&#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode* curr = root, *pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">int</span> value = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!st.empty() || curr)&#123;</span><br><span class="line">            <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">                st.push_back(curr);</span><br><span class="line">                value += curr-&gt;val;</span><br><span class="line">                curr = curr-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = st.back();</span><br><span class="line">            <span class="keyword">if</span>(!curr-&gt;left &amp;&amp; !curr-&gt;right &amp;&amp; value == targetSum)&#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> s : st) v.push_back(s-&gt;val);</span><br><span class="line">                res.push_back(v);</span><br><span class="line">            &#125; </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right &amp;&amp; curr-&gt;right != pre)&#123;</span><br><span class="line">                curr = curr-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//else语句实际上是回退操作。如左图的11。因为遍历右子树时，不想标准的中序遍历写法，没有将11移出st。所以从11的左子树回溯可能到达11，从11的右子树回溯，也可能到达11。pre记录了此次回溯到11时，前一个节点是左子节点还是右子节点。若是7，则应该遍历11的右子树。若是2，则应该将11从路径中删除，继续回溯。</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                pre = curr;</span><br><span class="line">                value -= curr-&gt;val;</span><br><span class="line">                st.pop_back();</span><br><span class="line">                <span class="comment">//令curr=NULL，而不是st.back()是因为防止再遍历一次st.back()的左子树</span></span><br><span class="line">                curr = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>根据此思路写出来的后续遍历：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        TreeNode* curr = root, *pre = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!st.empty() || curr)&#123;</span><br><span class="line">            <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">                st.push(curr);</span><br><span class="line">                curr = curr-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = st.top();</span><br><span class="line">          <span class="comment">//如果有curr-&gt;right，且curr-&gt;right没有被遍历过，则先去遍历curr-&gt;right</span></span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right &amp;&amp; curr-&gt;right!=pre) curr = curr-&gt;right;</span><br><span class="line">          <span class="comment">//如果没有curr-&gt;right，或者curr-&gt;right已经被遍历过了，curr也可以加入res中，并且再向上回溯</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                pre = curr;</span><br><span class="line">                res.push_back(curr-&gt;val);</span><br><span class="line">                st.pop();</span><br><span class="line">                curr = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -4635,6 +4643,214 @@
         <category>Leetcode</category>
         <category>Backtracking</category>
         <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker学习</title>
+    <url>/2021/07/24/Docker%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Docker学习"><a href="#Docker学习" class="headerlink" title="Docker学习"></a>Docker学习</h1><h2 id="Docker构架"><a href="#Docker构架" class="headerlink" title="Docker构架"></a>Docker构架</h2><p>1、镜像（Image）：类似于类，需要基于镜像创建容器，才可以运行。一个镜像可以创建多个容器。</p>
+<p>2、容器（Container）：类似于对象。使用的时候运行、停止、创建容器，在容器内进行操作。</p>
+<p>3、仓库（Repository）：镜像的仓库。一个Docker Registry中可以包含多个仓库（Repository）。一个仓库中包含一个软件镜像的多个版本，例如Ubuntu 15.10，Ubuntu 14.0，利用tag标识这个镜像是哪个版本，方便创造环境。利用docker images可以看到所有镜像。</p>
+<p>![image-20210712161900494](/Users/alice/Library/Application Support/typora-user-images/image-20210712161900494.png)</p>
+<p>Docker构架示意图</p>
+<p>![image-20210712161929702](/Users/alice/Library/Application Support/typora-user-images/image-20210712161929702.png)</p>
+<h2 id="Docker相关指令"><a href="#Docker相关指令" class="headerlink" title="Docker相关指令"></a>Docker相关指令</h2><h3 id="0、docker帮助"><a href="#0、docker帮助" class="headerlink" title="0、docker帮助"></a>0、docker帮助</h3><p>以下指令查看所有docker命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker</span><br></pre></td></tr></table></figure>
+
+<p>以下指令查看COMMAND指令的具体用法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker COMMAND --help</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1、docker容器操作"><a href="#1、docker容器操作" class="headerlink" title="1、docker容器操作"></a>1、docker容器操作</h3><h4 id="（1）创建一个新容器"><a href="#（1）创建一个新容器" class="headerlink" title="（1）创建一个新容器"></a>（1）创建一个新容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+
+<p>-t：在新容器内指定一个终端或伪终端</p>
+<p>-i：允许对容器内的标准输入（STDIN）进行交互</p>
+<p>ubuntu:15.10：镜像版本，是ubuntu仓库中，tag为15.10版本。</p>
+<p>/bin/bash：容器中执行的命令。</p>
+<p><b>如果当前仓库中没有指定镜像，那么docker会在执行此命令时从远程库中pull一个到本地</b></p>
+<p>也可以使用如下命令，-d是后台运行，不会自动进入到容器内部</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">runoob@runoob:~$ docker run -itd ubuntu:15.10 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="（2）查看现有容器"><a href="#（2）查看现有容器" class="headerlink" title="（2）查看现有容器"></a>（2）查看现有容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;查看运行容器</span><br><span class="line">docker ps</span><br><span class="line">&#x2F;&#x2F;查看所有容器</span><br><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）进入容器"><a href="#（3）进入容器" class="headerlink" title="（3）进入容器"></a>（3）进入容器</h4><p>一般在docker run时，执行/bin/bash命令，就会进入容器内部，如下图，表示进入了container id为4eda299a523a的容器内。</p>
+<p>![image-20210712162902996](/Users/alice/Library/Application Support/typora-user-images/image-20210712162902996.png)</p>
+<p>如果在docker run时使用了-d参数，则默认不会进入容器。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -i -t -d ubuntu:15.10 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+
+<p>如果需要进入容器，需要使用以下指令：</p>
+<p><b>（a）使用docker exec进入容器</b></p>
+<p>例：其中，243c32535da7为container id，可以通过docker ps指令查看。</p>
+<p><b>docker exec指令必须带有参数container id以及operation，这里的operation位/bin/bash</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker exec -it 243c32535da7 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+
+<p><b>使用docker exec指令，使用exit退出容器时不会导致容器停止，而docker attach会</b></p>
+<p><b>（b）使用docker attaach进入容器</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker attach 243c32535da7</span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）运行、停止、删除容器"><a href="#（3）运行、停止、删除容器" class="headerlink" title="（3）运行、停止、删除容器"></a>（3）运行、停止、删除容器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;停止</span><br><span class="line">docker stop [CONTAINER ID]</span><br><span class="line">&#x2F;&#x2F;运行</span><br><span class="line">docker start [CONTAINER ID]</span><br><span class="line">docker restart [CONTAINER ID]</span><br><span class="line">&#x2F;&#x2F;删除,-f表示强制</span><br><span class="line">docker rm -f [CONTAINER ID]</span><br><span class="line">&#x2F;&#x2F;删除所有处于终止状态容器</span><br><span class="line">docker container prune</span><br></pre></td></tr></table></figure>
+
+<h4 id="（4）docker端口映射"><a href="#（4）docker端口映射" class="headerlink" title="（4）docker端口映射"></a>（4）docker端口映射</h4><p> 参考资料：<a href="https://www.cnblogs.com/wholj/p/10551999.html">https://www.cnblogs.com/wholj/p/10551999.html</a></p>
+<p>docker容器在启动的时候,如果不指定<em>端口映射</em>参数,在容器外部是无法通过网络来访问容器内的网络应用和服务的</p>
+<p>示例1：利用-P将容器内部使用的网络端口映射到本地主机</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">runoob@runoob:~# docker run -d -P training&#x2F;webapp python app.py</span><br></pre></td></tr></table></figure>
+
+<p><b>（a）通过以下指令，查看端口映射结果</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p>![image-20210712155036392](/Users/alice/Library/Application Support/typora-user-images/image-20210712155036392.png)</p>
+<p>可见是将容器5000的端口号映射到了本地55000端口。</p>
+<p><b>（b）也可通过以下指令查看端口映射。</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker port CONTAINERID</span><br></pre></td></tr></table></figure>
+
+<p>示例2：利用-p指定映射端口和ip地址</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d -p 127.0.0.1:5000:5000 training&#x2F;webapp python app.py</span><br></pre></td></tr></table></figure>
+
+<p>将容器的5000端口映射到指定地址127.0.0.1的5000端口上。打开<a href="http://127.0.0.1:5000即可看到网页。">http://127.0.0.1:5000即可看到网页。</a></p>
+<h3 id="2、Docker镜像操作"><a href="#2、Docker镜像操作" class="headerlink" title="2、Docker镜像操作"></a>2、Docker镜像操作</h3><h4 id="（1）查看素有镜像"><a href="#（1）查看素有镜像" class="headerlink" title="（1）查看素有镜像"></a>（1）查看素有镜像</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;列出主机上的镜像</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<p>![image-20210712164634889](/Users/alice/Library/Application Support/typora-user-images/image-20210712164634889.png)</p>
+<p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如 ubuntu 仓库源里，有 15.10、14.04 等多个不同的版本，使用 REPOSITORY:TAG 来定义不同的镜像，例如：ubuntu:15.10</p>
+<h4 id="（2）获取、查找镜像"><a href="#（2）获取、查找镜像" class="headerlink" title="（2）获取、查找镜像"></a>（2）获取、查找镜像</h4><p><b>（a）获取镜像，docker pull</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker pull ubuntu:13.10</span><br></pre></td></tr></table></figure>
+
+<p><b>（b）查找镜像，docker search [IMAGE NAME]。</b></p>
+<p>例如查找ubuntu镜像</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker search ubuntu</span><br></pre></td></tr></table></figure>
+
+<p>![image-20210712165051800](/Users/alice/Library/Application Support/typora-user-images/image-20210712165051800.png)</p>
+<p>其中，</p>
+<p>NAME：镜像名字</p>
+<p>STARS：点赞数</p>
+<p>OFFICIAL：是否官方镜像</p>
+<p>AUTOMATED：自动构建（？）</p>
+<p>搜到所需镜像后，使用docker pull [IMAGE NAME] 即可下载镜像。</p>
+<h4 id="（3）创建镜像"><a href="#（3）创建镜像" class="headerlink" title="（3）创建镜像"></a>（3）创建镜像</h4><p>参考资料：<a href="https://www.runoob.com/docker/docker-image-usage.html">https://www.runoob.com/docker/docker-image-usage.html</a></p>
+<p><b>（a）更新镜像</b></p>
+<p>首先，容器内<b>apt-get update</b>指令进行更新，然后<b>exit</b>。</p>
+<p>然后，使用docker commit指令，将修改后的容器对应的镜像加入仓库中。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker commit -m&#x3D;&quot;has update&quot; -a&#x3D;&quot;runoob&quot; e218edb10161 runoob&#x2F;ubuntu:v2</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<p>-m：提交信息描述</p>
+<p>-a：作者</p>
+<p>e218edb10161：容器ID</p>
+<p>runoob/ubuntu:v2：镜像名称</p>
+<p><b>（b）使用Dockerfile和docker build重新构建镜像</b></p>
+<p>待补充，参考资料：<a href="https://www.runoob.com/docker/docker-image-usage.html">https://www.runoob.com/docker/docker-image-usage.html</a></p>
+<p>参考资料2:<a href="https://www.runoob.com/docker/docker-dockerfile.html">https://www.runoob.com/docker/docker-dockerfile.html</a></p>
+<h4 id="（4）为镜像添加tag"><a href="#（4）为镜像添加tag" class="headerlink" title="（4）为镜像添加tag"></a>（4）为镜像添加tag</h4> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker tag 860c279d2fec runoob&#x2F;centos:dev</span><br></pre></td></tr></table></figure>
+
+<p>860c279d2fec：IMAGE ID，通过docker images指令查看</p>
+<p>runoob/centos:dev：新的镜像名。其中dev为tag，runoob/centos为镜像所在仓库</p>
+<h2 id="Docker容器互联"><a href="#Docker容器互联" class="headerlink" title="Docker容器互联"></a>Docker容器互联</h2>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java学习</title>
+    <url>/2021/07/24/Java%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Java学习"><a href="#Java学习" class="headerlink" title="Java学习"></a>Java学习</h1><h2 id="1、"><a href="#1、" class="headerlink" title="1、"></a>1、</h2><ul>
+<li>一个源文件中只能有一个 public 类</li>
+<li>一个源文件可以有多个非 public 类</li>
+<li>源文件的名称应该和 public 类的类名保持一致。例如：源文件中 public 类的类名是 Employee，那么源文件应该命名为Employee.java。</li>
+<li>如果一个类定义在某个包中，那么 package 语句应该在源文件的首行。</li>
+<li>如果源文件包含 import 语句，那么应该放在 package 语句和类定义之间。如果没有 package 语句，那么 import 语句应该在源文件中最前面。</li>
+<li>import 语句和 package 语句对源文件中定义的所有类都有效。在同一源文件中，不能给不同的类不同的包声明。</li>
+</ul>
+<h2 id="2、final"><a href="#2、final" class="headerlink" title="2、final"></a>2、final</h2><p>java中使用final关键字修饰常量，声明方式和变量类似：（应该类似于C++中的const）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.1415926</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-78. Subsets</title>
+    <url>/2021/07/24/LeetCode-78-Subsets-0/</url>
+    <content><![CDATA[<h1 id="LeetCode-78-Subsets"><a href="#LeetCode-78-Subsets" class="headerlink" title="LeetCode-78. Subsets"></a>LeetCode-78. Subsets</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/subsets/">https://leetcode.com/problems/subsets/</a></p>
+<p>Given an integer array <code>nums</code> of <strong>unique</strong> elements, return <em>all possible subsets (the power set)</em>.</p>
+<p>The solution set <strong>must not</strong> contain duplicate subsets. Return the solution in <strong>any order</strong>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,2,3]</span><br><span class="line">Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0]</span><br><span class="line">Output: [[],[0]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+<li>All the numbers of <code>nums</code> are <strong>unique</strong>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）因为是subset，所以没有限制条件，直接每个curr都可以加入res。因为一个元素只能用一次，所以下一次从i+1开始。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; subsets(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr;</span><br><span class="line">        dfs(res, curr, nums, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; curr, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">        res.push_back(curr);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            curr.push_back(nums[i]);</span><br><span class="line">            dfs(res, curr, nums, i+<span class="number">1</span>);</span><br><span class="line">            curr.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-90. Subsets||</title>
+    <url>/2021/07/24/LeetCode-90-Subsets-0/</url>
+    <content><![CDATA[<h1 id="LeetCode-90-Subsets"><a href="#LeetCode-90-Subsets" class="headerlink" title="LeetCode-90. Subsets||"></a>LeetCode-90. Subsets||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an integer array <code>nums</code> that may contain duplicates, return <em>all possible subsets (the power set)</em>.</p>
+<p>The solution set <strong>must not</strong> contain duplicate subsets. Return the solution in <strong>any order</strong>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,2,2]</span><br><span class="line">Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0]</span><br><span class="line">Output: [[],[0]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）此题也需要一个visited数组，并且sort nums来存储元素是否被遍历过</p>
+<p>（2）比较其他两道nums不为distinct nums的题目：40. Combination Sum ||（sort）、47. Permutations ||（sort+visited）。重点观察continue的判定条件写法。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; subsetsWithDup(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">visited</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        </span><br><span class="line">        dfs(res, nums, curr, visited, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; curr, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; visited, <span class="keyword">int</span> start)</span></span>&#123;        </span><br><span class="line">        res.push_back(curr);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i<span class="number">-1</span>] &amp;&amp; visited[i<span class="number">-1</span>] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            curr.push_back(nums[i]);</span><br><span class="line">            visited[i] = <span class="number">1</span>;</span><br><span class="line">            dfs(res, nums, curr, visited, i+<span class="number">1</span>);</span><br><span class="line">            curr.pop_back();</span><br><span class="line">            visited[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode题目难度梳理</title>
+    <url>/2021/07/24/Leetcode%E9%A2%98%E7%9B%AE%E9%9A%BE%E5%BA%A6%E6%A2%B3%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Leetcode题目难度梳理"><a href="#Leetcode题目难度梳理" class="headerlink" title="Leetcode题目难度梳理"></a>Leetcode题目难度梳理</h1><p><font color = red>难</font>        <font color = blue>一般</font>       <font color=green>易</font></p>
+<h3 id="第六章-多指针"><a href="#第六章-多指针" class="headerlink" title="第六章 多指针"></a>第六章 多指针</h3><p><font color = blue> 912. Sort an Array (Quick Sort and Merge Sort)</font>    快排、计数排序</p>
+<p><font color = red>75. Sort Colors</font>    计数排序、三指针</p>
+<p><font color=blue>26. Remove Duplicates from Sorted Array</font>    双指针</p>
+<p><font color=red>80. Remove Duplicates from Sorted Array ||</font>   双指针</p>
+<p><font color=blue>88. Merge Sorted Array</font>  双指针，倒序</p>
+<p><font color=red>283. Move Zeroes</font>    双指针</p>
+<p><font color=red>215. Kth largetst Element in an Array</font>    快排，快排变形</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>整理</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
