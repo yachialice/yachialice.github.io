@@ -4856,4 +4856,389 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Henry制定的开发学习流程</title>
+    <url>/2021/07/27/Henry%E5%88%B6%E5%AE%9A%E7%9A%84%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="Henry制定的开发学习流程"><a href="#Henry制定的开发学习流程" class="headerlink" title="Henry制定的开发学习流程"></a>Henry制定的开发学习流程</h1><p>服务器开发方向</p>
+<ol>
+<li>Scrum敏捷开发流程</li>
+<li>基础工具掌握<br>2.1 版本管理工具<br>推荐使用GIT，google关键词“git”，“git使用”<br>2.2 单元测试框架<br>xUnit单元测试框架。PHP目前用的SimpleTest。google关键词：php simpletest<br>2.3 开发环境搭建<br>2.3.1 虚拟机环境<br>google关键词：VirtualBox<br>2.3.2 操作系统<br>关键词：ubuntu 14.04 Server<br>2.3.3 数据库<br>MySQL<br>2.3.4 WebServer<br>Nginx<br>2.3.5 NoSQL数据库<br>SSDB REDIS<br>2.3.6 前端JS工具<br>JQuery<br>2.4 自动化部署<br>2.4.1 工具<br> ansible<br>2.4.2 平台<br> Docker<br>3 架构师基础<br>3.1 HTTP分布式架构<br> 关键词：Restfull。所有到一遍著名的博士论文，参照网上的知识理解明白。<br> 要了解HTTP的GET PUT POST DELETE等方法的语义。如GET是幂等，多次GET一个资源不变；PUT是完整替换一个资源；POST可以部分更新资源；DELETE是删除资源<br>3.2 经典的Client/Server思路解决问题<br>3.3 大流量网站<br> 水平shard解决思路。了解网上各种水平分片的方法，尝试掌握。</li>
+</ol>
+<p>客户端开发方向<br>1 安卓<br>1.1 测试驱动开发<br>1.2 java.util类和java.io类<br>1.3<br>2 IOS</p>
+]]></content>
+      <categories>
+        <category>学习路线</category>
+      </categories>
+      <tags>
+        <tag>学习路线</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-13. Roman to Integer</title>
+    <url>/2021/08/06/LeetCode-13-Roman-to-Integer/</url>
+    <content><![CDATA[<h1 id="LeetCode-13-Roman-to-Integer"><a href="#LeetCode-13-Roman-to-Integer" class="headerlink" title="LeetCode-13. Roman to Integer"></a>LeetCode-13. Roman to Integer</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code>and <code>M</code>.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Symbol       Value</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure>
+
+<p>For example, <code>2</code> is written as <code>II</code> in Roman numeral, just two one’s added together. <code>12</code> is written as <code>XII</code>, which is simply <code>X + II</code>. The number <code>27</code> is written as <code>XXVII</code>, which is <code>XX + V + II</code>.</p>
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
+<ul>
+<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9. </li>
+<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90. </li>
+<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
+</ul>
+<p>Given a roman numeral, convert it to an integer.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;III&quot;</span><br><span class="line">Output: 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;IV&quot;</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;IX&quot;</span><br><span class="line">Output: 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;LVIII&quot;</span><br><span class="line">Output: 58</span><br><span class="line">Explanation: L &#x3D; 50, V&#x3D; 5, III &#x3D; 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 5:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;MCMXCIV&quot;</span><br><span class="line">Output: 1994</span><br><span class="line">Explanation: M &#x3D; 1000, CM &#x3D; 900, XC &#x3D; 90 and IV &#x3D; 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 15</code></li>
+<li><code>s</code> contains only the characters <code>(&#39;I&#39;, &#39;V&#39;, &#39;X&#39;, &#39;L&#39;, &#39;C&#39;, &#39;D&#39;, &#39;M&#39;)</code>.</li>
+<li>It is <strong>guaranteed</strong> that <code>s</code> is a valid roman numeral in the range <code>[1, 3999]</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）注意：使用unordered_map&lt;char,int&gt;，不要使用unordered_map&lt;string,int&gt;，因为s[i]是char类型</p>
+<p>（2）如果前&lt;后，则result-前。如果前&gt;后或前是最后一个字母，则result+前</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m = &#123;&#123;<span class="string">&#x27;I&#x27;</span>, <span class="number">1</span>&#125;, &#123;<span class="string">&#x27;V&#x27;</span>, <span class="number">5</span>&#125;, &#123;<span class="string">&#x27;X&#x27;</span>, <span class="number">10</span>&#125;, &#123;<span class="string">&#x27;L&#x27;</span>, <span class="number">50</span>&#125;,</span><br><span class="line">                                            &#123;<span class="string">&#x27;C&#x27;</span>, <span class="number">100</span>&#125;, &#123;<span class="string">&#x27;D&#x27;</span>, <span class="number">500</span>&#125;, &#123;<span class="string">&#x27;M&#x27;</span>, <span class="number">1000</span>&#125;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> value = m[s[i]];</span><br><span class="line">            <span class="keyword">if</span>(i == s.size()<span class="number">-1</span> || m[s[i]] &gt;= m[s[i+<span class="number">1</span>]]) res += value;</span><br><span class="line">            <span class="keyword">else</span> res -= value;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-17. Letter Combinations of a Phone Number</title>
+    <url>/2021/07/26/LeetCode-17-Letter-Combinations-of-a-Phone-Number/</url>
+    <content><![CDATA[<h1 id="LeetCode-17-Letter-Combinations-of-a-Phone-Number"><a href="#LeetCode-17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="LeetCode-17. Letter Combinations of a Phone Number"></a>LeetCode-17. Letter Combinations of a Phone Number</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent. Return the answer in <strong>any order</strong>.</p>
+<p>A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png" alt="img"></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: digits &#x3D; &quot;23&quot;</span><br><span class="line">Output: [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: digits &#x3D; &quot;&quot;</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: digits &#x3D; &quot;2&quot;</span><br><span class="line">Output: [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= digits.length &lt;= 4</code></li>
+<li><code>digits[i]</code> is a digit in the range <code>[&#39;2&#39;, &#39;9&#39;]</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>注意：string to int：string-‘0’</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">letterCombinations</span><span class="params">(<span class="built_in">string</span> digits)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(digits.empty()) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; dic = &#123;<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="string">&quot;def&quot;</span>,<span class="string">&quot;ghi&quot;</span>,<span class="string">&quot;jkl&quot;</span>,<span class="string">&quot;mno&quot;</span>,<span class="string">&quot;pqrs&quot;</span>,<span class="string">&quot;tuv&quot;</span>,<span class="string">&quot;wxyz&quot;</span>&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        dfs(digits, <span class="number">0</span>, res, <span class="string">&quot;&quot;</span>, dic);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">string</span>&amp; digits, <span class="keyword">int</span> start, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res, <span class="built_in">string</span> curr, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; dic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start &gt; digits.size()<span class="number">-1</span>) &#123;</span><br><span class="line">            res.push_back(curr);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> num = digits[start]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="built_in">string</span> str = dic[num];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.size(); i++)&#123;</span><br><span class="line">            curr += str[i];</span><br><span class="line">            dfs(digits, start+<span class="number">1</span>, res, curr, dic);</span><br><span class="line">            curr.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-22. Generate Parentheses</title>
+    <url>/2021/07/26/LeetCode-22-Generate-Parentheses/</url>
+    <content><![CDATA[<h1 id="LeetCode-22-Generate-Parentheses"><a href="#LeetCode-22-Generate-Parentheses" class="headerlink" title="LeetCode-22. Generate Parentheses"></a>LeetCode-22. Generate Parentheses</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given <code>n</code> pairs of parentheses, write a function to <em>generate all combinations of well-formed parentheses</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: n &#x3D; 3</span><br><span class="line">Output: [&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: n &#x3D; 1</span><br><span class="line">Output: [&quot;()&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 8</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）有n对括号，即左括号n个，右括号n个</p>
+<p>（2）还需要加入的左括号用left表示，还需要加入的右括号用right表示。若left&gt;right，则表示，已加入的右括号数大于左括号数，此时curr已经不可能正确了，直接return。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">generateParenthesis</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        generateParenthesis(n, n, res, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">generateParenthesis</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res, <span class="built_in">string</span> curr)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left &gt; right) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">0</span> &amp;&amp; right == <span class="number">0</span>)&#123;</span><br><span class="line">            res.push_back(curr);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(left &gt; <span class="number">0</span>) generateParenthesis(left<span class="number">-1</span>, right, res, curr+<span class="string">&#x27;(&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span>(right &gt; <span class="number">0</span>) generateParenthesis(left, right<span class="number">-1</span>, res, curr+<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-257. Binary Tree Paths</title>
+    <url>/2021/07/26/LeetCode-257-Binary-Tree-Paths/</url>
+    <content><![CDATA[<h1 id="LeetCode-257-Binary-Tree-Paths"><a href="#LeetCode-257-Binary-Tree-Paths" class="headerlink" title="LeetCode-257. Binary Tree Paths"></a>LeetCode-257. Binary Tree Paths</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given the <code>root</code> of a binary tree, return <em>all root-to-leaf paths in <strong>any order</strong></em>.</p>
+<p>A <strong>leaf</strong> is a node with no children.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/12/paths-tree.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1,2,3,null,5]</span><br><span class="line">Output: [&quot;1-&gt;2-&gt;5&quot;,&quot;1-&gt;3&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: root &#x3D; [1]</span><br><span class="line">Output: [&quot;1&quot;]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>标准的dfs思路。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">binaryTreePaths</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">        <span class="built_in">string</span> curr = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        dfs(res, curr, root);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res, <span class="built_in">string</span> curr, TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr.size()!=<span class="number">0</span>) curr += <span class="string">&quot;-&gt;&quot;</span>;</span><br><span class="line">        <span class="comment">//这里用curr+=root-&gt;val + &#x27;0&#x27;;会报错</span></span><br><span class="line">        curr += to_string(root-&gt;val);        </span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right)&#123;</span><br><span class="line"></span><br><span class="line">            res.push_back(curr);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left) dfs(res, curr, root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right) dfs(res, curr, root-&gt;right);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-289. Game of Life</title>
+    <url>/2021/08/06/LeetCode-289-Game-of-Life/</url>
+    <content><![CDATA[<h1 id="LeetCode-289-Game-of-Life"><a href="#LeetCode-289-Game-of-Life" class="headerlink" title="LeetCode-289. Game of Life"></a>LeetCode-289. Game of Life</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/game-of-life/">https://leetcode.com/problems/game-of-life/</a></p>
+<p>According to <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life">Wikipedia’s article</a>: “The <strong>Game of Life</strong>, also known simply as <strong>Life</strong>, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.”</p>
+<p>The board is made up of an <code>m x n</code> grid of cells, where each cell has an initial state: <strong>live</strong> (represented by a <code>1</code>) or <strong>dead</strong> (represented by a <code>0</code>). Each cell interacts with its <a href="https://en.wikipedia.org/wiki/Moore_neighborhood">eight neighbors</a> (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):</p>
+<ol>
+<li>Any live cell with fewer than two live neighbors dies as if caused by under-population.</li>
+<li>Any live cell with two or three live neighbors lives on to the next generation.</li>
+<li>Any live cell with more than three live neighbors dies, as if by over-population.</li>
+<li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
+</ol>
+<p>The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the <code>m x n</code> grid <code>board</code>, return <em>the next state</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/26/grid1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: board &#x3D; [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]</span><br><span class="line">Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/26/grid2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: board &#x3D; [[1,1],[1,0]]</span><br><span class="line">Output: [[1,1],[1,1]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == board.length</code></li>
+<li><code>n == board[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 25</code></li>
+<li><code>board[i][j]</code> is <code>0</code> or <code>1</code>.</li>
+</ul>
+<p><strong>Follow up:</strong></p>
+<ul>
+<li>Could you solve it in-place? Remember that the board needs to be updated simultaneously: You cannot update some cells first and then use their updated values to update other cells.</li>
+<li>In this question, we represent the board using a 2D array. In principle, the board is infinite, which would cause problems when the active area encroaches upon the border of the array (i.e., live cells reach the border). How would you address these problems?</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>整体比较简单。</p>
+<p>总共需要遍历两边board。需要用到2和-1两个标识，帮忙判别初始状态。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gameOfLife</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = board.size();</span><br><span class="line">        <span class="keyword">int</span> n = m ? board[<span class="number">0</span>].size() : <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dx = &#123;<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dy = &#123;<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">8</span>; k++)&#123;</span><br><span class="line">                    <span class="keyword">int</span> x = i + dx[k], y = j + dy[k];</span><br><span class="line">                    <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; x &lt; m &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; n &amp;&amp; board[x][y] &gt; <span class="number">0</span>)</span><br><span class="line">                        cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>((cnt &lt; <span class="number">2</span> || cnt &gt; <span class="number">3</span>) &amp;&amp; board[i][j]) board[i][j] = <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(!board[i][j] &amp;&amp; cnt == <span class="number">3</span>) board[i][j] = <span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="number">2</span>) board[i][j] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(board[i][j] == <span class="number">-1</span>) board[i][j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Matrix</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-491. Increasing Subsequences</title>
+    <url>/2021/07/26/LeetCode-491-Increasing-Subsequences/</url>
+    <content><![CDATA[<h1 id="LeetCode-491-Increasing-Subsequences"><a href="#LeetCode-491-Increasing-Subsequences" class="headerlink" title="LeetCode-491. Increasing Subsequences"></a>LeetCode-491. Increasing Subsequences</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an integer array <code>nums</code>, return all the different possible increasing subsequences of the given array with <strong>at least two elements</strong>. You may return the answer in <strong>any order</strong>.</p>
+<p>The given array may contain duplicates, and two equal integers should also be considered a special case of increasing sequence.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [4,6,7,7]</span><br><span class="line">Output: [[4,6],[4,6,7],[4,6,7,7],[4,7],[4,7,7],[6,7],[6,7,7],[7,7]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [4,4,3,2,1]</span><br><span class="line">Output: [[4,4]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 15</code></li>
+<li><code>-100 &lt;= nums[i] &lt;= 100</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>错误写法：</p>
+<p>注意，本题不能对nums进行排序，故而怎么跳过重复的元素是个问题，不能按照以下这种写法！！！但是可以使用set。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; findSubsequences(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.empty()) <span class="keyword">return</span>&#123;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr;</span><br><span class="line">        </span><br><span class="line">        dfs(res, curr, nums, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; curr, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr.size() &gt;= <span class="number">2</span>)&#123;</span><br><span class="line">            res.push_back(curr);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            <span class="comment">//因为这道题不能对nums排序，所以不能用下面这一句continue来跳过重复</span></span><br><span class="line">            <span class="comment">//比如[1,2,3,4,5,1,1]，这个在第一个1处，可能会产生[1,1],[1,1,1]，遍历到后面的1处，也可能会产生[1,1],[1,1,1]</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; start &amp;&amp; nums[i] == nums[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(!curr.empty() &amp;&amp; nums[i] &lt; curr.back()) <span class="keyword">break</span>;</span><br><span class="line">            curr.push_back(nums[i]);</span><br><span class="line">            dfs(res, curr, nums, i+<span class="number">1</span>);</span><br><span class="line">            curr.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>正确写法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; findSubsequences(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; out;</span><br><span class="line">        helper(nums, <span class="number">0</span>, out, res);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(res.begin(), res.end());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; out, <span class="built_in">set</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (out.size() &gt;= <span class="number">2</span>) res.insert(out);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; nums.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!out.empty() &amp;&amp; out.back() &gt; nums[i]) <span class="keyword">continue</span>;</span><br><span class="line">            out.push_back(nums[i]);</span><br><span class="line">            helper(nums, i + <span class="number">1</span>, out, res);</span><br><span class="line">            out.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Leedcode</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-51. N-Queens</title>
+    <url>/2021/07/26/LeetCode-51-N-Queens/</url>
+    <content><![CDATA[<h1 id="LeetCode-51-N-Queens"><a href="#LeetCode-51-N-Queens" class="headerlink" title="LeetCode-51. N-Queens"></a>LeetCode-51. N-Queens</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/n-queens/">https://leetcode.com/problems/n-queens/</a></p>
+<p>The <strong>n-queens</strong> puzzle is the problem of placing <code>n</code> queens on an <code>n x n</code> chessboard such that no two queens attack each other.</p>
+<p>Given an integer <code>n</code>, return <em>all distinct solutions to the <strong>n-queens puzzle</strong></em>. You may return the answer in <strong>any order</strong>.</p>
+<p>Each solution contains a distinct board configuration of the n-queens’ placement, where <code>&#39;Q&#39;</code> and <code>&#39;.&#39;</code> both indicate a queen and an empty space, respectively.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/13/queens.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: n &#x3D; 4</span><br><span class="line">Output: [[&quot;.Q..&quot;,&quot;...Q&quot;,&quot;Q...&quot;,&quot;..Q.&quot;],[&quot;..Q.&quot;,&quot;Q...&quot;,&quot;...Q&quot;,&quot;.Q..&quot;]]</span><br><span class="line">Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: n &#x3D; 1</span><br><span class="line">Output: [[&quot;Q&quot;]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 9</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>把验证方法令写一个函数isValid</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; solveNQueens(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">queens</span><span class="params">(n, <span class="built_in">string</span>(n, <span class="string">&#x27;.&#x27;</span>))</span></span>;</span><br><span class="line">        helper(<span class="number">0</span>, queens, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> curRow, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; queens, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = queens.size();</span><br><span class="line">        <span class="keyword">if</span> (curRow == n) &#123;</span><br><span class="line">            res.push_back(queens);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isValid(queens, curRow, i)) &#123;</span><br><span class="line">                queens[curRow][i] = <span class="string">&#x27;Q&#x27;</span>;</span><br><span class="line">                helper(curRow + <span class="number">1</span>, queens, res);</span><br><span class="line">                queens[curRow][i] = <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValid</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; queens, <span class="keyword">int</span> row, <span class="keyword">int</span> col)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (queens[i][col] == <span class="string">&#x27;Q&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = row - <span class="number">1</span>, j = col - <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>; --i, --j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (queens[i][j] == <span class="string">&#x27;Q&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = row - <span class="number">1</span>, j = col + <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &lt; queens.size(); --i, ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (queens[i][j] == <span class="string">&#x27;Q&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-6. ZigZag Conversion</title>
+    <url>/2021/08/06/LeetCode-6-ZigZag-Conversion/</url>
+    <content><![CDATA[<h1 id="LeetCode-6-ZigZag-Conversion"><a href="#LeetCode-6-ZigZag-Conversion" class="headerlink" title="LeetCode-6. ZigZag Conversion"></a>LeetCode-6. ZigZag Conversion</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br></pre></td></tr></table></figure>
+
+<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
+<p>Write the code that will take a string and make this conversion given a number of rows:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">string convert(string s, int numRows);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;PAYPALISHIRING&quot;, numRows &#x3D; 3</span><br><span class="line">Output: &quot;PAHNAPLSIIGYIR&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;PAYPALISHIRING&quot;, numRows &#x3D; 4</span><br><span class="line">Output: &quot;PINALSIGYAHRPI&quot;</span><br><span class="line">Explanation:</span><br><span class="line">P     I    N</span><br><span class="line">A   L S  I G</span><br><span class="line">Y A   H R</span><br><span class="line">P     I</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: s &#x3D; &quot;A&quot;, numRows &#x3D; 1</span><br><span class="line">Output: &quot;A&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 1000</code></li>
+<li><code>s</code> consists of English letters (lower-case and upper-case), <code>&#39;,&#39;</code> and <code>&#39;.&#39;</code>.</li>
+<li><code>1 &lt;= numRows &lt;= 1000</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）先写出z结构来，使用vector<string> vec(numRows)数据结构</p>
+<p>（2）再横着一排排读vec，即得到res</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">vec</span><span class="params">(numRows)</span></span>;</span><br><span class="line">        <span class="built_in">string</span> res;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, n = s.size();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(i &lt; n)&#123;</span><br><span class="line">            <span class="comment">//向下</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> pos = <span class="number">0</span>; pos &lt; numRows &amp;&amp; i &lt; n; pos++)&#123;</span><br><span class="line">                vec[pos] += s[i++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//斜上</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> pos = numRows<span class="number">-2</span>; pos &gt;=<span class="number">1</span> &amp;&amp; i &lt; n; pos--)&#123;</span><br><span class="line">                vec[pos] += s[i++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) res += v;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LintCode-246. Binary Tree Path Sum||</title>
+    <url>/2021/07/26/LintCode-246-Binary-Tree-Path-Sum/</url>
+    <content><![CDATA[<h1 id="LintCode-246-Binary-Tree-Path-Sum"><a href="#LintCode-246-Binary-Tree-Path-Sum" class="headerlink" title="LintCode-246. Binary Tree Path Sum||"></a>LintCode-246. Binary Tree Path Sum||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>给一棵二叉树和一个目标值，设计一个算法找到二叉树上的和为该目标值的所有路径。路径可以从任何节点出发和结束，但是需要是一条一直往下走的路线。也就是说，路径上的节点的层级是逐个递增的。</p>
+<p>样例</p>
+<p><strong>样例1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">&#123;1,2,3,4,#,2&#125;</span><br><span class="line">6</span><br><span class="line">输出:</span><br><span class="line">[[2, 4],[1, 3, 2]]</span><br><span class="line">解释:</span><br><span class="line">这棵二叉树如图所示：</span><br><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line"> &#x2F;   &#x2F;</span><br><span class="line">4   2</span><br><span class="line">对于给定目标值6, 很显然有 2 + 4 &#x3D; 6 和 1 + 3 + 2 &#x3D; 6 两条路径。</span><br></pre></td></tr></table></figure>
+
+<p><strong>样例2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">&#123;1,2,3,4&#125;</span><br><span class="line">10</span><br><span class="line">输出:</span><br><span class="line">[]</span><br><span class="line">解释:</span><br><span class="line">这棵二叉树如图所示：</span><br><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line"> &#x2F;   </span><br><span class="line">4   </span><br><span class="line">对于给定目标值10, 没有符合条件的答案。</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Soution"><a href="#Soution" class="headerlink" title="Soution"></a>Soution</h2><p>（1）关于可以从任何起点开始这一点，需要递归地遍历binaryTreePathSum2，注意以下：</p>
+<p>mid和left、right遍历的并非同一个函数。如果写成left=binaryTreePathSum(root-&gt;left, target);,则root-&gt;left的左右子树并没有再以左右子树中的点为起点递归下去，那么res中会缺少元素。</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">mid = binaryTreePathSum(root, target);</span><br><span class="line">left = binaryTreePathSum2(root-&gt;left, target);</span><br><span class="line">right = binaryTreePathSum2(root-&gt;right, target);</span><br></pre></td></tr></table></figure>
+
+<p>（2）关于可以从任何一点结束这一点，不用!root-&gt;left&amp;&amp;!root-&gt;right即可return，即去掉是叶节点的限制条件。</p>
+<p><b>（3）注意，dfs函数中curr也可以传reference类型，但要注意在返回前需要curr.pop_back()。</b></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * @param root: the root of binary tree</span></span><br><span class="line"><span class="comment">     * @param target: An integer</span></span><br><span class="line"><span class="comment">     * @return: all valid paths</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; binaryTreePathSum2(TreeNode * root, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="comment">// write your code here</span></span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res=&#123;&#125;, left, mid, right;</span><br><span class="line">        mid = binaryTreePathSum(root, target);</span><br><span class="line">        </span><br><span class="line">        left = binaryTreePathSum2(root-&gt;left, target);</span><br><span class="line">        right = binaryTreePathSum2(root-&gt;right, target);</span><br><span class="line"></span><br><span class="line">        res.insert(res.end(), left.begin(), left.end());</span><br><span class="line">        res.insert(res.end(), right.begin(), right.end());</span><br><span class="line">        res.insert(res.end(), mid.begin(), mid.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; binaryTreePathSum(TreeNode* root, <span class="keyword">int</span> target)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr;</span><br><span class="line"></span><br><span class="line">        dfs(root, curr, res, target);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; curr, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        curr.push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val == target)&#123;</span><br><span class="line">            res.push_back(curr);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dfs(root-&gt;left, curr, res, target-root-&gt;val);</span><br><span class="line">        dfs(root-&gt;right, curr, res, target-root-&gt;val);</span><br><span class="line">        curr.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LintCode-376. Binary Tree Path Sum</title>
+    <url>/2021/07/26/LintCode-376-Binary-Tree-Path-Sum/</url>
+    <content><![CDATA[<h1 id="LintCode-376-Binary-Tree-Path-Sum"><a href="#LintCode-376-Binary-Tree-Path-Sum" class="headerlink" title="LintCode-376. Binary Tree Path Sum"></a>LintCode-376. Binary Tree Path Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://www.lintcode.com/problem/binary-tree-path-sum/description">https://www.lintcode.com/problem/binary-tree-path-sum/description</a></p>
+<p>给定一个二叉树，找出所有路径中各节点相加总和等于给定 <code>目标值</code> 的路径。</p>
+<p>一个有效的路径，指的是从根节点到叶节点的路径。</p>
+<p>样例</p>
+<p><strong>样例1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">&#123;1,2,4,2,3&#125;</span><br><span class="line">5</span><br><span class="line">输出: [[1, 2, 2],[1, 4]]</span><br><span class="line">说明:</span><br><span class="line">这棵树如下图所示：</span><br><span class="line">         1</span><br><span class="line">        &#x2F; \</span><br><span class="line">       2   4</span><br><span class="line">      &#x2F; \</span><br><span class="line">     2   3</span><br><span class="line">对于目标总和为5，很显然1 + 2 + 2 &#x3D; 1 + 4 &#x3D; 5</span><br></pre></td></tr></table></figure>
+
+<p><strong>样例2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">&#123;1,2,4,2,3&#125;</span><br><span class="line">3</span><br><span class="line">输出: []</span><br><span class="line">说明:</span><br><span class="line">这棵树如下图所示：</span><br><span class="line">         1</span><br><span class="line">        &#x2F; \</span><br><span class="line">       2   4</span><br><span class="line">      &#x2F; \</span><br><span class="line">     2   3</span><br><span class="line">注意到题目要求我们寻找从根节点到叶子节点的路径。</span><br><span class="line">1 + 2 + 2 &#x3D; 5, 1 + 2 + 3 &#x3D; 6, 1 + 4 &#x3D; 5 </span><br><span class="line">这里没有合法的路径满足和等于3.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）如果curr是传&amp;方法，return前一定要pop_back()，提前return也要pop_back()</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition of TreeNode:</span></span><br><span class="line"><span class="comment"> * class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> * public:</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left, *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val) &#123;</span></span><br><span class="line"><span class="comment"> *         this-&gt;val = val;</span></span><br><span class="line"><span class="comment"> *         this-&gt;left = this-&gt;right = NULL;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * @param root: the root of binary tree</span></span><br><span class="line"><span class="comment">     * @param target: An integer</span></span><br><span class="line"><span class="comment">     * @return: all valid paths</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; binaryTreePathSum(TreeNode * root, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="comment">// write your code here</span></span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path = &#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res = &#123;&#125;;</span><br><span class="line">        dfs(root, target ,path, res);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> target, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; path, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        path.push_back(root-&gt;val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val == target &amp;&amp; !root-&gt;left &amp;&amp; !root-&gt;right)&#123;</span><br><span class="line">            res.push_back(path);</span><br><span class="line">            <span class="comment">//这里不能接return！！因为要先path.pop_back()才能return！！</span></span><br><span class="line">            path.pop_back();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dfs(root-&gt;left, target-root-&gt;val, path, res);</span><br><span class="line">        dfs(root-&gt;right, target-root-&gt;val, path, res);</span><br><span class="line"></span><br><span class="line">        path.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LintCode-472. Binary Tree Path Sum |||</title>
+    <url>/2021/07/26/LintCode-472-Binary-Tree-Path-Sum/</url>
+    <content><![CDATA[<h1 id="LintCode-472-Binary-Tree-Path-Sum"><a href="#LintCode-472-Binary-Tree-Path-Sum" class="headerlink" title="LintCode-472. Binary Tree Path Sum |||"></a>LintCode-472. Binary Tree Path Sum |||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>给一棵二叉树和一个目标值，找到二叉树上所有的和为该目标值的路径。路径可以从二叉树的任意节点出发，任意节点结束。</p>
+<p>样例</p>
+<p><strong>样例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：&#123;1,2,3,4&#125;,6</span><br><span class="line">输出：[[2, 4],[2, 1, 3],[3, 1, 2],[4, 2]]</span><br><span class="line">解释：</span><br><span class="line">该树如下：</span><br><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line"> &#x2F;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<p><strong>样例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：&#123;1,2,3,4&#125;,3</span><br><span class="line">输出：[[1,2],[2,1],[3]]</span><br><span class="line">解释：</span><br><span class="line">该树如下：</span><br><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line"> &#x2F;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）先序遍历，将点存到node_list中</p>
+<p>（2）node_list中每一个点为起点，寻找路径</p>
+<p>（3）因为ParentTreeNode中有parent指针，因此dfs时可以向parent方向遍历。</p>
+<p>（4）为了防止路径走反，走重复，或者kid-&gt;parent，parent-&gt;kid打转，引入一个set记录已经遍历过的节点。这个set在dfs前初始化为空，在dfs过程中只insert，不erase。我们保证dfs遍历的时候，每条路径都以root为起点，因为是棵树，所以每个节点遍历一次，就能遍历到所有路径，set不需要erase。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition of ParentTreeNode:</span></span><br><span class="line"><span class="comment"> * class ParentTreeNode &#123;</span></span><br><span class="line"><span class="comment"> * public:</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ParentTreeNode *parent, *left, *right;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//注意，这道题有parent node</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * @param root: the root of binary tree</span></span><br><span class="line"><span class="comment">     * @param target: An integer</span></span><br><span class="line"><span class="comment">     * @return: all valid paths</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; binaryTreePathSum3(ParentTreeNode * root, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="comment">// write your code here</span></span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;ParentTreeNode*&gt; node_list;</span><br><span class="line"></span><br><span class="line">        preorder(root, node_list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(ParentTreeNode* n : node_list)&#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path = &#123;&#125;;</span><br><span class="line">            <span class="built_in">unordered_set</span>&lt;ParentTreeNode*&gt; s = &#123;&#125;;</span><br><span class="line">            dfs(n, path, res, target, s);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">(ParentTreeNode* root, <span class="built_in">vector</span>&lt;ParentTreeNode*&gt;&amp; node_list)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        node_list.push_back(root);</span><br><span class="line">        preorder(root-&gt;left, node_list);</span><br><span class="line">        preorder(root-&gt;right, node_list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(ParentTreeNode* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; path, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="keyword">int</span> target, <span class="built_in">unordered_set</span>&lt;ParentTreeNode*&gt;&amp; s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root || s.count(root)) <span class="keyword">return</span>;</span><br><span class="line">        path.push_back(root-&gt;val);</span><br><span class="line">        s.insert(root);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val == target)&#123;</span><br><span class="line">            res.push_back(path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dfs(root-&gt;parent, path, res, target-root-&gt;val, s);</span><br><span class="line">        dfs(root-&gt;left, path, res, target-root-&gt;val, s);</span><br><span class="line">        dfs(root-&gt;right, path, res, target-root-&gt;val, s);</span><br><span class="line"></span><br><span class="line">        path.pop_back();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Tree</category>
+        <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
