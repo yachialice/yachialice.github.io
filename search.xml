@@ -151,7 +151,9 @@
 
 
 
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//在head前再加一个节点dumpy，在head就是重复值的情况下，可以简化删除head节点的过程</span></span><br><span class="line">        <span class="keyword">if</span>(!head||!head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode *dumpy = <span class="keyword">new</span> ListNode();</span><br><span class="line">        dumpy-&gt;next = head;</span><br><span class="line">        ListNode *prev = dumpy;</span><br><span class="line">        ListNode *current = head;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(prev-&gt;next)&#123;</span><br><span class="line">            current = prev-&gt;next;</span><br><span class="line">            <span class="keyword">while</span>(current-&gt;next &amp;&amp; current-&gt;val == current-&gt;next-&gt;val)&#123;</span><br><span class="line">                current = current-&gt;next;   </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(prev-&gt;next != current) prev-&gt;next = current-&gt;next;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                prev = prev-&gt;next;  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）本题的难点在于不distinct元素要去掉。（可对比Leetcode-83.）</p>
+<p>（2）本题每次另curr指针停在重复元素的最后一个元素中，利用curr==pre-&gt;next？来判断curr是否是distinct的。如果是，则pre = pre-&gt;next；如果不是，则扔掉curr，pre-&gt;next = curr-&gt;next;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>, head);</span><br><span class="line">        ListNode* pre = dumpy;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(pre-&gt;next)&#123;</span><br><span class="line">            ListNode* curr = pre-&gt;next;</span><br><span class="line">            <span class="comment">//while循环后，curr停在curr-&gt;next!=curr的地方，下面要判断要不要将curr加入</span></span><br><span class="line">            <span class="keyword">while</span>(curr-&gt;next &amp;&amp; curr-&gt;next-&gt;val == curr-&gt;val)</span><br><span class="line">                curr = curr-&gt;next;</span><br><span class="line">            <span class="comment">//若curr!=pre-&gt;next,说明curr不为distint，不加入list，跳过它</span></span><br><span class="line">            <span class="keyword">if</span>(curr != pre-&gt;next) pre-&gt;next = curr-&gt;next;</span><br><span class="line">            <span class="comment">//若curr==pre-&gt;next，说明curr为distint，将其加入list，移动pre</span></span><br><span class="line">            <span class="keyword">else</span> pre = pre-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -305,7 +307,13 @@
 <p>Example:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m &#x3D; 2, n &#x3D; 4</span><br><span class="line">Output: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</span><br></pre></td></tr></table></figure>
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseBetween</span><span class="params">(ListNode* head, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        ListNode* dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        dummy-&gt;next = head;</span><br><span class="line">        ListNode* prev = dummy;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= left<span class="number">-1</span>; i++) prev = prev-&gt;next;</span><br><span class="line">        ListNode* current = prev-&gt;next;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = left<span class="number">-1</span>; i &lt;= right<span class="number">-2</span>; i++)&#123;</span><br><span class="line">            ListNode* t = current-&gt;next;</span><br><span class="line">            current-&gt;next = t-&gt;next;</span><br><span class="line">            t-&gt;next = prev-&gt;next;</span><br><span class="line">            prev-&gt;next = t;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dummy-&gt;next;;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>相思题目：Leetcode 25. Reverse Nodes in k-Group <a href="https://leetcode.com/problems/reverse-nodes-in-k-group/">https://leetcode.com/problems/reverse-nodes-in-k-group/</a></p>
+<p>（1）注意，反转链表的套路：记得存储的tmp变量为curr-&gt;next，然后自然地往下推进</p>
+<p>令t = curr-&gt;next</p>
+<p>curr-&gt;next = t-&gt;next;</p>
+<p>t-&gt;next = prev-&gt;next;</p>
+<p>prev-&gt;next = t;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseBetween</span><span class="params">(ListNode* head, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        ListNode* dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        dummy-&gt;next = head;</span><br><span class="line">        ListNode* prev = dummy;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= left<span class="number">-1</span>; i++) prev = prev-&gt;next;</span><br><span class="line">        ListNode* current = prev-&gt;next;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = left<span class="number">-1</span>; i &lt;= right<span class="number">-2</span>; i++)&#123;</span><br><span class="line">            ListNode* t = current-&gt;next;</span><br><span class="line">            current-&gt;next = t-&gt;next;</span><br><span class="line">            t-&gt;next = prev-&gt;next;</span><br><span class="line">            prev-&gt;next = t;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dummy-&gt;next;;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1789,7 +1797,8 @@
 
 
 
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">sortList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        ListNode* prev = head;</span><br><span class="line">        <span class="keyword">while</span>(fast &amp;&amp; fast-&gt;next)&#123;</span><br><span class="line">            prev = slow;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        prev-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> merge(sortList(head), sortList(slow));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">merge</span><span class="params">(ListNode* l1, ListNode* l2)</span></span>&#123;</span><br><span class="line">        ListNode *dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        ListNode *curr = dumpy;</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）其实只包含一个递归。sortList这个递归是将linked list拆分成两段，返回排好序的list。所以每次传入的list要是截断的（最后一个节点的next设置为NULL）。merge其实不是递归本身，只是帮助排序的函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">sortList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* slow = head, *fast = head, *pre = slow;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(fast &amp;&amp; fast-&gt;next)&#123;</span><br><span class="line">            pre = slow;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//断开list为两截</span></span><br><span class="line">        pre-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="comment">//再merge</span></span><br><span class="line">        <span class="keyword">return</span> merge(sortList(head), sortList(slow));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">merge</span><span class="params">(ListNode* l1, ListNode* l2)</span></span>&#123;</span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>), *curr = dumpy;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(l1 &amp;&amp; l2)&#123;</span><br><span class="line">            <span class="keyword">if</span>(l1-&gt;val &lt;= l2-&gt;val)&#123;</span><br><span class="line">                curr-&gt;next = l1;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                curr-&gt;next = l2;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//记得写！！！</span></span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(l1) curr-&gt;next = l1;</span><br><span class="line">        <span class="keyword">if</span>(l2) curr-&gt;next = l2;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -2887,7 +2896,7 @@
 
 
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）用count记录index</p>
-<p>（2）两个链表，一个链接even index node，一个链接odd index node</p>
+<p>（2）两个链表，一个链接even index node，一个链接odd index node<br>因为只用了指针，没有新建节点，所有虽然构造了两个list，但也是空间复杂度O(1)!!!</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">oddEvenList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode* dummpy1 = <span class="keyword">new</span> ListNode(<span class="number">-1</span>), *h1 = dummpy1;</span><br><span class="line">        ListNode* dummpy2 = <span class="keyword">new</span> ListNode(<span class="number">-1</span>), *h2 = dummpy2;</span><br><span class="line">        </span><br><span class="line">        ListNode* curr = head;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">            <span class="keyword">if</span>(count%<span class="number">2</span>) &#123;</span><br><span class="line">                h1-&gt;next = curr;</span><br><span class="line">                h1 = h1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                h2-&gt;next = curr;</span><br><span class="line">                h2 = h2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">            count++;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        h2-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        h1-&gt;next = dummpy2-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> dummpy1-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -5236,6 +5245,315 @@
         <category>Leetcode</category>
         <category>Tree</category>
         <category>DFS</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++刷题常用语法</title>
+    <url>/2021/08/21/C-%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="C-刷题常用语法"><a href="#C-刷题常用语法" class="headerlink" title="C++刷题常用语法"></a>C++刷题常用语法</h2><p>（1）set中erase</p>
+<p>（2）string to int； int to string</p>
+<p>（3）string to char； char to string</p>
+<p>（4）string.substr(pos, n)</p>
+<p>（5）ostringstream, instingstream</p>
+<p>（6）vector insert</p>
+<p>（7）lambda写法（见LeetCode 23题）</p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go Java Full Stack wtih Spring Boot and React笔记</title>
+    <url>/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Go-Java-Full-Stack-wtih-Spring-Boot-and-React笔记"><a href="#Go-Java-Full-Stack-wtih-Spring-Boot-and-React笔记" class="headerlink" title="Go Java Full Stack wtih Spring Boot and React笔记"></a>Go Java Full Stack wtih Spring Boot and React笔记</h1><p>1、BabelJs</p>
+<p>（1）将高版本的javascript转换成低版本的javascript，从而兼容各个浏览器</p>
+<p>（2）将JSX转化成js代码</p>
+<p>（3）JSX只能return一个element    </p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--错误--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>yyy<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--正确--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>yyy<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--正确--&gt;</span></span><br><span class="line"><span class="tag">&lt;&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>yyy<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）All the nodes should be properly closed</p>
+<p>（5）JSX的component必须以大写字母开头，例如：FirstComponent。firtComponent是错误的！！因为html中标签都以小写字母开头，为了便于区分</p>
+<p>（6）要用JSX，必须import React</p>
+<p>2、React的state管理机制</p>
+<p>（1）不能直接改变state</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">increment</span>(<span class="params"></span>)</span>&#123;<span class="comment">//Update state - counter++</span></span><br><span class="line">    <span class="comment">//this.state.counter++; //Bad Practice</span></span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">        counter: <span class="built_in">this</span>.state.counter + <span class="number">1</span> <span class="comment">//Good Practice</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）React在内存中保存着virtual dom，因为在内存中，所以对virtual dom做修改很简单。每次状态改变，先检查virtual dom1和virtual dom2的区别，再将有差别的部分在dom上进行修改。</p>
+<p>3、可以使用arrow function来代替binding</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./Counter.css&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Define the initial state in a constructor</span></span><br><span class="line">    <span class="comment">//state =&gt; counter 0</span></span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>(); <span class="comment">//call the super method</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.state = &#123;</span><br><span class="line">            counter : <span class="number">0</span>,</span><br><span class="line">            secondCounter : <span class="number">100</span></span><br><span class="line">        &#125;</span><br><span class="line">                <span class="comment">//写arrow function，就不用写这句</span></span><br><span class="line">        <span class="built_in">this</span>.increment = <span class="built_in">this</span>.increment.bind(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//render = () =&gt;&#123;</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">        &lt;div className = <span class="string">&quot;counter&quot;</span>&gt;</span><br><span class="line">            &lt;button onClick=&#123;<span class="built_in">this</span>.increment&#125;&gt;+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">            &lt;span className = <span class="string">&quot;count&quot;</span>&gt;&#123;<span class="built_in">this</span>.state.counter&#125;&lt;/span&gt;</span><br><span class="line">            &lt;span className = <span class="string">&quot;count&quot;</span>&gt;&#123;<span class="built_in">this</span>.state.secondCounter&#125;&lt;/span&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">increment</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//increment = () =&gt; &#123;//Update state - counter++</span></span><br><span class="line">        <span class="comment">//this.state.counter++; //Bad Practice</span></span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">            counter: <span class="built_in">this</span>.state.counter + <span class="number">1</span>,</span><br><span class="line">            secondCounter: <span class="built_in">this</span>.state.secondCounter + <span class="number">1</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Projects</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-14. Longest Common Prefix</title>
+    <url>/2021/08/10/LeetCode-14-Longest-Common-Prefix/</url>
+    <content><![CDATA[<h1 id="LeetCode-14-Longest-Common-Prefix"><a href="#LeetCode-14-Longest-Common-Prefix" class="headerlink" title="LeetCode-14. Longest Common Prefix"></a>LeetCode-14. Longest Common Prefix</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/longest-common-prefix/">https://leetcode.com/problems/longest-common-prefix/</a></p>
+<p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+<p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: strs &#x3D; [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">Output: &quot;fl&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: strs &#x3D; [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]</span><br><span class="line">Output: &quot;&quot;</span><br><span class="line">Explanation: There is no common prefix among the input strings.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= strs.length &lt;= 200</code></li>
+<li><code>0 &lt;= strs[i].length &lt;= 200</code></li>
+<li><code>strs[i]</code> consists of only lower-case English letters.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>直接一个个比较，遇到不一样的，就停止循环，return</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestCommonPrefix</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs)</span></span>&#123;</span><br><span class="line">        <span class="built_in">string</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs[<span class="number">0</span>].size(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; strs.size(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i &gt;= strs[j].size() || strs[j][i]!=strs[<span class="number">0</span>][i]) <span class="keyword">return</span> strs[<span class="number">0</span>].substr(<span class="number">0</span>, i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>（1）进行排序</p>
+<p>（2）只需要对首尾两个单词进行比较即可</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestCommonPrefix</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (strs.empty()) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        sort(strs.begin(), strs.end());</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, len = min(strs[<span class="number">0</span>].size(), strs.back().size());</span><br><span class="line">        <span class="keyword">while</span> (i &lt; len &amp;&amp; strs[<span class="number">0</span>][i] == strs.back()[i]) ++i;</span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>].substr(<span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>String</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-2. Add Two Numbers</title>
+    <url>/2021/08/10/LeetCode-2-Add-Two-Numbers/</url>
+    <content><![CDATA[<h1 id="LeetCode-2-Add-Two-Numbers"><a href="#LeetCode-2-Add-Two-Numbers" class="headerlink" title="LeetCode-2. Add Two Numbers"></a>LeetCode-2. Add Two Numbers</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/add-two-numbers/">https://leetcode.com/problems/add-two-numbers/</a></p>
+<p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]</span><br><span class="line">Output: [7,0,8]</span><br><span class="line">Explanation: 342 + 465 &#x3D; 807.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: l1 &#x3D; [0], l2 &#x3D; [0]</span><br><span class="line">Output: [0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: l1 &#x3D; [9,9,9,9,9,9,9], l2 &#x3D; [9,9,9,9]</span><br><span class="line">Output: [8,9,9,9,0,0,0,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in each linked list is in the range <code>[1, 100]</code>.</li>
+<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>注意，累加到最后，当只有l1，只有l2，cnt不为0的情况下都要讨论，继续创建新结点累加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123;</span><br><span class="line">        ListNode* dummpy &#x3D; new ListNode();</span><br><span class="line">        ListNode* curr &#x3D; dummpy;</span><br><span class="line">        int cnt &#x3D; 0;</span><br><span class="line">        while(l1 || l2 || cnt!&#x3D;0)&#123;</span><br><span class="line">            int sum;</span><br><span class="line">            if(l1 &amp;&amp; l2)</span><br><span class="line">                sum &#x3D; l1-&gt;val + l2-&gt;val + cnt;</span><br><span class="line">            else if(l1)</span><br><span class="line">                sum &#x3D; l1-&gt;val + cnt;</span><br><span class="line">            else if(l2)</span><br><span class="line">                sum &#x3D; l2-&gt;val + cnt;</span><br><span class="line">            else</span><br><span class="line">                sum &#x3D; cnt;</span><br><span class="line">            int r &#x3D; sum % 10;</span><br><span class="line">            </span><br><span class="line">            cnt &#x3D; sum &#x2F; 10;</span><br><span class="line">            ListNode* newNode &#x3D; new ListNode(r);</span><br><span class="line">            curr-&gt;next &#x3D; newNode;</span><br><span class="line">            curr &#x3D; curr-&gt;next;</span><br><span class="line">            if(l1) l1 &#x3D; l1-&gt;next;</span><br><span class="line">            if(l2) l2 &#x3D; l2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        return dummpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Linked List</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-203. Remove Linked List Elements</title>
+    <url>/2021/08/11/LeetCode-203-Remove-Linked-List-Elements/</url>
+    <content><![CDATA[<h1 id="LeetCode-203-Remove-Linked-List-Elements"><a href="#LeetCode-203-Remove-Linked-List-Elements" class="headerlink" title="LeetCode-203. Remove Linked List Elements"></a>LeetCode-203. Remove Linked List Elements</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/remove-linked-list-elements/">https://leetcode.com/problems/remove-linked-list-elements/</a></p>
+<p>Given the <code>head</code> of a linked list and an integer <code>val</code>, remove all the nodes of the linked list that has <code>Node.val == val</code>, and return <em>the new head</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1,2,6,3,4,5,6], val &#x3D; 6</span><br><span class="line">Output: [1,2,3,4,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [], val &#x3D; 1</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [7,7,7,7], val &#x3D; 7</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the list is in the range <code>[0, 104]</code>.</li>
+<li><code>1 &lt;= Node.val &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 50</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）控制pre-&gt;next，如果curr==val，则要跳过curr，pre-&gt;next = curr-&gt;next，但是此时需要保持pre的指针不动，防止curr-&gt;next == val的情况。如果curr!=val，则移动pre。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>, head);</span><br><span class="line">        ListNode *prev = dumpy;</span><br><span class="line">        ListNode* curr = head;</span><br><span class="line">        <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;val == val)&#123;</span><br><span class="line">                prev-&gt;next = curr-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                prev = prev-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Linked List</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-206. Reverse Linked List</title>
+    <url>/2021/08/11/LeetCode-206-Reverse-Linked-List/</url>
+    <content><![CDATA[<h1 id="LeetCode-206-Reverse-Linked-List"><a href="#LeetCode-206-Reverse-Linked-List" class="headerlink" title="LeetCode-206. Reverse Linked List"></a>LeetCode-206. Reverse Linked List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/reverse-linked-list/">https://leetcode.com/problems/reverse-linked-list/</a></p>
+<p>Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1,2,3,4,5]</span><br><span class="line">Output: [5,4,3,2,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1,2]</span><br><span class="line">Output: [2,1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; []</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the list is the range <code>[0, 5000]</code>.</li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<p><strong>Follow up:</strong> A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>很重要的题，没啥好说的。记得用pre指针，curr指针指向的节点始终不变，把curr-&gt;next不断插入pre后面。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>, head);</span><br><span class="line">        ListNode* curr = head;</span><br><span class="line">        <span class="keyword">while</span>(curr-&gt;next)&#123;</span><br><span class="line">            ListNode* t = curr-&gt;next;</span><br><span class="line">            curr-&gt;next = t-&gt;next;</span><br><span class="line">            t-&gt;next = dumpy-&gt;next;</span><br><span class="line">            dumpy-&gt;next = t;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Linked List</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-23. Merge k Sorted Lists</title>
+    <url>/2021/08/21/LeetCode-23-Merge-k-Sorted-Lists/</url>
+    <content><![CDATA[<h1 id="LeetCode-23-Merge-k-Sorted-Lists"><a href="#LeetCode-23-Merge-k-Sorted-Lists" class="headerlink" title="LeetCode-23. Merge k Sorted Lists"></a>LeetCode-23. Merge k Sorted Lists</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given an array of <code>k</code> linked-lists <code>lists</code>, each linked-list is sorted in ascending order.</p>
+<p><em>Merge all the linked-lists into one sorted linked-list and return it.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: lists &#x3D; [[1,4,5],[1,3,4],[2,6]]</span><br><span class="line">Output: [1,1,2,3,4,4,5,6]</span><br><span class="line">Explanation: The linked-lists are:</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">merging them into one sorted list:</span><br><span class="line">1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: lists &#x3D; []</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: lists &#x3D; [[]]</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>k == lists.length</code></li>
+<li><code>0 &lt;= k &lt;= 10^4</code></li>
+<li><code>0 &lt;= lists[i].length &lt;= 500</code></li>
+<li><code>-10^4 &lt;= lists[i][j] &lt;= 10^4</code></li>
+<li><code>lists[i]</code> is sorted in <strong>ascending order</strong>.</li>
+<li>The sum of <code>lists[i].length</code> won’t exceed <code>10^4</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>Divide and Conquer</p>
+<p>（1）将vector&lt;ListNode*&gt;进行divide and conquer</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(<span class="built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mergeKLists(lists, <span class="number">0</span>, lists.size()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(<span class="built_in">vector</span>&lt;ListNode*&gt;&amp; lists, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start &gt; end) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(start == end) <span class="keyword">return</span> lists[start];</span><br><span class="line">        <span class="keyword">int</span> mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> merge(mergeKLists(lists, start, mid), mergeKLists(lists, mid+<span class="number">1</span>, end));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">merge</span><span class="params">(ListNode* l1, ListNode* l2)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>), *curr = dumpy;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(l1 &amp;&amp; l2)&#123;</span><br><span class="line">            <span class="keyword">if</span>(l1-&gt;val &lt; l2-&gt;val)&#123;</span><br><span class="line">                curr-&gt;next = l1;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                curr-&gt;next = l2;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//记得写这句话！！</span></span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(l1) curr-&gt;next = l1;</span><br><span class="line">        <span class="keyword">if</span>(l2) curr-&gt;next = l2;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>使用priority_queue</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(<span class="built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span></span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> cmp = [](ListNode* a, ListNode* b)&#123;</span><br><span class="line">            <span class="keyword">return</span> a-&gt;val &gt; b-&gt;val;</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">priority_queue</span>&lt;ListNode*, <span class="built_in">vector</span>&lt;ListNode*&gt;, <span class="keyword">decltype</span>(cmp)&gt; q(cmp);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> l : lists) <span class="keyword">if</span>(l) q.push(l);</span><br><span class="line">        </span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>), *curr = dumpy;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">            <span class="keyword">auto</span> n = q.top(); q.pop();</span><br><span class="line">            curr-&gt;next = n;</span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next) q.push(curr-&gt;next);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="语法笔记"><a href="#语法笔记" class="headerlink" title="语法笔记"></a>语法笔记</h4><p>Solution 2使用了自定义的priority_queue。记住以下写法！！</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//decltype返回cmp的类型，此处第三个参数必须是类型，不能是cmp</span></span><br><span class="line"><span class="comment">//这里的cmp似乎必须定义为lambda表达式，使用sort一样bool cmp(ListNode* a, ListNode* b)&#123;&#125;会报错</span></span><br><span class="line"><span class="built_in">priority_queue</span>&lt;ListNode*, <span class="built_in">vector</span>&lt;ListNode*&gt;, <span class="keyword">decltype</span>(cmp)&gt; q(cmp);</span><br></pre></td></tr></table></figure>
+
+<p>关于sort()，priority_queue等，自定义比较器的方法，可参考<a href="https://blog.csdn.net/whutshiliu/article/details/108927694%E3%80%82sort(v.begin()">https://blog.csdn.net/whutshiliu/article/details/108927694。sort(v.begin()</a>, v.end(), cmp)的第三个参数不必是类型。</p>
+<p>关于lambda函数的写法可以参考<a href="https://www.cnblogs.com/jimodetiantang/p/9016826.html">https://www.cnblogs.com/jimodetiantang/p/9016826.html</a></p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Divide &amp; Conquer</category>
+        <category>Heap</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-25. Reverse Nodes in k-Group</title>
+    <url>/2021/08/10/LeetCode-25-Reverse-Nodes-in-k-Group/</url>
+    <content><![CDATA[<h1 id="LeetCode-25-Reverse-Nodes-in-k-Group"><a href="#LeetCode-25-Reverse-Nodes-in-k-Group" class="headerlink" title="LeetCode-25. Reverse Nodes in k-Group"></a>LeetCode-25. Reverse Nodes in k-Group</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a linked list, reverse the nodes of a linked list <em>k</em> at a time and return its modified list.</p>
+<p><em>k</em> is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of <em>k</em> then left-out nodes, in the end, should remain as it is.</p>
+<p>You may not alter the values in the list’s nodes, only nodes themselves may be changed.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/03/reverse_ex1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1,2,3,4,5], k &#x3D; 2</span><br><span class="line">Output: [2,1,4,3,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/03/reverse_ex2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1,2,3,4,5], k &#x3D; 3</span><br><span class="line">Output: [3,2,1,4,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1,2,3,4,5], k &#x3D; 1</span><br><span class="line">Output: [1,2,3,4,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: head &#x3D; [1], k &#x3D; 1</span><br><span class="line">Output: [1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the list is in the range <code>sz</code>.</li>
+<li><code>1 &lt;= sz &lt;= 5000</code></li>
+<li><code>0 &lt;= Node.val &lt;= 1000</code></li>
+<li><code>1 &lt;= k &lt;= sz</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）首先遍历算出整个list中的节点数</p>
+<p>（2）求出有几个k-Group需要翻转</p>
+<p>（3）对每一个k-Group进行反转。需要知道k-Group前一个节点prev指针，curr指针。要会反转链表！！</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseKGroup</span><span class="params">(ListNode* head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        ListNode* curr = head;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">            num++;</span><br><span class="line">            curr = curr-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> reverseTime = num / k;</span><br><span class="line">        </span><br><span class="line">        ListNode* dumpy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>, head), *prev = dumpy;</span><br><span class="line">        curr = dumpy-&gt;next;</span><br><span class="line">        <span class="keyword">while</span>(reverseTime)&#123;</span><br><span class="line">            <span class="comment">//翻转有k个元素的链表的方法</span></span><br><span class="line">            curr = prev-&gt;next;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k<span class="number">-1</span>; i++)&#123;</span><br><span class="line">                ListNode* nextNode = curr-&gt;next;</span><br><span class="line">                curr-&gt;next = nextNode-&gt;next;</span><br><span class="line">                nextNode-&gt;next = prev-&gt;next;</span><br><span class="line">                prev-&gt;next = nextNode;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            prev = curr;</span><br><span class="line">            reverseTime--;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dumpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Linked List</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-443. String Compression</title>
+    <url>/2021/08/10/LeetCode-443-String-Compression/</url>
+    <content><![CDATA[<h1 id="LeetCode-443-String-Compression"><a href="#LeetCode-443-String-Compression" class="headerlink" title="LeetCode-443. String Compression"></a>LeetCode-443. String Compression</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/string-compression/">https://leetcode.com/problems/string-compression/</a></p>
+<p>Given an array of characters <code>chars</code>, compress it using the following algorithm:</p>
+<p>Begin with an empty string <code>s</code>. For each group of <strong>consecutive repeating characters</strong> in <code>chars</code>:</p>
+<ul>
+<li>If the group’s length is 1, append the character to <code>s</code>.</li>
+<li>Otherwise, append the character followed by the group’s length.</li>
+</ul>
+<p>The compressed string <code>s</code> <strong>should not be returned separately</strong>, but instead be stored <strong>in the input character array <code>chars</code></strong>. Note that group lengths that are 10 or longer will be split into multiple characters in <code>chars</code>.</p>
+<p>After you are done <strong>modifying the input array</strong>, return <em>the new length of the array</em>.</p>
+<p>You must write an algorithm that uses only constant extra space.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: chars &#x3D; [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</span><br><span class="line">Output: Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</span><br><span class="line">Explanation: The groups are &quot;aa&quot;, &quot;bb&quot;, and &quot;ccc&quot;. This compresses to &quot;a2b2c3&quot;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: chars &#x3D; [&quot;a&quot;]</span><br><span class="line">Output: Return 1, and the first character of the input array should be: [&quot;a&quot;]</span><br><span class="line">Explanation: The only group is &quot;a&quot;, which remains uncompressed since it&#39;s a single character.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: chars &#x3D; [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;]</span><br><span class="line">Output: Return 4, and the first 4 characters of the input array should be: [&quot;a&quot;,&quot;b&quot;,&quot;1&quot;,&quot;2&quot;].</span><br><span class="line">Explanation: The groups are &quot;a&quot; and &quot;bbbbbbbbbbbb&quot;. This compresses to &quot;ab12&quot;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: chars &#x3D; [&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;a&quot;,&quot;a&quot;]</span><br><span class="line">Output: Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;3&quot;,&quot;b&quot;,&quot;2&quot;,&quot;a&quot;,&quot;2&quot;].</span><br><span class="line">Explanation: The groups are &quot;aaa&quot;, &quot;bb&quot;, and &quot;aa&quot;. This compresses to &quot;a3b2a2&quot;. Note that each group is independent even if two groups have the same character.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= chars.length &lt;= 2000</code></li>
+<li><code>chars[i]</code> is a lower-case English letter, upper-case English letter, digit, or symbol.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>注意，关于cnt&gt;10的情况，for(char c : to_string(cnt)) chars[++left] = c;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compress</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&amp; chars)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> prev = chars[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(right &lt; chars.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(chars[right] == prev)</span><br><span class="line">                cnt++;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(cnt &gt; <span class="number">1</span>)</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">char</span> c : to_string(cnt)) chars[++left] = c;</span><br><span class="line">                cnt = <span class="number">1</span>;</span><br><span class="line">                chars[++left] = chars[right];</span><br><span class="line">                prev = chars[right];</span><br><span class="line">            &#125;</span><br><span class="line">            right++;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt &gt; <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c : to_string(cnt)) chars[++left] = c;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> left+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>String</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
