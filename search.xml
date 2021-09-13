@@ -112,7 +112,7 @@
   </entry>
   <entry>
     <title>Leetcode-81. Search in Rotated Sorted Array ||</title>
-    <url>/2021/03/09/Leetcode-81-Search-in-Rotated-Sorted-Array/</url>
+    <url>/2021/03/08/Leetcode-81-Search-in-Rotated-Sorted-Array/</url>
     <content><![CDATA[<h1 id="Leetcode-81-Search-in-Rotated-Sorted-Array"><a href="#Leetcode-81-Search-in-Rotated-Sorted-Array" class="headerlink" title="Leetcode-81. Search in Rotated Sorted Array ||"></a>Leetcode-81. Search in Rotated Sorted Array ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
 <p>(i.e., <code>[0,0,1,2,2,5,6]</code> might become <code>[2,5,6,0,0,1,2]</code>).</p>
 <p>You are given a target value to search. If found in the array return <code>true</code>, otherwise return <code>false</code>.</p>
@@ -141,7 +141,7 @@
   </entry>
   <entry>
     <title>Leetcode 82. Remove Duplicates from Sorted List ||</title>
-    <url>/2021/03/09/Leetcode-82-Remove-Duplicates-from-Sorted-List/</url>
+    <url>/2021/03/08/Leetcode-82-Remove-Duplicates-from-Sorted-List/</url>
     <content><![CDATA[<h1 id="Leetcode-82-Remove-Duplicates-from-Sorted-List"><a href="#Leetcode-82-Remove-Duplicates-from-Sorted-List" class="headerlink" title="Leetcode 82. Remove Duplicates from Sorted List ||"></a>Leetcode 82. Remove Duplicates from Sorted List ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only <em>distinct</em> numbers from the original list.</p>
 <p>Example 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5</span><br><span class="line">Output: 1-&gt;2-&gt;5</span><br></pre></td></tr></table></figure>
@@ -166,7 +166,7 @@
   </entry>
   <entry>
     <title>Leetcode-83. Remove Duplicates from Sorted List</title>
-    <url>/2021/03/11/Leetcode-83-Remove-Duplicates-from-Sorted-List/</url>
+    <url>/2021/03/10/Leetcode-83-Remove-Duplicates-from-Sorted-List/</url>
     <content><![CDATA[<h1 id="Leetcode-83-Remove-Duplicates-from-Sorted-List"><a href="#Leetcode-83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="Leetcode-83. Remove Duplicates from Sorted List"></a>Leetcode-83. Remove Duplicates from Sorted List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a sorted linked list, delete all duplicates such that each element appear only <em>once</em>.</p>
 <p>Example 1:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: 1-&gt;1-&gt;2</span><br><span class="line">Output: 1-&gt;2</span><br></pre></td></tr></table></figure>
@@ -195,7 +195,7 @@
   </entry>
   <entry>
     <title>Leetcode-86. Partition List</title>
-    <url>/2021/03/11/Leetcode-86-Partition-List/</url>
+    <url>/2021/03/10/Leetcode-86-Partition-List/</url>
     <content><![CDATA[<h1 id="Leetcode-86-Partition-List"><a href="#Leetcode-86-Partition-List" class="headerlink" title="Leetcode-86. Partition List"></a>Leetcode-86. Partition List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a linked list and a value <em>x</em>, partition it such that all nodes less than <em>x</em> come before nodes greater than or equal to <em>x</em>.</p>
 <p>You should preserve the original relative order of the nodes in each of the two partitions.</p>
 <p>For example,<br>Given <code>1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2</code> and <em>x</em> = 3,<br>return <code>1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</code>.</p>
@@ -1037,7 +1037,7 @@
   </entry>
   <entry>
     <title>LeetCode-104. Maximum Depth of Binary Tree</title>
-    <url>/2021/03/27/LeetCode-104-Maximum-Depth-of-Binary-Tree/</url>
+    <url>/2021/03/26/LeetCode-104-Maximum-Depth-of-Binary-Tree/</url>
     <content><![CDATA[<h2 id="LeetCode-104-Maximum-Depth-of-Binary-Tree"><a href="#LeetCode-104-Maximum-Depth-of-Binary-Tree" class="headerlink" title="LeetCode-104. Maximum Depth of Binary Tree"></a>LeetCode-104. Maximum Depth of Binary Tree</h2><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Given a binary tree, find its maximum depth.</span><br><span class="line"></span><br><span class="line">The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</span><br><span class="line"></span><br><span class="line">Note: A leaf is a node with no children.</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"></span><br><span class="line">Given binary tree [3,9,20,null,null,15,7],</span><br><span class="line"></span><br><span class="line">    3</span><br><span class="line">   &#x2F; \</span><br><span class="line">  9  20</span><br><span class="line">    &#x2F;  \</span><br><span class="line">   15   7</span><br><span class="line">return its depth &#x3D; 3.</span><br></pre></td></tr></table></figure>
 
 
@@ -1055,7 +1055,7 @@
   </entry>
   <entry>
     <title>LeetCode-103. Binary Tree Zigzag Level Order Traversal</title>
-    <url>/2021/03/27/LeetCode-103-Binary-Tree-Zigzag-Level-Order-Traversal/</url>
+    <url>/2021/03/26/LeetCode-103-Binary-Tree-Zigzag-Level-Order-Traversal/</url>
     <content><![CDATA[<h1 id="LeetCode-103-Binary-Tree-Zigzag-Level-Order-Traversal"><a href="#LeetCode-103-Binary-Tree-Zigzag-Level-Order-Traversal" class="headerlink" title="LeetCode-103. Binary Tree Zigzag Level Order Traversal"></a>LeetCode-103. Binary Tree Zigzag Level Order Traversal</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, return the <em>zigzag level order</em> traversal of its nodes’ values. (ie, from left to right, then right to left for the next level and alternate between).</p>
 <p>For example:<br>Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
@@ -1082,7 +1082,7 @@
   </entry>
   <entry>
     <title>LeetCode-107. Binary Tree Level Order Traversal ||</title>
-    <url>/2021/03/30/LeetCode-107-Binary-Tree-Level-Order-Traversal/</url>
+    <url>/2021/03/29/LeetCode-107-Binary-Tree-Level-Order-Traversal/</url>
     <content><![CDATA[<h1 id="LeetCode-107-Binary-Tree-Level-Order-Traversal"><a href="#LeetCode-107-Binary-Tree-Level-Order-Traversal" class="headerlink" title="LeetCode-107. Binary Tree Level Order Traversal ||"></a>LeetCode-107. Binary Tree Level Order Traversal ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, return the <em>bottom-up level order</em> traversal of its nodes’ values. (ie, from left to right, level by level from leaf to root).</p>
 <p>For example:<br>Given binary tree <code>&#123;3,9,20,#,#,15,7&#125;</code>,</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
@@ -1106,7 +1106,7 @@
   </entry>
   <entry>
     <title>LeetCode-108. Convert Sorted Array to Binary Search Tree</title>
-    <url>/2021/03/30/LeetCode-108-Convert-Sorted-Array-to-Binary-Search-Tree/</url>
+    <url>/2021/03/29/LeetCode-108-Convert-Sorted-Array-to-Binary-Search-Tree/</url>
     <content><![CDATA[<h1 id="LeetCode-108-Convert-Sorted-Array-to-Binary-Search-Tree"><a href="#LeetCode-108-Convert-Sorted-Array-to-Binary-Search-Tree" class="headerlink" title="LeetCode-108. Convert Sorted Array to Binary Search Tree"></a>LeetCode-108. Convert Sorted Array to Binary Search Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an array where elements are sorted in ascending order, convert it to a height balanced BST.</p>
 <p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of <em>every</em>node never differ by more than 1.</p>
 <p>Example:</p>
@@ -1127,7 +1127,7 @@
   </entry>
   <entry>
     <title>LeetCode-109. Convert Sorted List to Binary Search Tree</title>
-    <url>/2021/03/30/LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree/</url>
+    <url>/2021/03/29/LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree/</url>
     <content><![CDATA[<h1 id="LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree"><a href="#LeetCode-109-Convert-Sorted-List-to-Binary-Search-Tree" class="headerlink" title="LeetCode-109. Convert Sorted List to Binary Search Tree"></a>LeetCode-109. Convert Sorted List to Binary Search Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.</p>
 <p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of <em>every</em> node never differ by more than 1.</p>
 <p>Example:</p>
@@ -1151,7 +1151,7 @@
   </entry>
   <entry>
     <title>Leetcode-110. Balanced Binary Tree</title>
-    <url>/2021/03/30/Leetcode-110-Balanced-Binary-Tree/</url>
+    <url>/2021/03/29/Leetcode-110-Balanced-Binary-Tree/</url>
     <content><![CDATA[<h1 id="LeetCode-110-Balanced-Binary-Tree"><a href="#LeetCode-110-Balanced-Binary-Tree" class="headerlink" title="LeetCode-110. Balanced Binary Tree"></a>LeetCode-110. Balanced Binary Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, determine if it is height-balanced.</p>
 <p>For this problem, a height-balanced binary tree is defined as:</p>
 <blockquote>
@@ -1289,7 +1289,7 @@
   </entry>
   <entry>
     <title>LeetCode-118. Pascal&#39;s Triangle</title>
-    <url>/2021/04/08/LeetCode-118-Pascal-s-Triangle/</url>
+    <url>/2021/04/07/LeetCode-118-Pascal-s-Triangle/</url>
     <content><![CDATA[<h1 id="LeetCode-118-Pascal’s-Triangle"><a href="#LeetCode-118-Pascal’s-Triangle" class="headerlink" title="LeetCode-118. Pascal’s Triangle"></a>LeetCode-118. Pascal’s Triangle</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a non-negative integer <em>numRows</em>, generate the first <em>numRows</em> of Pascal’s triangle.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif" alt="img"><br>In Pascal’s triangle, each number is the sum of the two numbers directly above it.</p>
 <p>Example:</p>
@@ -1310,7 +1310,7 @@
   </entry>
   <entry>
     <title>LeetCode-119. Pascal&#39;s Triangle ||</title>
-    <url>/2021/04/08/LeetCode-119-Pascal-s-Triangle/</url>
+    <url>/2021/04/07/LeetCode-119-Pascal-s-Triangle/</url>
     <content><![CDATA[<h1 id="LeetCode-119-Pascal’s-Triangle"><a href="#LeetCode-119-Pascal’s-Triangle" class="headerlink" title="LeetCode-119. Pascal’s Triangle ||"></a>LeetCode-119. Pascal’s Triangle ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a non-negative index <em>k</em> where <em>k</em> ≤ 33, return the <em>k</em>th index row of the Pascal’s triangle.</p>
 <p>Note that the row index starts from 0.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif" alt="img"><br>In Pascal’s triangle, each number is the sum of the two numbers directly above it.</p>
@@ -1371,7 +1371,7 @@
   </entry>
   <entry>
     <title>LeetCode-122. Best Time to Buy and Sell Stock ||</title>
-    <url>/2021/04/10/LeetCode-122-Best-Time-to-Buy-and-Sell-Stock/</url>
+    <url>/2021/04/09/LeetCode-122-Best-Time-to-Buy-and-Sell-Stock/</url>
     <content><![CDATA[<h1 id="LeetCode-122-Best-Time-to-Buy-and-Sell-Stock"><a href="#LeetCode-122-Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="LeetCode-122. Best Time to Buy and Sell Stock ||"></a>LeetCode-122. Best Time to Buy and Sell Stock ||</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
 <p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>涨的话就一直持有，所以今天只要比昨天价高，就将今天-昨天的利润加入res。跌的话，当卖掉了，不做res的修改。</p>
@@ -1387,7 +1387,7 @@
   </entry>
   <entry>
     <title>LeetCode-125. Valid Palindrome</title>
-    <url>/2021/04/10/LeetCode-125-Valid-Palindrome/</url>
+    <url>/2021/04/09/LeetCode-125-Valid-Palindrome/</url>
     <content><![CDATA[<h1 id="LeetCode-125-Valid-Palindrome"><a href="#LeetCode-125-Valid-Palindrome" class="headerlink" title="LeetCode-125. Valid Palindrome"></a>LeetCode-125. Valid Palindrome</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Given a <span class="built_in">string</span>, determine <span class="keyword">if</span> it is a palindrome, considering only alphanumeric characters <span class="keyword">and</span> ignoring cases.</span><br><span class="line"></span><br><span class="line">For example,</span><br><span class="line"><span class="string">&quot;A man, a plan, a canal: Panama&quot;</span> is a palindrome.</span><br><span class="line"><span class="string">&quot;race a car&quot;</span> is <span class="keyword">not</span> a palindrome.</span><br><span class="line"></span><br><span class="line">Note:</span><br><span class="line">Have you consider that the <span class="built_in">string</span> might be empty? This is a good question to ask during an interview.</span><br><span class="line"></span><br><span class="line">For the purpose of <span class="keyword">this</span> problem, we define empty <span class="built_in">string</span> as valid palindrome.</span><br></pre></td></tr></table></figure>
 
 
@@ -1736,7 +1736,7 @@
   </entry>
   <entry>
     <title>LeetCode-144. Binary Tree Preorder Traversal</title>
-    <url>/2021/04/20/LeetCode-144-Binary-Tree-Preorder-Traversal/</url>
+    <url>/2021/04/19/LeetCode-144-Binary-Tree-Preorder-Traversal/</url>
     <content><![CDATA[<h1 id="LeetCode-144-Binary-Tree-Preorder-Traversal"><a href="#LeetCode-144-Binary-Tree-Preorder-Traversal" class="headerlink" title="LeetCode-144. Binary Tree Preorder Traversal"></a>LeetCode-144. Binary Tree Preorder Traversal</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>前序遍历，根-&gt;左-&gt;右</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>递归法</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        help(root, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">help</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; res)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        res.push_back(root-&gt;val);</span><br><span class="line">        help(root-&gt;left,res);</span><br><span class="line">        help(root-&gt;right,res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -1757,7 +1757,7 @@
   </entry>
   <entry>
     <title>LeetCode-145. Binary Tree Postorder Traversal</title>
-    <url>/2021/04/20/LeetCode-145-Binary-Tree-Postorder-Traversal/</url>
+    <url>/2021/04/19/LeetCode-145-Binary-Tree-Postorder-Traversal/</url>
     <content><![CDATA[<h1 id="LeetCode-145-Binary-Tree-Postorder-Traversal"><a href="#LeetCode-145-Binary-Tree-Postorder-Traversal" class="headerlink" title="LeetCode-145. Binary Tree Postorder Traversal"></a>LeetCode-145. Binary Tree Postorder Traversal</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a binary tree, return the <em>postorder</em> traversal of its nodes’ values.</p>
 <p>For example:<br>Given binary tree <code>&#123;1,#,2,3&#125;</code>,</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> &#x2F;</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
@@ -1892,7 +1892,7 @@
   </entry>
   <entry>
     <title>LeetCode-160. Intersection of Two Linked Lists</title>
-    <url>/2021/04/27/LeetCode-160-Intersection-of-Two-Linked-Lists/</url>
+    <url>/2021/04/26/LeetCode-160-Intersection-of-Two-Linked-Lists/</url>
     <content><![CDATA[<h1 id="LeetCode-160-Intersection-of-Two-Linked-Lists"><a href="#LeetCode-160-Intersection-of-Two-Linked-Lists" class="headerlink" title="LeetCode-160. Intersection of Two Linked Lists"></a>LeetCode-160. Intersection of Two Linked Lists</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Write a program to find the node at which the intersection of two singly linked lists begins.</p>
 <p>For example, the following two linked lists:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">A:          a1 → a2</span><br><span class="line">                      ↘</span><br><span class="line">                        c1 → c2 → c3</span><br><span class="line">                      ↗            </span><br><span class="line">B:     b1 → b2 → b3</span><br></pre></td></tr></table></figure>
@@ -1919,7 +1919,7 @@
   </entry>
   <entry>
     <title>LeetCode-162. Find Peak Element</title>
-    <url>/2021/04/27/LeetCode-162-Find-Peak-Element/</url>
+    <url>/2021/04/26/LeetCode-162-Find-Peak-Element/</url>
     <content><![CDATA[<h1 id="LeetCode-162-Find-Peak-Element"><a href="#LeetCode-162-Find-Peak-Element" class="headerlink" title="LeetCode-162. Find Peak Element"></a>LeetCode-162. Find Peak Element</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>A peak element is an element that is greater than its neighbors.</p>
 <p>Given an input array <code>nums</code>, where <code>nums[i] ≠ nums[i+1]</code>, find a peak element and return its index.</p>
 <p>The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.</p>
@@ -1951,7 +1951,7 @@
   </entry>
   <entry>
     <title>LeetCode-165. Compare Version Numbers</title>
-    <url>/2021/04/29/LeetCode-165-Compare-Version-Numbers/</url>
+    <url>/2021/04/28/LeetCode-165-Compare-Version-Numbers/</url>
     <content><![CDATA[<h1 id="LeetCode-165-Compare-Version-Numbers"><a href="#LeetCode-165-Compare-Version-Numbers" class="headerlink" title="LeetCode-165. Compare Version Numbers"></a>LeetCode-165. Compare Version Numbers</h1><h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>Compare two version numbers <em>version1</em> and <em>version2</em>.<br>If <code>*version1* &gt; *version2*</code> return <code>1;</code> if <code>*version1* &lt;*version2*</code> return <code>-1;</code>otherwise return <code>0</code>.</p>
 <p>You may assume that the version strings are non-empty and contain only digits and the <code>.</code> character.<br>The <code>.</code> character does not represent a decimal point and is used to separate number sequences.<br>For instance, <code>2.5</code> is not “two and a half” or “half way to version three”, it is the fifth second-level revision of the second first-level revision.</p>
 <p>Example 1:</p>
@@ -1979,7 +1979,7 @@
   </entry>
   <entry>
     <title>LeetCode-166. Fraction to Recurring Decimal</title>
-    <url>/2021/04/29/LeetCode-166-Fraction-to-Recurring-Decimal/</url>
+    <url>/2021/04/28/LeetCode-166-Fraction-to-Recurring-Decimal/</url>
     <content><![CDATA[<h1 id="LeetCode-166-Fraction-to-Recurring-Decimal"><a href="#LeetCode-166-Fraction-to-Recurring-Decimal" class="headerlink" title="LeetCode-166. Fraction to Recurring Decimal"></a>LeetCode-166. Fraction to Recurring Decimal</h1><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</p>
 <p>If the fractional part is repeating, enclose the repeating part in parentheses.</p>
 <p>For example,</p>
@@ -2349,7 +2349,7 @@
   </entry>
   <entry>
     <title>LeetCode-1283. Find the Smallest Divisor Given a Threshold</title>
-    <url>/2021/05/13/LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold/</url>
+    <url>/2021/05/12/LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold/</url>
     <content><![CDATA[<h1 id="LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold"><a href="#LeetCode-1283-Find-the-Smallest-Divisor-Given-a-Threshold" class="headerlink" title="LeetCode-1283. Find the Smallest Divisor Given a Threshold"></a>LeetCode-1283. Find the Smallest Divisor Given a Threshold</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/">https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/</a></p>
 <p>Given an array of integers <code>nums</code> and an integer <code>threshold</code>, we will choose a positive integer <code>divisor</code>, divide all the array by it, and sum the division’s result. Find the <strong>smallest</strong> <code>divisor</code> such that the result mentioned above is less than or equal to <code>threshold</code>.</p>
 <p>Each result of the division is rounded to the nearest integer greater than or equal to that element. (For example: <code>7/3 = 3</code> and <code>10/2 = 5</code>).</p>
@@ -2385,7 +2385,7 @@
   </entry>
   <entry>
     <title>LeetCode-875. Koko Eating Bananas</title>
-    <url>/2021/05/13/LeetCode-875-Koko-Eating-Bananas/</url>
+    <url>/2021/05/12/LeetCode-875-Koko-Eating-Bananas/</url>
     <content><![CDATA[<h1 id="LeetCode-875-Koko-Eating-Bananas"><a href="#LeetCode-875-Koko-Eating-Bananas" class="headerlink" title="LeetCode-875. Koko Eating Bananas"></a>LeetCode-875. Koko Eating Bananas</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/koko-eating-bananas/">https://leetcode.com/problems/koko-eating-bananas/</a></p>
 <p>相似题目：1283. <a href="https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/">https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/</a></p>
 <p>Koko loves to eat bananas. There are <code>n</code> piles of bananas, the <code>ith</code> pile has <code>piles[i]</code> bananas. The guards have gone and will come back in <code>h</code> hours.</p>
@@ -2663,6 +2663,7 @@
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>（1）使用priority_queue（会priority_queue的写法）</p>
 <p>（2）先用unordered_map统计个数字数目，再将其放入priority_queue中按照出现次数排序</p>
 <p>（3）从priority_queue中pop出前k个数</p>
+<p>注意：（1）unordered_map不用出实话，也能m[num]++<br>           （2）unordered_map遍历方式</p>
  <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">topKFrequent</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="built_in">priority_queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; p;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) m[num]++;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> n : m) p.push(&#123;n.second, n.first&#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;k; i++)&#123;</span><br><span class="line">            res.push_back(p.top().second);</span><br><span class="line">            p.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>（1）桶排序（但似乎不是完整的桶排序？）</p>
@@ -2848,7 +2849,7 @@
   </entry>
   <entry>
     <title>LeetCode-234. Palindrome Linked List</title>
-    <url>/2021/05/18/LeetCode-234-Palindrome-Linked-List/</url>
+    <url>/2021/05/17/LeetCode-234-Palindrome-Linked-List/</url>
     <content><![CDATA[<h1 id="LeetCode-234-Palindrome-Linked-List"><a href="#LeetCode-234-Palindrome-Linked-List" class="headerlink" title="LeetCode-234. Palindrome Linked List"></a>LeetCode-234. Palindrome Linked List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given the <code>head</code> of a singly linked list, return <code>true</code> if it is a palindrome.</p>
 <p><strong>Example 1:</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="img"></p>
@@ -2881,7 +2882,7 @@
   </entry>
   <entry>
     <title>LeetCode-328. Odd Even Linked List</title>
-    <url>/2021/05/18/LeetCode-328-Odd-Even-Linked-List/</url>
+    <url>/2021/05/17/LeetCode-328-Odd-Even-Linked-List/</url>
     <content><![CDATA[<h1 id="LeetCode-328-Odd-Even-Linked-List"><a href="#LeetCode-328-Odd-Even-Linked-List" class="headerlink" title="LeetCode-328. Odd Even Linked List"></a>LeetCode-328. Odd Even Linked List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p> Given the <code>head</code> of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return <em>the reordered list</em>.</p>
 <p>The <strong>first</strong> node is considered <strong>odd</strong>, and the <strong>second</strong> node is <strong>even</strong>, and so on.</p>
 <p>Note that the relative order inside both the even and odd groups should remain as it was in the input.</p>
@@ -3741,7 +3742,7 @@
   </entry>
   <entry>
     <title>LeetCode-297. Serialize and Deserialize Binary Tree</title>
-    <url>/2021/06/18/LeetCode-297-Serialize-and-Deserialize-Binary-Tree/</url>
+    <url>/2021/06/17/LeetCode-297-Serialize-and-Deserialize-Binary-Tree/</url>
     <content><![CDATA[<h1 id="LeetCode-297-Serialize-and-Deserialize-Binary-Tree"><a href="#LeetCode-297-Serialize-and-Deserialize-Binary-Tree" class="headerlink" title="LeetCode-297. Serialize and Deserialize Binary Tree"></a>LeetCode-297. Serialize and Deserialize Binary Tree</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/">https://leetcode.com/problems/serialize-and-deserialize-binary-tree/</a></p>
 <p>Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.</p>
 <p>Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.</p>
@@ -3787,7 +3788,7 @@
   </entry>
   <entry>
     <title>LeetCode-513. Find Bottom Left Tree Value</title>
-    <url>/2021/06/18/LeetCode-513-Find-Bottom-Left-Tree-Value/</url>
+    <url>/2021/06/17/LeetCode-513-Find-Bottom-Left-Tree-Value/</url>
     <content><![CDATA[<h1 id="LeetCode-513-Find-Bottom-Left-Tree-Value"><a href="#LeetCode-513-Find-Bottom-Left-Tree-Value" class="headerlink" title="LeetCode-513. Find Bottom Left Tree Value"></a>LeetCode-513. Find Bottom Left Tree Value</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given the <code>root</code> of a binary tree, return the leftmost value in the last row of the tree.</p>
 <p><strong>Example 1:</strong></p>
 <p><img src="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg" alt="img"></p>
@@ -4039,7 +4040,7 @@
   </entry>
   <entry>
     <title>LeetCode-105. Construct Binary Tree from Preorder and Inorder Traversal</title>
-    <url>/2021/06/28/LeetCode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/</url>
+    <url>/2021/06/27/LeetCode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/</url>
     <content><![CDATA[<h1 id="LeetCode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"><a href="#LeetCode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" class="headerlink" title="LeetCode-105. Construct Binary Tree from Preorder and Inorder Traversal"></a>LeetCode-105. Construct Binary Tree from Preorder and Inorder Traversal</h1><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
 <p>Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return <em>the binary tree</em>.</p>
 <p><strong>Example 1:</strong></p>
@@ -4134,7 +4135,7 @@
   </entry>
   <entry>
     <title>LeetCode-173. Binary Search Tree Iterator</title>
-    <url>/2021/07/01/LeetCode-173-Binary-Search-Tree-Iterator/</url>
+    <url>/2021/06/30/LeetCode-173-Binary-Search-Tree-Iterator/</url>
     <content><![CDATA[<h1 id="LeetCode-173-Binary-Search-Tree-Iterator"><a href="#LeetCode-173-Binary-Search-Tree-Iterator" class="headerlink" title="LeetCode-173. Binary Search Tree Iterator"></a>LeetCode-173. Binary Search Tree Iterator</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/binary-search-tree-iterator/">https://leetcode.com/problems/binary-search-tree-iterator/</a></p>
 <p>Implement the <code>BSTIterator</code> class that represents an iterator over the <strong><a href="https://en.wikipedia.org/wiki/Tree_traversal#In-order_(LNR)">in-order traversal</a></strong> of a binary search tree (BST):</p>
 <ul>
@@ -4164,7 +4165,7 @@
   </entry>
   <entry>
     <title>LeetCode-230. Kth Smallest Element in a BST</title>
-    <url>/2021/07/01/LeetCode-230-Kth-Smallest-Element-in-a-BST/</url>
+    <url>/2021/06/30/LeetCode-230-Kth-Smallest-Element-in-a-BST/</url>
     <content><![CDATA[<h1 id="LeetCode-230-Kth-Smallest-Element-in-a-BST"><a href="#LeetCode-230-Kth-Smallest-Element-in-a-BST" class="headerlink" title="LeetCode-230. Kth Smallest Element in a BST"></a>LeetCode-230. Kth Smallest Element in a BST</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">https://leetcode.com/problems/kth-smallest-element-in-a-bst/</a></p>
 <p>Given the <code>root</code> of a binary search tree, and an integer <code>k</code>, return <em>the</em> <code>kth</code> (<strong>1-indexed</strong>) <em>smallest element in the tree</em>.</p>
 <p><strong>Example 1:</strong></p>
@@ -4273,7 +4274,7 @@
   </entry>
   <entry>
     <title>Leetcode-112. Path Sum</title>
-    <url>/2021/07/03/Leetcode-112-Path-Sum/</url>
+    <url>/2021/07/02/Leetcode-112-Path-Sum/</url>
     <content><![CDATA[<h1 id="Leetcode-112-Path-Sum"><a href="#Leetcode-112-Path-Sum" class="headerlink" title="Leetcode-112. Path Sum"></a>Leetcode-112. Path Sum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/path-sum/">https://leetcode.com/problems/path-sum/</a></p>
 <p>Given the <code>root</code> of a binary tree and an integer <code>targetSum</code>, return <code>true</code> if the tree has a <strong>root-to-leaf</strong> path such that adding up all the values along the path equals <code>targetSum</code>.</p>
 <p>A <strong>leaf</strong> is a node with no children.</p>
@@ -4867,7 +4868,7 @@
   </entry>
   <entry>
     <title>Henry制定的开发学习流程</title>
-    <url>/2021/07/27/Henry%E5%88%B6%E5%AE%9A%E7%9A%84%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/</url>
+    <url>/2021/07/26/Henry%E5%88%B6%E5%AE%9A%E7%9A%84%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="Henry制定的开发学习流程"><a href="#Henry制定的开发学习流程" class="headerlink" title="Henry制定的开发学习流程"></a>Henry制定的开发学习流程</h1><p>服务器开发方向</p>
 <ol>
 <li>Scrum敏捷开发流程</li>
@@ -5260,6 +5261,7 @@
 <p>（5）ostringstream, instingstream</p>
 <p>（6）vector insert</p>
 <p>（7）lambda写法（见LeetCode 23题）</p>
+<p>（8）遍历unordered_map方法（见LeetCode347题）</p>
 ]]></content>
       <tags>
         <tag>C++</tag>
@@ -5285,6 +5287,206 @@
 <p>3、可以使用arrow function来代替binding</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./Counter.css&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Define the initial state in a constructor</span></span><br><span class="line">    <span class="comment">//state =&gt; counter 0</span></span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>(); <span class="comment">//call the super method</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.state = &#123;</span><br><span class="line">            counter : <span class="number">0</span>,</span><br><span class="line">            secondCounter : <span class="number">100</span></span><br><span class="line">        &#125;</span><br><span class="line">                <span class="comment">//写arrow function，就不用写这句</span></span><br><span class="line">        <span class="built_in">this</span>.increment = <span class="built_in">this</span>.increment.bind(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//render = () =&gt;&#123;</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">        &lt;div className = <span class="string">&quot;counter&quot;</span>&gt;</span><br><span class="line">            &lt;button onClick=&#123;<span class="built_in">this</span>.increment&#125;&gt;+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">            &lt;span className = <span class="string">&quot;count&quot;</span>&gt;&#123;<span class="built_in">this</span>.state.counter&#125;&lt;/span&gt;</span><br><span class="line">            &lt;span className = <span class="string">&quot;count&quot;</span>&gt;&#123;<span class="built_in">this</span>.state.secondCounter&#125;&lt;/span&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">increment</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//increment = () =&gt; &#123;//Update state - counter++</span></span><br><span class="line">        <span class="comment">//this.state.counter++; //Bad Practice</span></span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">            counter: <span class="built_in">this</span>.state.counter + <span class="number">1</span>,</span><br><span class="line">            secondCounter: <span class="built_in">this</span>.state.secondCounter + <span class="number">1</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter</span><br></pre></td></tr></table></figure>
 
+
+
+<p>4、props</p>
+<p>使用示例:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//添加props</span></span><br><span class="line">&lt;Counter by=&#123;1&#125;&gt;&lt;/Counter&gt;</span><br><span class="line"><span class="comment">//使用props</span></span><br><span class="line">&lt;button onClick=&#123;this.increment&#125;&gt;+&#123;this.props.by&#125;&lt;/button&gt;</span><br><span class="line"><span class="comment">//Counter class外定义default props，这样&lt;Counter&gt;中不定义by的时候，就用默认的by</span></span><br><span class="line">Counter.defaultProps = &#123;</span><br><span class="line">    by : <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Counter.propTypes = &#123;</span><br><span class="line">    by : PropTypes.number</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>5、Arrow Function的使用</p>
+<p>（1）可以和prevState配合使用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//普通写法</span></span><br><span class="line"><span class="function"><span class="title">decrement</span>(<span class="params">by</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.setState(</span><br><span class="line">  	&#123;<span class="attr">counter</span>: <span class="built_in">this</span>.state.counter - by&#125;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Arrow Function + prevState    </span></span><br><span class="line"><span class="function"><span class="title">decrement</span>(<span class="params">by</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.setState(</span><br><span class="line">            (prevState) =&gt; &#123;</span><br><span class="line">                <span class="keyword">return</span>&#123;<span class="attr">counter</span>: prevState.counter - by&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）可以用于onClick定义含参数的函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//错误，使用incrementMethod()，加上()，则表示调用了函数，会报错</span></span><br><span class="line">&lt;button onClick=&#123;<span class="built_in">this</span>.props.incrementMethod(<span class="built_in">this</span>.props.by)&#125;&gt;+&#123;<span class="built_in">this</span>.props.by&#125;&lt;/button&gt;</span><br><span class="line"><span class="comment">//正确，定义一个arrow function</span></span><br><span class="line">&lt;button onClick=&#123;<span class="function">() =&gt;</span> &#123;<span class="built_in">this</span>.props.incrementMethod(<span class="built_in">this</span>.props.by)&gt;+&#123;<span class="built_in">this</span>.props.by&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6、React Router history api用于界面跳转</p>
+<p>（1）安装</p>
+<p>npm add react-router-dom</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;BrowserRouter <span class="keyword">as</span> Router, Route&#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）使用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoApp</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;Router&gt;</span><br><span class="line">                    &lt;&gt;</span><br><span class="line">                        &lt;Route path=<span class="string">&quot;/&quot;</span> exact component=&#123;LoginComponent&#125;/&gt;</span><br><span class="line">                        &lt;Route path=<span class="string">&quot;/login&quot;</span> component=&#123;LoginComponent&#125;/&gt;</span><br><span class="line">                        &lt;Route path=<span class="string">&quot;/welcome&quot;</span> component=&#123;WelcomeComponent&#125;/&gt;</span><br><span class="line">                    &lt;/&gt;</span><br><span class="line">                &lt;/Router&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.props.history.push(<span class="string">&quot;/welcome&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>7、Bootstrap</p>
+<p>可以与手机很好地兼容。</p>
+<p>8、login &amp; logout</p>
+<p>（1）使用session storage（比Local Storage优越的地方在于，浏览器推出后，key和value也会被清空）。</p>
+<p>（2）在检查-&gt;application-&gt;seesion storage中可以看到当前的key和value。</p>
+<p>（3）logn和logout机制思路：</p>
+<p>​        login-&gt;将key放入session storage</p>
+<p>​        logout-&gt;将key移除</p>
+<p>9、header不会自动刷新问题</p>
+<p>使用withRouter</p>
+<p>10、Web Services</p>
+<p>Request and Respond语言：XML、JSON</p>
+<p>Service Consumer：Client（App）</p>
+<p>Service Provider（Server）</p>
+<p>Service definition（Contract between Provider &amp; Consumer）：（1）Request/Response Format （2）Request Structure （3）Response Structure  （4）Endpoint</p>
+<p>Transport：HTTP、MQ</p>
+<p>11、REST（Representational State Transfer）</p>
+<p>基于HTTP，利用HTTP定义的东西（Get，Put，Post…），来构造web service。核心概念是将东西都视为资源。</p>
+<p>12、写REST的Request和Respond</p>
+<p>@RestController，定义Controller</p>
+<p>@GetMapping，@RequestMapping，与Request方式mapping</p>
+<p>12、axios</p>
+<p>详情见：<a href="https://github.com/axios/axios">https://github.com/axios/axios</a></p>
+<p>HTTP Client</p>
+<p>Promise——asynchronous framework（请求发出，浏览器继续工作，请求回应再更新界面，而不是一直等待回应）</p>
+<p>例：</p>
+<p>前端页面：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorldService</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">executeHelloWorldService</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="comment">//axios.get()返回一个promise。可以利用axios.get().then().catch()方式处理返回结果</span></span><br><span class="line">        <span class="keyword">return</span> axios.get(<span class="string">&#x27;http://localhost:8080/hello-world&#x27;</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;executed HelloWorldService&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.get(<span class="string">&#x27;/user?ID=12345&#x27;</span>)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//handle success</span></span><br><span class="line">  	<span class="built_in">console</span>.log(response);</span><br><span class="line">&#125;)</span><br><span class="line">	.catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//handle error</span></span><br><span class="line">  	<span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">//always executed</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>13、后端允许来自一些origins的请求</p>
+<p>例如：以下语句即位允许来自前端界面<a href="http://localhost:3000/welcome/alice%E7%9A%84%E8%AF%B7%E6%B1%82">http://localhost:3000/welcome/alice的请求</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CrossOrigin(origins=&quot;http://localhost:3000/welcome/alice&quot;)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>14、管理用户的个人todos</p>
+<p>Retrieve all Todos for A User</p>
+<p>GET /users/{user_name}/todos</p>
+<p>Delete a Todo of a User</p>
+<p>DELETE /users/{user_name}/todos/{todo_id}</p>
+<p>Edit/Update a Tdo</p>
+<p>PUT /users/{user_name}/todos/{todo_id}</p>
+<p>Create a new Todo</p>
+<p>POST /user/{user_name}/todos/</p>
+<p>15、页面渲染顺序</p>
+<p>constructor-&gt;ComponentUpdate()-&gt;render()-&gt;componentDidMount()-&gt;某个component is unmounted，调用componentWillUnmount()</p>
+<p>因此，一般不在constructor中从后端拉取数据初始化state，否则第一次render()前需要等待很久。在componentDidMount()中从后端拉取数据出实话数据。</p>
+<p>shouldComponentUpdate()：在render()前调用。控制当前prop和state的更改是否被render。若shouldComponentUpdate()函数return false，则state不会被render；return true，则被render。</p>
+<p>16、利用formik和moment建立表格</p>
+<p>npm add formik</p>
+<p>npm add moment</p>
+<p>initialValues设置表中的初始值，onSubmit方法获取表格提交的value</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">&lt;Formik</span><br><span class="line">  initialValues=&#123;&#123;description, targetDate&#125;&#125;</span><br><span class="line">  onSubmit=&#123;<span class="built_in">this</span>.onSubmit&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>16、安全问题</p>
+<p>需要在request中附加username和password才能获取信息。</p>
+<p>使用JWT（JSON Web Token）。</p>
+<p>使用dependencies：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在resource-&gt;application.properties中设置指定用户名和密码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">spring.security.user.name&#x3D;alice</span><br><span class="line">spring.security.user.password&#x3D;dummy</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>17、解决问题：Access to XMLHttpRequest at ‘URL’ from origin ‘<a href="http://localhost:4200&#39;">http://localhost:4200&#39;</a> has been blocked by CORS policy</p>
+<p>参考网址（Debugging Guide）：<a href="https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/fullstack.md#basic-authentication-problems">https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/fullstack.md#basic-authentication-problems</a></p>
+<p>18、CSRF问题</p>
+<p>Override WebSecurityConfigurerAdapter.class中的configure(HttpSecurity http)，并给每个request加上一个header。</p>
+<p>可以使用interceptors，拦截每个request，为每个request增加一个header。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">setupAxiosInterceptors</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> username = <span class="string">&#x27;alice&#x27;</span></span><br><span class="line">    <span class="keyword">let</span> password = <span class="string">&#x27;dummy&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> basicAuthHeader = <span class="string">&#x27;Basic &#x27;</span> +  <span class="built_in">window</span>.btoa(username + <span class="string">&quot;:&quot;</span> + password)</span><br><span class="line">    axios.interceptors.request.use(</span><br><span class="line">        (config) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">this</span>.isUserLoggedIn()) &#123;</span><br><span class="line">                config.headers.authorization = basicAuthHeader</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> config</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>19、JWT（Json Web Token，Jott）</p>
+<p>（1）Basic Authentication</p>
+<p>send a basic 64 encoded username and password</p>
+<p>no expiration time</p>
+<p>no user details except username &amp; password</p>
+<p>（2）Custom Token System</p>
+<p>cotain user details</p>
+<p>custom structure</p>
+<p> possible security flaws</p>
+<p>（3）JWT（参见：<a href="https://jwt.io/">https://jwt.io</a>)</p>
+<p>Standard</p>
+<p>contain user details and authorization</p>
+<p>(a) POST <a href="http://localhost:8080/authenticate">http://localhost:8080/authenticate</a></p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;alice&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;password&quot;</span>: <span class="string">&quot;dummy&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到token</p>
+<p>（b）GET <a href="http://localhost:8080/users/alice/todos">http://localhost:8080/users/alice/todos</a></p>
+<p>Add header-&gt;Authorization-&gt;Bearer token</p>
+<p>header中加入token，可以顺利GET</p>
+<p>![image-20210906193445247](/Users/alice/Library/Application Support/typora-user-images/image-20210906193445247.png)</p>
+<p>JWT梳理</p>
+<p>（1）得到token</p>
+<p>![image-20210906193652508](/Users/alice/Library/Application Support/typora-user-images/image-20210906193652508.png)</p>
+<p>（2）refresh token</p>
+<p>![image-20210906193715913](/Users/alice/Library/Application Support/typora-user-images/image-20210906193715913.png)</p>
+<p>（3）Request（需要加上Bearer token）</p>
+<p>![image-20210906193835215](/Users/alice/Library/Application Support/typora-user-images/image-20210906193835215.png)</p>
+<p>​    Filter用来check当前用户是否valid</p>
+<p>（4）JwtTokenUtil.java帮助我们使用token（查看token expire date等等）</p>
+<p>（5）User Details</p>
+<p>![image-20210906194902129](/Users/alice/Library/Application Support/typora-user-images/image-20210906194902129.png)</p>
+<p>JwtInMemonryUserDetailsService.java中，添加username和password</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//password需要先编码  </span></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    inMemoryUserList.add(<span class="keyword">new</span> JwtUserDetails(<span class="number">1L</span>, <span class="string">&quot;alice&quot;</span>,</span><br><span class="line">        <span class="string">&quot;$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e&quot;</span>, <span class="string">&quot;ROLE_USER_2&quot;</span>));</span><br><span class="line">    inMemoryUserList.add(<span class="keyword">new</span> JwtUserDetails(<span class="number">2L</span>, <span class="string">&quot;linda&quot;</span>, <span class="string">&quot;$2a$10$kooDMzheSGQ35cXXNcKu/.CnA54Srl7tjq4LRsOmij3T2xLfqKTHa&quot;</span>, <span class="string">&quot;ROLE_USER_2&quot;</span>));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（6）整合</p>
+<p>![image-20210906195040936](/Users/alice/Library/Application Support/typora-user-images/image-20210906195040936.png)</p>
+<p><b>JWT Authentication Debugging Reference: <a href="https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/fullstack.md#jwt-authentication-problems">https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/fullstack.md#jwt-authentication-problems</a></b></p>
+<h3 id="Appendix–Spring-Boot"><a href="#Appendix–Spring-Boot" class="headerlink" title="Appendix–Spring Boot"></a>Appendix–Spring Boot</h3><p>1、About Spring Boot</p>
+<p>Goals of Spring Boot：</p>
+<p>（1）Enable building production ready applications quickly</p>
+<p>（2）Provide common non-functional features</p>
+<p>eg：embedded servers；metrics；health checks；externalized configuration</p>
+<p>What Spring Boot is NOT</p>
+<p>（1）Zero code generation</p>
+<p>（2）Neither an application server nor a web server</p>
+<p>Features</p>
+<p>（1）Quicker Starter Projects （可以快速用很多框架搭建项目，比如Spring MVC、JPA）</p>
+<p>（2）Embedded Servers - Tomcat, Jetty or Udertow（可以package server在jar中，直接在代码中include，不用安装服务器）</p>
+<p>（3）Production-ready features</p>
+<p>mertrics and health check</p>
+<p>externalized configuration</p>
+<p>在Spring Boot之前，建立web application等需要设置许多configuration，设置各种包的版本，非常麻烦。</p>
+<p>2、SpringBootApplication</p>
+<p>作用（1）indicates Spring context file</p>
+<p>​        （2）Auto configuration</p>
+<p>​        （3）Component Scan：scan classes in the package</p>
+<p>3、Spring Boot VS Spring VS Spring MVC</p>
+<p>Dependency Injection-&gt;Easily unit tested</p>
+<p>DispatcherServlet</p>
+<p>Spring MVC: Develop Web Application。如果用Spring Boot开发REST Sevices，内在也在使用Spring MVC框架。</p>
+<p>4、Spring Boot Starter Web &amp; Spring Boot Starter JPA</p>
+<p>5、各种Spring Boot Starter Projects的功能</p>
+<p>![image-20210907190459483](/Users/alice/Library/Application Support/typora-user-images/image-20210907190459483.png)</p>
+<p>6、一些概念</p>
+<p><b>Servlet</b></p>
+<p>​        静态页面是指内容完全写在html中，不需要从服务器中获取数据显示到界面上的页面。对于静态页面来说，收到请求后，服务器只要根据URL，找到对应的html文件response即可。但对于动态页面来说，服务器需要结合数据库中的内容进行处理，生成HTML代码，之后再response。</p>
+<p>Servlet即是在服务器上运行的小程序，主要功能是用于交互式地浏览和修改数据，生成动态Web内容。</p>
+<p>![image-20210907191612557](/Users/alice/Library/Application Support/typora-user-images/image-20210907191612557.png)</p>
+<p><b>DispatcherServlet</b></p>
+<p>​        SpringMVC的核心即为DispatcherServlet，实质上是一个HttpServlet，负责将所有请求分发。</p>
+<p>![image-20210907192131803](/Users/alice/Library/Application Support/typora-user-images/image-20210907192131803.png)</p>
+<p><b>Spring Boot Actuator</b></p>
+<p>用于监控和管理Spring Boot应用，健康检查、审计、统计和HTTP追踪等。</p>
+<p>7、Spring Boot Dev tools</p>
+<p>依赖中添加spring-boot-devtools，当代码更新后，可以自动更新界面</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Appendix–JPA-with-H2-in-memory-database"><a href="#Appendix–JPA-with-H2-in-memory-database" class="headerlink" title="Appendix–JPA with H2 in-memory database"></a>Appendix–JPA with H2 in-memory database</h3><p>Impedence Mismatch</p>
+<p>类的设计（Employer，Employee等）和table的设计之间有gap，为了弥补这种gap，诞生了JPA，JDBC，Spring JDBC，myBatis等。</p>
+<p>myBatis：map objects to queries</p>
+<p>JDBC和myBatis还是要deal with queries，当queries很大时，修改的时候需要对数据库非常熟悉，JPA解决了这个问题。</p>
+<p><b>H2 Console</b></p>
+<p>![image-20210908101846334](/Users/alice/Library/Application Support/typora-user-images/image-20210908101846334.png)</p>
 ]]></content>
       <tags>
         <tag>Projects</tag>
@@ -5292,7 +5494,7 @@
   </entry>
   <entry>
     <title>LeetCode-14. Longest Common Prefix</title>
-    <url>/2021/08/10/LeetCode-14-Longest-Common-Prefix/</url>
+    <url>/2021/08/09/LeetCode-14-Longest-Common-Prefix/</url>
     <content><![CDATA[<h1 id="LeetCode-14-Longest-Common-Prefix"><a href="#LeetCode-14-Longest-Common-Prefix" class="headerlink" title="LeetCode-14. Longest Common Prefix"></a>LeetCode-14. Longest Common Prefix</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/longest-common-prefix/">https://leetcode.com/problems/longest-common-prefix/</a></p>
 <p>Write a function to find the longest common prefix string amongst an array of strings.</p>
 <p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
@@ -5328,7 +5530,7 @@
   </entry>
   <entry>
     <title>LeetCode-203. Remove Linked List Elements</title>
-    <url>/2021/08/11/LeetCode-203-Remove-Linked-List-Elements/</url>
+    <url>/2021/08/10/LeetCode-203-Remove-Linked-List-Elements/</url>
     <content><![CDATA[<h1 id="LeetCode-203-Remove-Linked-List-Elements"><a href="#LeetCode-203-Remove-Linked-List-Elements" class="headerlink" title="LeetCode-203. Remove Linked List Elements"></a>LeetCode-203. Remove Linked List Elements</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/remove-linked-list-elements/">https://leetcode.com/problems/remove-linked-list-elements/</a></p>
 <p>Given the <code>head</code> of a linked list and an integer <code>val</code>, remove all the nodes of the linked list that has <code>Node.val == val</code>, and return <em>the new head</em>.</p>
 <p><strong>Example 1:</strong></p>
@@ -5361,7 +5563,7 @@
   </entry>
   <entry>
     <title>LeetCode-206. Reverse Linked List</title>
-    <url>/2021/08/11/LeetCode-206-Reverse-Linked-List/</url>
+    <url>/2021/08/10/LeetCode-206-Reverse-Linked-List/</url>
     <content><![CDATA[<h1 id="LeetCode-206-Reverse-Linked-List"><a href="#LeetCode-206-Reverse-Linked-List" class="headerlink" title="LeetCode-206. Reverse Linked List"></a>LeetCode-206. Reverse Linked List</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/reverse-linked-list/">https://leetcode.com/problems/reverse-linked-list/</a></p>
 <p>Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.</p>
 <p><strong>Example 1:</strong></p>
@@ -5444,7 +5646,7 @@
   </entry>
   <entry>
     <title>LeetCode-443. String Compression</title>
-    <url>/2021/08/10/LeetCode-443-String-Compression/</url>
+    <url>/2021/08/09/LeetCode-443-String-Compression/</url>
     <content><![CDATA[<h1 id="LeetCode-443-String-Compression"><a href="#LeetCode-443-String-Compression" class="headerlink" title="LeetCode-443. String Compression"></a>LeetCode-443. String Compression</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/string-compression/">https://leetcode.com/problems/string-compression/</a></p>
 <p>Given an array of characters <code>chars</code>, compress it using the following algorithm:</p>
 <p>Begin with an empty string <code>s</code>. For each group of <strong>consecutive repeating characters</strong> in <code>chars</code>:</p>
@@ -5486,7 +5688,7 @@
   </entry>
   <entry>
     <title>LeetCode-25. Reverse Nodes in k-Group</title>
-    <url>/2021/08/10/LeetCode-25-Reverse-Nodes-in-k-Group/</url>
+    <url>/2021/08/09/LeetCode-25-Reverse-Nodes-in-k-Group/</url>
     <content><![CDATA[<h1 id="LeetCode-25-Reverse-Nodes-in-k-Group"><a href="#LeetCode-25-Reverse-Nodes-in-k-Group" class="headerlink" title="LeetCode-25. Reverse Nodes in k-Group"></a>LeetCode-25. Reverse Nodes in k-Group</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a linked list, reverse the nodes of a linked list <em>k</em> at a time and return its modified list.</p>
 <p><em>k</em> is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of <em>k</em> then left-out nodes, in the end, should remain as it is.</p>
 <p>You may not alter the values in the list’s nodes, only nodes themselves may be changed.</p>
@@ -5527,7 +5729,7 @@
   </entry>
   <entry>
     <title>LeetCode-2. Add Two Numbers</title>
-    <url>/2021/08/10/LeetCode-2.Add-Two-Numbers/</url>
+    <url>/2021/08/09/LeetCode-2.Add-Two-Numbers/</url>
     <content><![CDATA[<h1 id="LeetCode-2-Add-Two-Numbers"><a href="#LeetCode-2-Add-Two-Numbers" class="headerlink" title="LeetCode-2. Add Two Numbers"></a>LeetCode-2. Add Two Numbers</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/add-two-numbers/">https://leetcode.com/problems/add-two-numbers/</a></p>
 <p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.</p>
 <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
@@ -5561,7 +5763,7 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2021/08/10/LeetCode-25.%20Reverse%20Nodes%20in%20k-Group/</url>
+    <url>/2021/08/09/LeetCode-25.%20Reverse%20Nodes%20in%20k-Group/</url>
     <content><![CDATA[<h1 id="LeetCode-25-Reverse-Nodes-in-k-Group"><a href="#LeetCode-25-Reverse-Nodes-in-k-Group" class="headerlink" title="LeetCode-25. Reverse Nodes in k-Group"></a>LeetCode-25. Reverse Nodes in k-Group</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a linked list, reverse the nodes of a linked list <em>k</em> at a time and return its modified list.</p>
 <p><em>k</em> is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of <em>k</em> then left-out nodes, in the end, should remain as it is.</p>
 <p>You may not alter the values in the list’s nodes, only nodes themselves may be changed.</p>
@@ -5595,7 +5797,7 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2021/08/10/LeetCode-2.%20Add%20Two%20Numbers/</url>
+    <url>/2021/08/09/LeetCode-2.%20Add%20Two%20Numbers/</url>
     <content><![CDATA[<h1 id="LeetCode-2-Add-Two-Numbers"><a href="#LeetCode-2-Add-Two-Numbers" class="headerlink" title="LeetCode-2. Add Two Numbers"></a>LeetCode-2. Add Two Numbers</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/add-two-numbers/">https://leetcode.com/problems/add-two-numbers/</a></p>
 <p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.</p>
 <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
@@ -5619,5 +5821,135 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123;</span><br><span class="line">        ListNode* dummpy &#x3D; new ListNode();</span><br><span class="line">        ListNode* curr &#x3D; dummpy;</span><br><span class="line">        int cnt &#x3D; 0;</span><br><span class="line">        while(l1 || l2 || cnt!&#x3D;0)&#123;</span><br><span class="line">            int sum;</span><br><span class="line">            if(l1 &amp;&amp; l2)</span><br><span class="line">                sum &#x3D; l1-&gt;val + l2-&gt;val + cnt;</span><br><span class="line">            else if(l1)</span><br><span class="line">                sum &#x3D; l1-&gt;val + cnt;</span><br><span class="line">            else if(l2)</span><br><span class="line">                sum &#x3D; l2-&gt;val + cnt;</span><br><span class="line">            else</span><br><span class="line">                sum &#x3D; cnt;</span><br><span class="line">            int r &#x3D; sum % 10;</span><br><span class="line">            </span><br><span class="line">            cnt &#x3D; sum &#x2F; 10;</span><br><span class="line">            ListNode* newNode &#x3D; new ListNode(r);</span><br><span class="line">            curr-&gt;next &#x3D; newNode;</span><br><span class="line">            curr &#x3D; curr-&gt;next;</span><br><span class="line">            if(l1) l1 &#x3D; l1-&gt;next;</span><br><span class="line">            if(l2) l2 &#x3D; l2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        return dummpy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+  </entry>
+  <entry>
+    <title>LeetCode-128. Longest Consecutive</title>
+    <url>/2021/08/21/LeetCode-128-Longest-Consecutive/</url>
+    <content><![CDATA[<h1 id="LeetCode-128-Longest-Consecutive-Sequence"><a href="#LeetCode-128-Longest-Consecutive-Sequence" class="headerlink" title="LeetCode-128. Longest Consecutive Sequence"></a>LeetCode-128. Longest Consecutive Sequence</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/longest-consecutive-sequence/">https://leetcode.com/problems/longest-consecutive-sequence/</a></p>
+<p>Given an unsorted array of integers <code>nums</code>, return <em>the length of the longest consecutive elements sequence.</em></p>
+<p>You must write an algorithm that runs in <code>O(n)</code> time.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [100,4,200,1,3,2]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [0,3,7,2,5,8,4,6,0,1]</span><br><span class="line">Output: 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）遍历nums，将其中的num放入set中</p>
+<p>（2）遍历set（这里不遍历nums，因为nums中可能有重复元素），找初始元素（即currentNums-1不存在的元素），求此初始元素向后构成的consecutive elements</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestConsecutive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; num_set;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums) num_set.insert(num);</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter = num_set.begin();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(iter != num_set.end())&#123;</span><br><span class="line">            <span class="keyword">int</span> currentNum = *iter;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(!num_set.count(currentNum<span class="number">-1</span>))&#123;</span><br><span class="line">                <span class="keyword">while</span>(num_set.count(currentNum+<span class="number">1</span>))&#123;</span><br><span class="line">                    sum += <span class="number">1</span>;</span><br><span class="line">                    currentNum += <span class="number">1</span>;   </span><br><span class="line">                &#125;</span><br><span class="line">                res = max(sum, res);</span><br><span class="line">            &#125;</span><br><span class="line">            iter++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Table</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-307. Range Sum Query - Mutable</title>
+    <url>/2021/09/13/LeetCode-307-Range-Sum-Query-Mutable/</url>
+    <content><![CDATA[<h1 id="LeetCode-307-Range-Sum-Query-Mutable"><a href="#LeetCode-307-Range-Sum-Query-Mutable" class="headerlink" title="LeetCode-307. Range Sum Query - Mutable"></a>LeetCode-307. Range Sum Query - Mutable</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an integer array <code>nums</code>, handle multiple queries of the following types:</p>
+<ol>
+<li><strong>Update</strong> the value of an element in <code>nums</code>.</li>
+<li>Calculate the <strong>sum</strong> of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> <strong>inclusive</strong> where <code>left &lt;= right</code>.</li>
+</ol>
+<p>Implement the <code>NumArray</code> class:</p>
+<ul>
+<li><code>NumArray(int[] nums)</code> Initializes the object with the integer array <code>nums</code>.</li>
+<li><code>void update(int index, int val)</code> <strong>Updates</strong> the value of <code>nums[index]</code>to be <code>val</code>.</li>
+<li><code>int sumRange(int left, int right)</code> Returns the <strong>sum</strong> of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> <strong>inclusive</strong> (i.e. <code>nums[left] + nums[left + 1] + ... + nums[right]</code>).</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input</span><br><span class="line">[&quot;NumArray&quot;, &quot;sumRange&quot;, &quot;update&quot;, &quot;sumRange&quot;]</span><br><span class="line">[[[1, 3, 5]], [0, 2], [1, 2], [0, 2]]</span><br><span class="line">Output</span><br><span class="line">[null, 9, null, 8]</span><br><span class="line"></span><br><span class="line">Explanation</span><br><span class="line">NumArray numArray &#x3D; new NumArray([1, 3, 5]);</span><br><span class="line">numArray.sumRange(0, 2); &#x2F;&#x2F; return 1 + 3 + 5 &#x3D; 9</span><br><span class="line">numArray.update(1, 2);   &#x2F;&#x2F; nums &#x3D; [1, 2, 5]</span><br><span class="line">numArray.sumRange(0, 2); &#x2F;&#x2F; return 1 + 2 + 5 &#x3D; 8</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 3 * 104</code></li>
+<li><code>-100 &lt;= nums[i] &lt;= 100</code></li>
+<li><code>0 &lt;= index &lt; nums.length</code></li>
+<li><code>-100 &lt;= val &lt;= 100</code></li>
+<li><code>0 &lt;= left &lt;= right &lt; nums.length</code></li>
+<li>At most <code>3 * 104</code> calls will be made to <code>update</code> and <code>sumRange</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>做法其实就是树状数组的基本做饭，详细参见树状数组的笔记。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    NumArray(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line">        data.resize(nums.size());</span><br><span class="line">        bit.resize(nums.size()+<span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            update(i, nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; bit.size(); j += (j&amp;(-j)))&#123;</span><br><span class="line">            bit[j] = bit[j] + val - data[i];</span><br><span class="line">        &#125;</span><br><span class="line">        data[i] = val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getSum(j) - getSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &gt; <span class="number">0</span>; j -= (j&amp;(-j)))&#123;</span><br><span class="line">            sum += bit[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; data, bit;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Binary indexed Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-953. Verifying an Alien Dictionary</title>
+    <url>/2021/08/21/LeetCode-953-Verifying-an-Alien-Dictionary/</url>
+    <content><![CDATA[<h1 id="LeetCode-953-Verifying-an-Alien-Dictionary"><a href="#LeetCode-953-Verifying-an-Alien-Dictionary" class="headerlink" title="LeetCode-953. Verifying an Alien Dictionary"></a>LeetCode-953. Verifying an Alien Dictionary</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/verifying-an-alien-dictionary/">https://leetcode.com/problems/verifying-an-alien-dictionary/</a></p>
+<p>In an alien language, surprisingly, they also use English lowercase letters, but possibly in a different <code>order</code>. The <code>order</code> of the alphabet is some permutation of lowercase letters.</p>
+<p>Given a sequence of <code>words</code> written in the alien language, and the <code>order</code> of the alphabet, return <code>true</code> if and only if the given <code>words</code> are sorted lexicographically in this alien language.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: words &#x3D; [&quot;hello&quot;,&quot;leetcode&quot;], order &#x3D; &quot;hlabcdefgijkmnopqrstuvwxyz&quot;</span><br><span class="line">Output: true</span><br><span class="line">Explanation: As &#39;h&#39; comes before &#39;l&#39; in this language, then the sequence is sorted.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: words &#x3D; [&quot;word&quot;,&quot;world&quot;,&quot;row&quot;], order &#x3D; &quot;worldabcefghijkmnpqstuvxyz&quot;</span><br><span class="line">Output: false</span><br><span class="line">Explanation: As &#39;d&#39; comes after &#39;l&#39; in this language, then words[0] &gt; words[1], hence the sequence is unsorted.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: words &#x3D; [&quot;apple&quot;,&quot;app&quot;], order &#x3D; &quot;abcdefghijklmnopqrstuvwxyz&quot;</span><br><span class="line">Output: false</span><br><span class="line">Explanation: The first three characters &quot;app&quot; match, and the second string is shorter (in size.) According to lexicographical rules &quot;apple&quot; &gt; &quot;app&quot;, because &#39;l&#39; &gt; &#39;∅&#39;, where &#39;∅&#39; is defined as the blank character which is less than any other character (More info).</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= words.length &lt;= 100</code></li>
+<li><code>1 &lt;= words[i].length &lt;= 20</code></li>
+<li><code>order.length == 26</code></li>
+<li>All characters in <code>words[i]</code> and <code>order</code> are English lowercase letters.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>（1）将alphabet放入hash map</p>
+<p>（2）在words中，比较curr和next。for循环时，不用求min(curr.size(), next.size())，直接使用curr.size()，若next.size()-1 &lt; j，说明next与curr前j-1个字母都一样，且next大小小于curr，返回false。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isAlienSorted</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words, <span class="built_in">string</span> order)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; order.size(); i++)&#123;</span><br><span class="line">            m[order[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.size()<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="built_in">string</span> curr = words[i], next = words[i+<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; curr.size(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt; next.size()<span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(m[curr[j]] &gt; m[next[j]]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(m[curr[j]] == m[next[j]]) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Table</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树状数组</title>
+    <url>/2021/09/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><h3 id="一、计算方式"><a href="#一、计算方式" class="headerlink" title="一、计算方式"></a>一、计算方式</h3><p>![image-20210913144922869](/Users/alice/Library/Application Support/typora-user-images/image-20210913144922869.png)（1）</p>
+<p>![image-20210913144931113](/Users/alice/Library/Application Support/typora-user-images/image-20210913144931113.png)</p>
+<p>其中，k为i的二进制中从最低位刀高位连续零的长度。</p>
+<p>因为k不容易求得，所以引入lowbit(x)的概念，lowbit其实就是取出x的最低位1（比如lowbit(6)=lowbit(110)=2)。lowbit(x) = 2^k。根据公式（1）可以看出，我们不用求k直接求2^k更为方便。</p>
+<p>lowbit(x) = x&amp;(-x)，即求x和x补码的积。（6&amp;（-6） = 110&amp;010 = 010 = 2）。</p>
+<h3 id="二、区间查询"><a href="#二、区间查询" class="headerlink" title="二、区间查询"></a>二、区间查询</h3><p>求sum(x) = A[1] + A[2] + .. + A[x]，则用如下代码。顶到底。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &gt; <span class="number">0</span>; i-=lowbit(i))&#123;</span><br><span class="line">        ans += C[i];</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="单点更新"><a href="#单点更新" class="headerlink" title="单点更新"></a>单点更新</h3><p>A[i]+y，则用如下代码，底到顶：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &lt;= n; i += lowbit(i) )&#123;</span><br><span class="line">        C[i] += y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>Binary Indexed Tree</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
   </entry>
 </search>
