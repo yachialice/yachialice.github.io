@@ -5271,7 +5271,7 @@
   <entry>
     <title>Go Java Full Stack wtih Spring Boot and React笔记</title>
     <url>/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Go-Java-Full-Stack-wtih-Spring-Boot-and-React笔"><a href="#Go-Java-Full-Stack-wtih-Spring-Boot-and-React笔" class="headerlink" title="Go Java Full Stack wtih Spring Boot and React笔"></a>Go Java Full Stack wtih Spring Boot and React笔</h1><p>1、BabelJs</p>
+    <content><![CDATA[<h1 id="Go-Java-Full-Stack-wtih-Spring-Boot-and-React笔记"><a href="#Go-Java-Full-Stack-wtih-Spring-Boot-and-React笔记" class="headerlink" title="Go Java Full Stack wtih Spring Boot and React笔记"></a>Go Java Full Stack wtih Spring Boot and React笔记</h1><p>1、BabelJs</p>
 <p>（1）将高版本的javascript转换成低版本的javascript，从而兼容各个浏览器</p>
 <p>（2）将JSX转化成js代码</p>
 <p>（3）JSX只能return一个element    </p>
