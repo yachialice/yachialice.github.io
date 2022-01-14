@@ -6456,4 +6456,65 @@
         <tag>Leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-380-Insert Delete GetRandom O(1)</title>
+    <url>/2022/01/14/LeetCode-380-Insert-Delete-GetRandom-O-1/</url>
+    <content><![CDATA[<h1 id="LeetCode-380-Insert-Delete-GetRandom-O-1"><a href="#LeetCode-380-Insert-Delete-GetRandom-O-1" class="headerlink" title="LeetCode-380. Insert Delete GetRandom O(1)"></a>LeetCode-380. Insert Delete GetRandom O(1)</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/insert-delete-getrandom-o1/">https://leetcode.com/problems/insert-delete-getrandom-o1/</a></p>
+<p>Implement the <code>RandomizedSet</code> class:</p>
+<ul>
+<li><code>RandomizedSet()</code> Initializes the <code>RandomizedSet</code> object.</li>
+<li><code>bool insert(int val)</code> Inserts an item <code>val</code> into the set if not present. Returns <code>true</code> if the item was not present, <code>false</code> otherwise.</li>
+<li><code>bool remove(int val)</code> Removes an item <code>val</code> from the set if present. Returns <code>true</code> if the item was present, <code>false</code> otherwise.</li>
+<li><code>int getRandom()</code> Returns a random element from the current set of elements (it’s guaranteed that at least one element exists when this method is called). Each element must have the <strong>same probability</strong> of being returned.</li>
+</ul>
+<p>You must implement the functions of the class such that each function works in <strong>average</strong> <code>O(1)</code> time complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input</span><br><span class="line">[&quot;RandomizedSet&quot;, &quot;insert&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;]</span><br><span class="line">[[], [1], [2], [2], [], [1], [2], []]</span><br><span class="line">Output</span><br><span class="line">[null, true, false, true, 2, true, false, 2]</span><br><span class="line"></span><br><span class="line">Explanation</span><br><span class="line">RandomizedSet randomizedSet &#x3D; new RandomizedSet();</span><br><span class="line">randomizedSet.insert(1); &#x2F;&#x2F; Inserts 1 to the set. Returns true as 1 was inserted successfully.</span><br><span class="line">randomizedSet.remove(2); &#x2F;&#x2F; Returns false as 2 does not exist in the set.</span><br><span class="line">randomizedSet.insert(2); &#x2F;&#x2F; Inserts 2 to the set, returns true. Set now contains [1,2].</span><br><span class="line">randomizedSet.getRandom(); &#x2F;&#x2F; getRandom() should return either 1 or 2 randomly.</span><br><span class="line">randomizedSet.remove(1); &#x2F;&#x2F; Removes 1 from the set, returns true. Set now contains [2].</span><br><span class="line">randomizedSet.insert(2); &#x2F;&#x2F; 2 was already in the set, so return false.</span><br><span class="line">randomizedSet.getRandom(); &#x2F;&#x2F; Since 2 is the only number in the set, getRandom() will always return 2.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>-231 &lt;= val &lt;= 231 - 1</code></li>
+<li>At most <code>2 * ``105</code> calls will be made to <code>insert</code>, <code>remove</code>, and <code>getRandom</code>.</li>
+<li>There will be <strong>at least one</strong> element in the data structure when <code>getRandom</code> is called.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>​    第一想法是用set，但是set取随机数需要经过遍历，不是O(1)时间负责度，如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomizedSet</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    RandomizedSet() &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Inserts a value to the set. Returns true if the set did not already contain the specified element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.count(val)!=<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span> s.insert(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Removes a value from the set. Returns true if the set contained the specified element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.count(val)==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        s.erase(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Get a random element from the set. */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = rand() % s.size();</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = s.begin();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i == index) <span class="keyword">return</span> *it;</span><br><span class="line">            it++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *it;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​    因为想要取随机数的时候，可以直接用下标获取，所以引入一个vector用来存储val。但是还是需要一个hash_table来判断set中是否已经有当前要插入的val了。</p>
+<p>​    所以使用以下数据结构：</p>
+<p>（1）unordered_map&lt;int, int&gt; m ： value-&gt;vector中存储value的index</p>
+<p>（2）vector，存储value</p>
+<p>（3）当删除value的时候，因为vector删除中间的元素，操作时间复杂度不为O(1)，所以将需要删除的元素和vector尾部元素交换位置，更改m中的索引，然后删除掉vector尾部的元素。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomizedSet</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RandomizedSet()&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m.count(val) != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        v.push_back(val);</span><br><span class="line">        m[val] = v.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m.count(val) == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> index1 = m[val], index2 = v.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> t = v[index1];</span><br><span class="line">        v[index1] = v[index2];</span><br><span class="line">        v[index2] = t;</span><br><span class="line">        </span><br><span class="line">        v.pop_back();</span><br><span class="line">        m[v[index1]] = index1;</span><br><span class="line">        m.erase(val);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> v[rand() % v.size()];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+        <category>Hash Table</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React学习笔记</title>
+    <url>/2022/01/14/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="React学习笔记"><a href="#React学习笔记" class="headerlink" title="React学习笔记"></a>React学习笔记</h1><h2 id="关于React"><a href="#关于React" class="headerlink" title="关于React"></a>关于React</h2><p>React是facebook的一个javaScript库。</p>
+<p>JSX是一种语法糖。是一种JavaScript的语法扩展，在很多地方称为JavaScript XML。可以用在.js文件中利用标签描述UI界面。</p>
+<p>Babel可以将JSX转化为普通JavaScript代码，从而兼容就浏览器。</p>
+<h2 id="建立React-APP"><a href="#建立React-APP" class="headerlink" title="建立React APP"></a>建立React APP</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure>
+
+<p>启动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm start</span><br><span class="line">&#x2F;&#x2F;浏览器url</span><br><span class="line">http:&#x2F;&#x2F;localhost:3000</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
 </search>
