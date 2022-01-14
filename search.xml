@@ -4625,9 +4625,9 @@
     <content><![CDATA[<h1 id="Docker学习"><a href="#Docker学习" class="headerlink" title="Docker学习"></a>Docker学习</h1><h2 id="Docker构架"><a href="#Docker构架" class="headerlink" title="Docker构架"></a>Docker构架</h2><p>1、镜像（Image）：类似于类，需要基于镜像创建容器，才可以运行。一个镜像可以创建多个容器。</p>
 <p>2、容器（Container）：类似于对象。使用的时候运行、停止、创建容器，在容器内进行操作。</p>
 <p>3、仓库（Repository）：镜像的仓库。一个Docker Registry中可以包含多个仓库（Repository）。一个仓库中包含一个软件镜像的多个版本，例如Ubuntu 15.10，Ubuntu 14.0，利用tag标识这个镜像是哪个版本，方便创造环境。利用docker images可以看到所有镜像。</p>
-<p>![image-20210712161900494](/Users/alice/Library/Application Support/typora-user-images/image-20210712161900494.png)</p>
+<p><img src="/2021/07/24/Docker%E5%AD%A6%E4%B9%A0/image-20210712161900494.png" alt="image-20210712161900494"></p>
 <p>Docker构架示意图</p>
-<p>![image-20210712161929702](/Users/alice/Library/Application Support/typora-user-images/image-20210712161929702.png)</p>
+<p><img src="/2021/07/24/Docker%E5%AD%A6%E4%B9%A0/image-20210712161929702.png" alt="image-20210712161929702"></p>
 <h2 id="Docker相关指令"><a href="#Docker相关指令" class="headerlink" title="Docker相关指令"></a>Docker相关指令</h2><h3 id="0、docker帮助"><a href="#0、docker帮助" class="headerlink" title="0、docker帮助"></a>0、docker帮助</h3><p>以下指令查看所有docker命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker</span><br></pre></td></tr></table></figure>
 
@@ -4673,7 +4673,7 @@
 <p><b>（a）通过以下指令，查看端口映射结果</b></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
 
-<p>![image-20210712155036392](/Users/alice/Library/Application Support/typora-user-images/image-20210712155036392.png)</p>
+<p><img src="/2021/07/24/Docker%E5%AD%A6%E4%B9%A0/image-20210712155036392.png" alt="image-20210712155036392"></p>
 <p>可见是将容器5000的端口号映射到了本地55000端口。</p>
 <p><b>（b）也可通过以下指令查看端口映射。</b></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker port CONTAINERID</span><br></pre></td></tr></table></figure>
@@ -4684,7 +4684,7 @@
 <p>将容器的5000端口映射到指定地址127.0.0.1的5000端口上。打开<a href="http://127.0.0.1:5000即可看到网页。">http://127.0.0.1:5000即可看到网页。</a></p>
 <h3 id="2、Docker镜像操作"><a href="#2、Docker镜像操作" class="headerlink" title="2、Docker镜像操作"></a>2、Docker镜像操作</h3><h4 id="（1）查看素有镜像"><a href="#（1）查看素有镜像" class="headerlink" title="（1）查看素有镜像"></a>（1）查看素有镜像</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;列出主机上的镜像</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
 
-<p>![image-20210712164634889](/Users/alice/Library/Application Support/typora-user-images/image-20210712164634889.png)</p>
+<p><img src="/2021/07/24/Docker%E5%AD%A6%E4%B9%A0/image-20210712164634889.png" alt="image-20210712164634889"></p>
 <p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如 ubuntu 仓库源里，有 15.10、14.04 等多个不同的版本，使用 REPOSITORY:TAG 来定义不同的镜像，例如：ubuntu:15.10</p>
 <h4 id="（2）获取、查找镜像"><a href="#（2）获取、查找镜像" class="headerlink" title="（2）获取、查找镜像"></a>（2）获取、查找镜像</h4><p><b>（a）获取镜像，docker pull</b></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker pull ubuntu:13.10</span><br></pre></td></tr></table></figure>
@@ -4693,7 +4693,7 @@
 <p>例如查找ubuntu镜像</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker search ubuntu</span><br></pre></td></tr></table></figure>
 
-<p>![image-20210712165051800](/Users/alice/Library/Application Support/typora-user-images/image-20210712165051800.png)</p>
+<p><img src="/2021/07/24/Docker%E5%AD%A6%E4%B9%A0/image-20210712165051800.png" alt="image-20210712165051800"></p>
 <p>其中，</p>
 <p>NAME：镜像名字</p>
 <p>STARS：点赞数</p>
