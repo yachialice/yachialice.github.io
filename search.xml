@@ -4171,7 +4171,7 @@
 <p>（2）堆：二叉树，每个子节点都不大于（不小于）父节点，称为大顶堆（小顶堆）。编程时会使用priority_queue</p>
 <h2 id="内存中的堆-amp-栈"><a href="#内存中的堆-amp-栈" class="headerlink" title="内存中的堆&amp;栈"></a>内存中的堆&amp;栈</h2><p>一半程序放在Rom（只读内存，比如硬盘）或Flash中，运行时拷贝到RAM中执行。</p>
 <p>RAM存储信息结构如下图：</p>
-<p>![image-20210701164033872](/Users/alice/Library/Application Support/typora-user-images/image-20210701164033872.png)</p>
+<p><img src="/2021/07/01/Heap-Stack/image-20210701164033872.png" alt="image-20210701164033872"></p>
 <p>（1）栈从高地址-&gt;低地址分配，栈的最大容量事先由系统分配好</p>
 <p>（2）堆低地址-&gt;高地址分配，是不连续的内存区域。</p>
 <p>操作系统分配堆的操作：操作系统有一个记录空闲内存地址的链表，当系统收到程序的申请时，会遍历该链表，寻找第一个空间大于所申请空间的堆结点，然后将该结点从空闲结点链表中删除，并将该结点的空间分配给程序，另外，对于大多数系统，会在这块内存空间中的首地址处记录本次分配的大小，这样，代码中的 delete语句才能正确的释放本内存空间。另外，由于找到的堆结点的大小不一定正好等于申请的大小，系统会自动的将多余的那部分重新放入空闲链表中</p>
@@ -5381,25 +5381,25 @@
 <p>（b）GET <a href="http://localhost:8080/users/alice/todos">http://localhost:8080/users/alice/todos</a></p>
 <p>Add header-&gt;Authorization-&gt;Bearer token</p>
 <p>header中加入token，可以顺利GET</p>
-<p>![image-20210906193445247](/Users/alice/Library/Application Support/typora-user-images/image-20210906193445247.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210906193445247.png" alt="image-20210906193445247"></p>
 <p>JWT梳理</p>
 <p>（1）得到token</p>
-<p>![image-20210906193652508](/Users/alice/Library/Application Support/typora-user-images/image-20210906193652508.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210906193652508.png" alt="image-20210906193652508"></p>
 <p>（2）refresh token</p>
-<p>![image-20210906193715913](/Users/alice/Library/Application Support/typora-user-images/image-20210906193715913.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210906193715913.png" alt="image-20210906193715913"></p>
 <p>（3）Request（需要加上Bearer token）</p>
-<p>![image-20210906193835215](/Users/alice/Library/Application Support/typora-user-images/image-20210906193835215.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210906193835215.png" alt="image-20210906193835215"></p>
 <p>​    Filter用来check当前用户是否valid</p>
 <p>（4）JwtTokenUtil.java帮助我们使用token（查看token expire date等等）</p>
 <p>（5）User Details</p>
-<p>![image-20210906194902129](/Users/alice/Library/Application Support/typora-user-images/image-20210906194902129.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210906194902129.png" alt="image-20210906194902129"></p>
 <p>JwtInMemonryUserDetailsService.java中，添加username和password</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//password需要先编码  </span></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    inMemoryUserList.add(<span class="keyword">new</span> JwtUserDetails(<span class="number">1L</span>, <span class="string">&quot;alice&quot;</span>,</span><br><span class="line">        <span class="string">&quot;$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e&quot;</span>, <span class="string">&quot;ROLE_USER_2&quot;</span>));</span><br><span class="line">    inMemoryUserList.add(<span class="keyword">new</span> JwtUserDetails(<span class="number">2L</span>, <span class="string">&quot;linda&quot;</span>, <span class="string">&quot;$2a$10$kooDMzheSGQ35cXXNcKu/.CnA54Srl7tjq4LRsOmij3T2xLfqKTHa&quot;</span>, <span class="string">&quot;ROLE_USER_2&quot;</span>));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>（6）整合</p>
-<p>![image-20210906195040936](/Users/alice/Library/Application Support/typora-user-images/image-20210906195040936.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210906195040936.png" alt="image-20210906195040936"></p>
 <p><b>JWT Authentication Debugging Reference: <a href="https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/fullstack.md#jwt-authentication-problems">https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/fullstack.md#jwt-authentication-problems</a></b></p>
 <h3 id="Appendix–Spring-Boot"><a href="#Appendix–Spring-Boot" class="headerlink" title="Appendix–Spring Boot"></a>Appendix–Spring Boot</h3><p>1、About Spring Boot</p>
 <p>Goals of Spring Boot：</p>
@@ -5426,15 +5426,15 @@
 <p>Spring MVC: Develop Web Application。如果用Spring Boot开发REST Sevices，内在也在使用Spring MVC框架。</p>
 <p>4、Spring Boot Starter Web &amp; Spring Boot Starter JPA</p>
 <p>5、各种Spring Boot Starter Projects的功能</p>
-<p>![image-20210907190459483](/Users/alice/Library/Application Support/typora-user-images/image-20210907190459483.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210907190459483.png" alt="image-20210907190459483"></p>
 <p>6、一些概念</p>
 <p><b>Servlet</b></p>
 <p>​        静态页面是指内容完全写在html中，不需要从服务器中获取数据显示到界面上的页面。对于静态页面来说，收到请求后，服务器只要根据URL，找到对应的html文件response即可。但对于动态页面来说，服务器需要结合数据库中的内容进行处理，生成HTML代码，之后再response。</p>
 <p>Servlet即是在服务器上运行的小程序，主要功能是用于交互式地浏览和修改数据，生成动态Web内容。</p>
-<p>![image-20210907191612557](/Users/alice/Library/Application Support/typora-user-images/image-20210907191612557.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210907191612557.png" alt="image-20210907191612557"></p>
 <p><b>DispatcherServlet</b></p>
 <p>​        SpringMVC的核心即为DispatcherServlet，实质上是一个HttpServlet，负责将所有请求分发。</p>
-<p>![image-20210907192131803](/Users/alice/Library/Application Support/typora-user-images/image-20210907192131803.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210907192131803.png" alt="image-20210907192131803"></p>
 <p><b>Spring Boot Actuator</b></p>
 <p>用于监控和管理Spring Boot应用，健康检查、审计、统计和HTTP追踪等。</p>
 <p>7、Spring Boot Dev tools</p>
@@ -5448,7 +5448,7 @@
 <p>myBatis：map objects to queries</p>
 <p>JDBC和myBatis还是要deal with queries，当queries很大时，修改的时候需要对数据库非常熟悉，JPA解决了这个问题。</p>
 <p><b>H2 Console</b></p>
-<p>![image-20210908101846334](/Users/alice/Library/Application Support/typora-user-images/image-20210908101846334.png)</p>
+<p><img src="/2021/08/21/Go-Java-Full-Stack-wtih-Spring-Boot-and-React%E7%AC%94%E8%AE%B0/image-20210908101846334.png" alt="image-20210908101846334"></p>
 ]]></content>
       <categories>
         <category>Projects</category>
@@ -5895,8 +5895,8 @@
   <entry>
     <title>树状数组</title>
     <url>/2021/09/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><h3 id="一、计算方式"><a href="#一、计算方式" class="headerlink" title="一、计算方式"></a>一、计算方式</h3><p>![image-20210913144922869](/Users/alice/Library/Application Support/typora-user-images/image-20210913144922869.png)（1）</p>
-<p>![image-20210913144931113](/Users/alice/Library/Application Support/typora-user-images/image-20210913144931113.png)</p>
+    <content><![CDATA[<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><h3 id="一、计算方式"><a href="#一、计算方式" class="headerlink" title="一、计算方式"></a>一、计算方式</h3><p><img src="/2021/09/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/image-20210913144922869.png" alt="image-20210913144922869">（1）</p>
+<p><img src="/2021/09/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/image-20210913144931113.png" alt="image-20210913144931113"></p>
 <p>其中，k为i的二进制中从最低位刀高位连续零的长度。</p>
 <p>因为k不容易求得，所以引入lowbit(x)的概念，lowbit其实就是取出x的最低位1（比如lowbit(6)=lowbit(110)=2)。lowbit(x) = 2^k。根据公式（1）可以看出，我们不用求k直接求2^k更为方便。</p>
 <p>lowbit(x) = x&amp;(-x)，即求x和x补码的积。（6&amp;（-6） = 110&amp;010 = 010 = 2）。</p>
@@ -6211,12 +6211,6 @@
       </tags>
   </entry>
   <entry>
-    <title>photo</title>
-    <url>/2022/01/14/photo/</url>
-    <content><![CDATA[<p><img src="/2022/01/14/photo/Leetcode-71.png" alt="Leetcode-71"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Leetcode-198. House Robber</title>
     <url>/2021/09/27/Leetcode-198-House-Robber/</url>
     <content><![CDATA[<h1 id="Leetcode-198-House-Robber"><a href="#Leetcode-198-House-Robber" class="headerlink" title="Leetcode-198. House Robber"></a>Leetcode-198. House Robber</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><a href="https://leetcode.com/problems/house-robber/">https://leetcode.com/problems/house-robber/</a></p>
@@ -6241,6 +6235,49 @@
       </categories>
       <tags>
         <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Learning Git</title>
+    <url>/2022/01/14/Learning-Git/</url>
+    <content><![CDATA[<h1 id="Learning-Git"><a href="#Learning-Git" class="headerlink" title="Learning Git"></a>Learning Git</h1><h2 id="Stage-Branch-Repository"><a href="#Stage-Branch-Repository" class="headerlink" title="Stage, Branch, Repository"></a>Stage, Branch, Repository</h2><p>Working Directory</p>
+<p>Stage</p>
+<p>Branch</p>
+<p><img src="/2022/01/14/Learning-Git/image-20211026162150859.png" alt="image-20211026162150859"></p>
+<h2 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h2><h3 id="local-repository-modification"><a href="#local-repository-modification" class="headerlink" title="local repository modification"></a>local repository modification</h3><p>git add: add changes to Stage</p>
+<p>git commit: commit changes from Stage to branch</p>
+<p>git HEAD^: version withdrawal</p>
+<p>git checkout – readme.txt: dischard changes of readme.txt in working dirctory to the most recent version when using git commit or git add</p>
+<h3 id="Remote-repository-modification"><a href="#Remote-repository-modification" class="headerlink" title="Remote repository modification"></a>Remote repository modification</h3><p>git clone: clone remote repository to local repository</p>
+<p>git checkout -b dev: switch to new branch ‘dev’</p>
+<p>git checkout master: switch to master branch</p>
+<p>git merge dev: merge branche dev to current branch</p>
+<p>git branch -d feature1: delete branch feature1</p>
+<p>git merge –no-ff -m “merge with no-off” dev</p>
+<p>git stash：temporately store current working status without add or commit</p>
+<p>git stash apply： restore stash without deleting the record in stash</p>
+<p>git stash pop: restore stash and delete the stash</p>
+<p>git stash list: show stash</p>
+<p>git push origin master: push branch master to origin (remote repository)</p>
+<p>git checkout -b dev origin/dev: create local dev branch and remote dev branch</p>
+<p>Deal with confilicts when pushing to the remote repository</p>
+<p>git branch –set-upstream-to=origin/dev dev: create connection between local branch dev and remote branch dev</p>
+<p>git pull: pull from the remote repository, a conflicts ocurrs as follows</p>
+<p><img src="/2022/01/14/Learning-Git/image-20211026181245204.png" alt="image-20211026181245204"></p>
+<p>(solve the conflicts manually)</p>
+<p>git commit</p>
+<p>git push origin dev</p>
+<p>git多人协作：</p>
+<p><a href="https://www.jianshu.com/p/442895dc6a06">https://www.jianshu.com/p/442895dc6a06</a></p>
+<p><img src="/2022/01/14/Learning-Git/image-20211026181405243.png" alt="image-20211026181405243"></p>
+<p>git rebase:  turn history commits into a line</p>
+<p><a href="https://blog.csdn.net/weixin_41282397/article/details/81185844">https://blog.csdn.net/weixin_41282397/article/details/81185844</a></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
 </search>
