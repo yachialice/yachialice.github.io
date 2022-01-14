@@ -3210,31 +3210,7 @@
   <entry>
     <title>LeetCode-239. Sliding Window Maximum</title>
     <url>/2021/06/08/LeetCode-239-Sliding-Window-Maximum/</url>
-    <content><![CDATA[<h1 id="LeetCode-239-Sliding-Window-Maximum"><a href="#LeetCode-239-Sliding-Window-Maximum" class="headerlink" title="LeetCode-239. Sliding Window Maximum"></a>LeetCode-239. Sliding Window Maximum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given an array of integers <code>nums</code>, there is a sliding window of size <code>k</code> which is moving from the very left of the array to the very right. You can only see the <code>k</code> numbers in the window. Each time the sliding window moves right by one position.</p>
-<p>Return <em>the max sliding window</em>.</p>
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1], k &#x3D; 1</span><br><span class="line">Output: [1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [1,-1], k &#x3D; 1</span><br><span class="line">Output: [1,-1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 4:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [9,11], k &#x3D; 2</span><br><span class="line">Output: [11]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 5:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Input: nums &#x3D; [4,-2], k &#x3D; 2</span><br><span class="line">Output: [4]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 105</code></li>
-<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
-<li><code>1 &lt;= k &lt;= nums.length</code></li>
-</ul>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>（1）首先想到希望sliding window中的元素时有序的，所以使用priority_queue来做</p>
-<p>（2）如果priority_queue中，最大的元素在sliding window外，则q.pop()</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">priority_queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            <span class="comment">//当q队头的元素位置不在sliding window内，弹出队头元素</span></span><br><span class="line">            <span class="keyword">while</span>(!q.empty() &amp;&amp; q.top().second &lt; i-k+<span class="number">1</span>) q.pop();</span><br><span class="line">            q.push(&#123;nums[i], i&#125;);</span><br><span class="line">            <span class="comment">//如果sliding window足够大，弹出栈顶元素。</span></span><br><span class="line">            <span class="keyword">if</span>(i-k+<span class="number">1</span> &gt;= <span class="number">0</span>)</span><br><span class="line">                res.push_back(q.top().first);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
+    <content><![CDATA[<h1 id="LeetCode-239-Sliding-Window-Maximum"><a href="#LeetCode-239-Sliding-Window-Maximum" class="headerlink" title="LeetCode-239. Sliding Window Maximum"></a>LeetCode-239. Sliding Window Maximum</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2>]]></content>
       <categories>
         <category>Leetcode</category>
         <category>Sliding Window</category>
